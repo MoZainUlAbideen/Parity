@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240" viewBox="0 0 400 240">
+  <rect width="400" height="240" fill="#ffffff"/>
+  <text x="200" y="24" font-family="Arial" font-size="16" text-anchor="middle" fill="#111">Quarterly sales 2026 (units)</text>
+  <line x1="50" y1="200" x2="380" y2="200" stroke="#333"/>
+  <rect x="70" y="120" width="50" height="80" fill="#3b5bdb"/><text x="95" y="218" font-family="Arial" font-size="12" text-anchor="middle">Q1</text><text x="95" y="112" font-family="Arial" font-size="12" text-anchor="middle">400</text>
+  <rect x="150" y="90" width="50" height="110" fill="#3b5bdb"/><text x="175" y="218" font-family="Arial" font-size="12" text-anchor="middle">Q2</text><text x="175" y="82" font-family="Arial" font-size="12" text-anchor="middle">550</text>
+  <rect x="230" y="60" width="50" height="140" fill="#3b5bdb"/><text x="255" y="218" font-family="Arial" font-size="12" text-anchor="middle">Q3</text><text x="255" y="52" font-family="Arial" font-size="12" text-anchor="middle">700</text>
+  <rect x="310" y="100" width="50" height="100" fill="#3b5bdb"/><text x="335" y="218" font-family="Arial" font-size="12" text-anchor="middle">Q4</text><text x="335" y="92" font-family="Arial" font-size="12" text-anchor="middle">500</text>
+</svg>

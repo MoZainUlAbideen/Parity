@@ -1,0 +1,130 @@
+{
+  "engine": "axe v4.13.0",
+  "precision": 1.0,
+  "recall_rule_detectable": 1.0,
+  "recall_all": 0.6842,
+  "true_positives": 13,
+  "false_positives": 0,
+  "false_positives_on_clean": 0,
+  "labeled_total": 19,
+  "labeled_rule_detectable": 13,
+  "needs_review_total": 1,
+  "pages": [
+    {
+      "page": "broken/images.html",
+      "true_positives": 3,
+      "false_positives": 0,
+      "labeled": 4,
+      "needs_review": 0
+    },
+    {
+      "page": "broken/forms.html",
+      "true_positives": 3,
+      "false_positives": 0,
+      "labeled": 4,
+      "needs_review": 0
+    },
+    {
+      "page": "broken/contrast.html",
+      "true_positives": 1,
+      "false_positives": 0,
+      "labeled": 2,
+      "needs_review": 1
+    },
+    {
+      "page": "broken/structure.html",
+      "true_positives": 4,
+      "false_positives": 0,
+      "labeled": 4,
+      "needs_review": 0
+    },
+    {
+      "page": "broken/links_aria.html",
+      "true_positives": 2,
+      "false_positives": 0,
+      "labeled": 5,
+      "needs_review": 0
+    },
+    {
+      "page": "fixed/images.html",
+      "true_positives": 0,
+      "false_positives": 0,
+      "labeled": 0,
+      "needs_review": 0
+    },
+    {
+      "page": "fixed/forms.html",
+      "true_positives": 0,
+      "false_positives": 0,
+      "labeled": 0,
+      "needs_review": 0
+    },
+    {
+      "page": "fixed/contrast.html",
+      "true_positives": 0,
+      "false_positives": 0,
+      "labeled": 0,
+      "needs_review": 0
+    },
+    {
+      "page": "fixed/structure.html",
+      "true_positives": 0,
+      "false_positives": 0,
+      "labeled": 0,
+      "needs_review": 0
+    },
+    {
+      "page": "fixed/links_aria.html",
+      "true_positives": 0,
+      "false_positives": 0,
+      "labeled": 0,
+      "needs_review": 0
+    },
+    {
+      "page": "clean.html",
+      "true_positives": 0,
+      "false_positives": 0,
+      "labeled": 0,
+      "needs_review": 0
+    }
+  ],
+  "missed": [
+    {
+      "page": "broken/images.html",
+      "rule": "alt-text-uninformative",
+      "selector": "#chart",
+      "detectable_by": "ai"
+    },
+    {
+      "page": "broken/forms.html",
+      "rule": "placeholder-as-label",
+      "selector": "#phone",
+      "detectable_by": "ai"
+    },
+    {
+      "page": "broken/contrast.html",
+      "rule": "contrast-over-image",
+      "selector": "#banner-text",
+      "detectable_by": "ai"
+    },
+    {
+      "page": "broken/links_aria.html",
+      "rule": "link-purpose-unclear",
+      "selector": "#read-more-1",
+      "detectable_by": "ai"
+    },
+    {
+      "page": "broken/links_aria.html",
+      "rule": "link-purpose-unclear",
+      "selector": "#read-more-2",
+      "detectable_by": "ai"
+    },
+    {
+      "page": "broken/links_aria.html",
+      "rule": "keyboard-inaccessible",
+      "selector": "#click-div",
+      "detectable_by": "ai"
+    }
+  ],
+  "false_positive_details": []
+}

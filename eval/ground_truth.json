@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "notes": "Human-labeled issues for the fixture pages. Every issue was placed in the page on purpose. detectable_by = 'axe' means a deterministic rule engine should catch it; 'ai' means it needs judgment (vision, language, or interaction) that rules cannot provide. Fixed pages and clean.html must have zero issues.",
+  "pages": [
+    {
+      "page": "broken/images.html",
+      "issues": [
+        {"id": "img-01", "rule": "image-alt", "selector": "#hero", "wcag": "1.1.1", "detectable_by": "axe", "why": "Image has no alt attribute; screen readers read the file name or nothing."},
+        {"id": "img-02", "rule": "image-alt", "selector": "#logo-img", "wcag": "1.1.1", "detectable_by": "axe", "why": "Logo image has no alt attribute."},
+        {"id": "img-03", "rule": "link-name", "selector": "#logo-link", "wcag": "2.4.4", "detectable_by": "axe", "why": "Home link contains only an unlabeled image, so it has no name."},
+        {"id": "img-04", "rule": "alt-text-uninformative", "selector": "#chart", "wcag": "1.1.1", "detectable_by": "ai", "why": "Chart alt text is just 'image'; the data in the chart is lost to blind users."}
+      ]
+    },
+    {
+      "page": "broken/forms.html",
+      "issues": [
+        {"id": "frm-01", "rule": "label", "selector": "#email", "wcag": "4.1.2", "detectable_by": "axe", "why": "The visible word 'Email' is not tied to the input."},
+        {"id": "frm-02", "rule": "select-name", "selector": "#country", "wcag": "4.1.2", "detectable_by": "axe", "why": "Dropdown has no label."},
+        {"id": "frm-03", "rule": "button-name", "selector": "#submit-btn", "wcag": "4.1.2", "detectable_by": "axe", "why": "Icon-only button has no accessible name."},
+        {"id": "frm-04", "rule": "placeholder-as-label", "selector": "#phone", "wcag": "3.3.2", "detectable_by": "ai", "why": "Placeholder is the only label and vanishes while typing; rules accept it as a name."}
+      ]
+    },
+    {
+      "page": "broken/contrast.html",
+      "issues": [
+        {"id": "con-01", "rule": "color-contrast", "selector": "#faint", "wcag": "1.4.3", "detectable_by": "axe", "why": "Light gray text on white is below 4.5:1."},
+        {"id": "con-02", "rule": "contrast-over-image", "selector": "#banner-text", "wcag": "1.4.3", "detectable_by": "ai", "why": "White text over a pale background image; rules cannot compute contrast against an image and only flag it for review."}
+      ]
+    },
+    {
+      "page": "broken/structure.html",
+      "issues": [
+        {"id": "str-01", "rule": "html-has-lang", "selector": "html", "wcag": "3.1.1", "detectable_by": "axe", "why": "No page language, so screen readers may pronounce it wrong."},
+        {"id": "str-02", "rule": "document-title", "selector": "html", "wcag": "2.4.2", "detectable_by": "axe", "why": "Page has no title."},
+        {"id": "str-03", "rule": "list", "selector": "#nav-list", "wcag": "1.3.1", "detectable_by": "axe", "why": "A div inside a ul breaks list semantics."},
+        {"id": "str-04", "rule": "heading-order", "selector": "#skip-heading", "wcag": null, "detectable_by": "axe", "why": "Heading jumps from h1 to h4 (best practice)."}
+      ]
+    },
+    {
+      "page": "broken/links_aria.html",
+      "issues": [
+        {"id": "lnk-01", "rule": "link-name", "selector": "#empty-link", "wcag": "2.4.4", "detectable_by": "axe", "why": "Link has no text at all."},
+        {"id": "lnk-02", "rule": "aria-required-attr", "selector": "#fake-checkbox", "wcag": "4.1.2", "detectable_by": "axe", "why": "role=checkbox without aria-checked, so its state is never announced."},
+        {"id": "lnk-03", "rule": "link-purpose-unclear", "selector": "#read-more-1", "wcag": "2.4.4", "detectable_by": "ai", "why": "Two 'Read more' links go to different places; out of context they are indistinguishable."},
+        {"id": "lnk-04", "rule": "link-purpose-unclear", "selector": "#read-more-2", "wcag": "2.4.4", "detectable_by": "ai", "why": "Second identical 'Read more' link."},
+        {"id": "lnk-05", "rule": "keyboard-inaccessible", "selector": "#click-div", "wcag": "2.1.1", "detectable_by": "ai", "why": "Clickable div cannot be reached or activated with a keyboard."}
+      ]
+    },
+    {"page": "fixed/images.html", "issues": []},
+    {"page": "fixed/forms.html", "issues": []},
+    {"page": "fixed/contrast.html", "issues": []},
+    {"page": "fixed/structure.html", "issues": []},
+    {"page": "fixed/links_aria.html", "issues": []},
+    {"page": "clean.html", "issues": []}
+  ]
+}
