@@ -122,3 +122,44 @@ def test_hybrid_search_runs_and_returns_relevant_criterion(tmp_path):
     for method in ("dense", "hybrid"):
         hits = r.search("captions for prerecorded video", method=method, top_k=5)
         assert "1.2.2" in [h.sc for h in hits]
+
+
+def test_query_vectors_are_cached_and_reused(tmp_path):
+    emb = FakeEmbedder()
+    idx = DenseIndex(emb, ["video captions", "text contrast"], cache_dir=tmp_path)
+    idx.rank("captions")
+    calls = emb.calls
+    idx.rank("captions")
+    assert emb.calls == calls  # second identical query never hits the model
+    fresh = FakeEmbedder()
+    DenseIndex(fresh, ["video captions", "text contrast"], cache_dir=tmp_path).rank("captions")
+    assert fresh.calls == 0  # survives restarts via .cache/queries-*.json
+
+
+def test_hybrid_ranks_first_what_both_methods_rank_first(tmp_path):
+    """Regression (2026-09-26, T12 "aria-live region for announcing search result counts").
+
+    Keyword AND semantic search both ranked 4.1.3 Status Messages #1, each via a
+    DIFFERENT passage, yet hybrid put 1.3.1 first: fusion ran over passages, so
+    the agreement was never counted, while a 1.3.1 passage sitting at #2 in both
+    lists collected two votes. Fusion now runs over criteria.
+    """
+    r = Retriever(embedder=FakeEmbedder(), cache_dir=tmp_path)
+    by_sc = {}
+    for i, c in enumerate(r.chunks):
+        by_sc.setdefault(c.sc, []).append(i)
+    status_a, status_b = by_sc["4.1.3"][:2]  # two different passages of 4.1.3
+    info_rel = by_sc["1.3.1"][0]  # one passage of 1.3.1
+    fake = {
+        "bm25": [(status_a, 9.0), (info_rel, 8.0)],
+        "dense": [(status_b, 0.9), (info_rel, 0.8)],
+    }
+    r._chunk_ranking = lambda query, method: fake[method]
+    hits = r.search("aria-live region for announcing search result counts", method="hybrid", top_k=2)
+    assert [h.sc for h in hits] == ["4.1.3", "1.3.1"]
+    assert {c.chunk_id for c in hits[0].evidence} == {r.chunks[status_a].chunk_id, r.chunks[status_b].chunk_id}
+
+
+def test_default_method_is_best_measured(tmp_path):
+    assert Retriever().default_method == "bm25"
+    assert Retriever(embedder=FakeEmbedder(), cache_dir=tmp_path).default_method == "dense"

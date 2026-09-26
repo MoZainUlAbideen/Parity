@@ -52,6 +52,27 @@ class DenseIndex:
     def __init__(self, embedder: Embedder, documents: list[str], cache_dir: Path | None = None):
         self.embedder = embedder
         self.vectors = self._load_or_embed(documents, cache_dir)
+        # Query vectors are cached too: repeated questions (evals, the chat widget's
+        # suggested questions) skip the model, and eval runs become replayable.
+        slug = "".join(ch if ch.isalnum() else "-" for ch in embedder.name)
+        self._query_path = cache_dir / f"queries-{slug}.json" if cache_dir else None
+        self._query_cache: dict[str, list[float]] = {}
+        if self._query_path and self._query_path.exists():
+            import json
+
+            self._query_cache = json.loads(self._query_path.read_text(encoding="utf-8"))
+
+    def embed_query(self, query: str) -> list[float]:
+        prefix = BGE_QUERY_PREFIX if "bge" in self.embedder.name.lower() else ""
+        key = prefix + query
+        if key not in self._query_cache:
+            self._query_cache[key] = _normalize(self.embedder.embed([key])[0])
+            if self._query_path:
+                import json
+
+                self._query_path.parent.mkdir(parents=True, exist_ok=True)
+                self._query_path.write_text(json.dumps(self._query_cache), encoding="utf-8")
+        return self._query_cache[key]
 
     def _load_or_embed(self, documents: list[str], cache_dir: Path | None) -> list[list[float]]:
         import json
@@ -67,8 +88,7 @@ class DenseIndex:
         return vectors
 
     def rank(self, query: str, top_k: int | None = None) -> list[tuple[int, float]]:
-        prefix = BGE_QUERY_PREFIX if "bge" in self.embedder.name.lower() else ""
-        q = _normalize(self.embedder.embed([prefix + query])[0])
+        q = self.embed_query(query)
         sims = [(i, sum(a * b for a, b in zip(q, v))) for i, v in enumerate(self.vectors)]
         sims.sort(key=lambda x: -x[1])
         return sims[:top_k] if top_k else sims

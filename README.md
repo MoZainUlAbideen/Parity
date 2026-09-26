@@ -26,7 +26,7 @@ Every finding is labeled honestly:
 ### Milestone 2: WCAG knowledge base
 - **Built from W3C's own sources**: all 87 WCAG 2.2 success criteria and their Understanding documents, pulled from W3C's GitHub repositories, chunked along W3C's own sections (rule, in brief, intent, benefits, examples, techniques and failures) into 1,092 passages
 - **Every finding cites its rule**: a scan finding carries the success criterion, level, rule text and W3C's plain-language "why it's important". Citing is an exact lookup, never a search, so it can't be hallucinated
-- **Search in plain words**: `parity search "people keep tapping the wrong link on phones"` finds 2.5.8 Target Size. BM25 keyword search is always available; semantic search (bge-small, CPU) and hybrid fusion (RRF) are optional
+- **Search in plain words**: `parity search "people keep tapping the wrong link on phones"` finds 2.5.8 Target Size. BM25 keyword search is always available; semantic search (bge-small, CPU, the default when installed) and hybrid fusion (RRF over criteria) are optional
 - **Grounded answers**: `parity ask` answers from retrieved WCAG passages only. The model must copy exact quotes, code verifies each quote word for word against the passage, and unverified citations are dropped. If nothing survives, Parity says it couldn't verify an answer instead of guessing
 - **Targets WCAG A/AA by default**, the level laws point to, so answers don't cite stricter AAA rules nobody is required to meet
 - 95 tests, including a retrieval quality floor that fails CI if search gets worse
@@ -46,14 +46,19 @@ The rules miss 6 of 19 issues, all judgment calls: a chart whose alt text is jus
 
 54 golden questions, written in the asker's own words (not W3C's) so keyword overlap can't inflate scores.
 
-| Method | Questions | Hit@1 | Hit@3 | Hit@5 | MRR |
+| Method | Phrasing | Hit@1 | Hit@3 | Hit@5 | MRR |
 |---|---|---|---|---|---|
-| Keyword (BM25), all | 51 | 71% | 84% | 86% | 0.78 |
-| Keyword, lay phrasing | 32 | 59% | 75% | 78% | 0.67 |
-| Keyword, technical phrasing | 19 | 89% | 100% | 100% | 0.95 |
-| Semantic / hybrid | | *run locally* | | | |
+| Keyword (BM25) | all 51 | 71% | 84% | 86% | 0.78 |
+| | lay (32) | 59% | 75% | 78% | 0.67 |
+| | technical (19) | 89% | 100% | 100% | 0.95 |
+| **Semantic (bge-small)** | all 51 | 71% | 86% | **92%** | **0.80** |
+| | lay (32) | 56% | 78% | **88%** | 0.69 |
+| | technical (19) | **95%** | 100% | 100% | **0.97** |
+| Hybrid v1 (passage-level RRF) | all 51 | 65% | 80% | 86% | 0.75 |
 
-Keyword search is excellent when people use technical words and weak when they describe the problem in everyday language ("the site only works when I hold my tablet upright" should find 1.3.4 Orientation). That gap is what semantic search is for, and the eval measures whether it closes it.
+Semantic search closes much of the gap on everyday phrasing ("the site only works when I hold my tablet upright" goes from not found to 1.3.4 Orientation at #1), and it is now the default when the model is installed.
+
+**Hybrid v1 was worse than both of its parts, and the eval caught it.** It fused rankings of individual passages. A WCAG criterion has many passages, so when keyword and semantic search agreed on a criterion through *different* paragraphs, the agreement was never counted: for "aria-live region for announcing search result counts", both methods ranked 4.1.3 Status Messages first, yet hybrid put 1.3.1 first. Hybrid now fuses criterion rankings instead (regression test included) and will be re-measured.
 
 Caveat: both benchmarks are small and hand-built. Treat the numbers as a regression baseline, not a claim about real-world accuracy.
 

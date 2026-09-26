@@ -75,23 +75,54 @@ class Retriever:
         self.dense = DenseIndex(embedder, docs, cache_dir) if embedder else None
 
     @property
+    def default_method(self) -> str:
+        # Best measured method (eval/results/retrieval.json, 2026-09-26): dense beat
+        # bm25 on hit@5 (92% vs 86%). Hybrid is re-measured after the fusion fix.
+        return "dense" if self.dense else "bm25"
+
+    @property
     def methods(self) -> list[str]:
         return ["bm25"] + (["dense", "hybrid"] if self.dense else [])
 
-    def _chunk_ranking(self, query: str, method: Method) -> list[tuple[int, float]]:
-        pool = 100  # rank this many chunks before grouping by criterion
+    def _chunk_ranking(self, query: str, method: str) -> list[tuple[int, float]]:
+        pool = 100  # rank this many passages before grouping by criterion
         if method == "bm25":
             return self.bm25.rank(query, pool)
         if self.dense is None:
             raise ValueError(f"Method '{method}' needs an embedding model; install with: uv sync --extra dense")
-        if method == "dense":
-            return self.dense.rank(query, pool)
-        bm = [i for i, _ in self.bm25.rank(query, pool)]
-        de = [i for i, _ in self.dense.rank(query, pool)]
-        return rrf([bm, de])[:pool]
+        return self.dense.rank(query, pool)
+
+    def _criterion_ranking(self, query: str, method: str) -> list[tuple[str, float, list[int]]]:
+        """Criteria in rank order, each with its matching passage indices (best first).
+
+        Hybrid fuses CRITERION rankings, not passage rankings. Regression
+        (2026-09-26): passage-level fusion let criteria with many mediocre
+        passages in both lists outrank the criterion one method put first
+        ("hold my tablet upright": dense #1 1.3.4 Orientation fell out of the
+        top 10). Fusing at the level we actually return fixes that.
+        """
+        if method in ("bm25", "dense"):
+            order: dict[str, tuple[float, list[int]]] = {}
+            for idx, score in self._chunk_ranking(query, method):
+                sc = self.chunks[idx].sc
+                if sc not in order:
+                    order[sc] = (score, [idx])
+                else:
+                    order[sc][1].append(idx)
+            return [(sc, score, idxs) for sc, (score, idxs) in order.items()]
+        if method != "hybrid":
+            raise ValueError(f"Unknown method '{method}'")
+        per_method = [self._criterion_ranking(query, m) for m in ("bm25", "dense")]
+        passages: dict[str, list[int]] = {}
+        for ranking in per_method:
+            for sc, _, idxs in ranking:
+                passages.setdefault(sc, [])
+                passages[sc] += [i for i in idxs if i not in passages[sc]]
+        fused = rrf([[sc for sc, _, _ in ranking] for ranking in per_method])
+        return [(sc, score, passages[sc]) for sc, score in fused]
 
     def search(self, query: str, top_k: int = 5, method: Method | None = None, evidence_per_hit: int = 3) -> list[Hit]:
-        method = method or ("hybrid" if self.dense else "bm25")
+        method = method or self.default_method
         hits: dict[str, Hit] = {}
 
         # 1. Criteria named explicitly in the question come first.
@@ -101,13 +132,13 @@ class Retriever:
                 own = [c for c in self.kb.chunks_for(num) if c.section.value in ("normative", "brief")]
                 hits[num] = Hit(sc=num, handle=crit.handle, level=crit.level, score=float("inf"), evidence=own, exact_match=True)
 
-        # 2. Ranked passages, grouped by criterion (best passage decides the order).
-        for idx, score in self._chunk_ranking(query, method):
-            chunk = self.chunks[idx]
-            crit = self.kb.criteria[chunk.sc]
-            hit = hits.get(chunk.sc)
-            if hit is None:
-                hits[chunk.sc] = Hit(sc=chunk.sc, handle=crit.handle, level=crit.level, score=score, evidence=[chunk])
-            elif not hit.exact_match and len(hit.evidence) < evidence_per_hit:
-                hit.evidence.append(chunk)
+        # 2. Ranked criteria, each with its best-matching passages as evidence.
+        for sc, score, idxs in self._criterion_ranking(query, method):
+            if sc in hits:
+                continue
+            crit = self.kb.criteria[sc]
+            hits[sc] = Hit(sc=sc, handle=crit.handle, level=crit.level, score=score,
+                           evidence=[self.chunks[i] for i in idxs[:evidence_per_hit]])
+            if len(hits) >= top_k:
+                break
         return list(hits.values())[:top_k]

@@ -26,9 +26,14 @@
 - [x] Retrieval eval: 54 golden questions; BM25 hit@5 86% overall, lay hit@1 59%, technical hit@3 100%
 - [x] Retrieval quality floor in tests + retrieval eval in CI
 - [x] Bug found and fixed: W3C labels "What to do" as "Author task" on 1.4.12 and 2.2.6; plain-language brief was lost
-- [x] 95 tests passing
-- [ ] Run semantic + hybrid eval on your machine and record the numbers
-- [ ] Try `parity ask` live with your Groq key
+- [x] 107 tests passing
+- [x] Semantic eval on your machine: hit@5 92% vs keyword 86%; lay-phrasing hit@5 88% vs 78%; now the default
+- [x] `parity ask` live with gpt-oss-120b: correct, quotes verified
+- [x] Bug found in live use: answers cited examples, not the rule; rule text now always offered
+- [x] Bug found by the eval: hybrid v1 worse than both parts (passage-level fusion lost cross-method agreement, e.g. T12); now fuses criteria
+- [x] Query-embedding cache (repeat questions skip the model; eval runs replayable)
+- [x] Groq model discovery: `parity models`, clear error when a model is retired
+- [ ] Re-run retrieval eval to measure hybrid v2
 - [ ] Push to GitHub, CI green
 
 ## Milestone 3: Vision agent
