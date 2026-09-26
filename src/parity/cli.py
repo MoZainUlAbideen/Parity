@@ -8,6 +8,8 @@
     uv run parity search "tap targets too small"   # which rules apply?
     uv run parity ask "how big must buttons be?"   # grounded answer (needs GROQ_API_KEY)
     uv run parity models                        # Groq models your key can use
+    uv run parity models --provider gemini      # Gemini models (vision agent)
+    uv run parity agent-eval                    # rules vs rules + agents on labeled pages
     uv run parity retrieval-eval                # score search on the golden questions
 
     uv run parity kb fetch                      # re-download W3C sources
@@ -45,7 +47,8 @@ IMPACT_STYLE = {"critical": "bold red", "serious": "red", "moderate": "yellow", 
 
 def print_report(report: ScanReport) -> None:
     s = report.summary
-    console.print(f"\n[bold]{report.url}[/bold]  ({report.engine}, {report.duration_seconds}s)")
+    agents = f" + {', '.join(report.agents)}" if report.agents else ""
+    console.print(f"\n[bold]{report.url}[/bold]  ({report.engine}{agents}, {report.duration_seconds}s)")
     console.print(
         f"{s.by_confidence.get(Confidence.auto_verified.value, 0)} confirmed issues on "
         f"{s.affected_elements} elements, "
@@ -72,6 +75,22 @@ def print_report(report: ScanReport) -> None:
         )
     console.print(table)
 
+    agent_nodes = [(f, n) for f in report.findings for n in f.nodes if n.evidence or n.suggestion]
+    if agent_nodes:
+        console.print("\n[bold]Agent evidence and suggested fixes[/bold]")
+        for f, n in agent_nodes:
+            console.print(f"  [bold]{escape(n.target)}[/bold] ({escape(f.rule_id)}, {f.source.value}, {f.confidence.value})")
+            if n.evidence:
+                console.print(f"    {escape(n.evidence)}")
+            if n.suggestion:
+                console.print(f"    [green]Suggested:[/green] {escape(n.suggestion)}")
+    if report.resolved:
+        console.print(f"\n[bold]Settled as passing[/bold] ({len(report.resolved)} item(s) the rule engine couldn't decide)")
+        for r in report.resolved:
+            console.print(f"  {escape(r.target)}: {escape(r.evidence)}")
+    for note in report.notes:
+        console.print(f"[yellow]Note:[/yellow] {escape(note)}")
+
     # One plain-language line per broken rule, straight from W3C's "In brief".
     seen = {}
     for f in report.findings:
@@ -87,16 +106,33 @@ def print_report(report: ScanReport) -> None:
             console.print(f"  [bold]{c.sc} {escape(c.handle)}[/bold] (Level {c.level}): {escape(why)}")
 
 
+def _agent_options(ai: bool, max_images: int = 15):
+    from parity.gemini import GeminiError, GeminiVision
+    from parity.scanner import AgentOptions
+
+    vision = None
+    if ai:
+        try:
+            vision = GeminiVision(cache_dir=CACHE_DIR)
+        except GeminiError:
+            console.print("[dim]Vision agent off: no GEMINI_API_KEY in .env (image checks use rules only).[/dim]")
+    return AgentOptions(vision=vision, max_images=max_images)
+
+
 @app.command()
 def scan(
     url: str = typer.Argument(..., help="Page to scan, e.g. https://example.com"),
     out: Path = typer.Option(Path("reports"), help="Folder for the JSON report and screenshots."),
     viewport: list[str] = typer.Option(["desktop", "mobile"], help="Viewports to test."),
     allow_local: bool = typer.Option(False, help="Allow localhost/private addresses (local testing only)."),
+    ai: bool = typer.Option(True, help="Use the Gemini vision agent when GEMINI_API_KEY is set."),
+    agents: bool = typer.Option(True, help="Run Parity's agents on top of the rule engine."),
+    max_images: int = typer.Option(15, help="Most images sent to the vision model per page (protects your quota)."),
 ) -> None:
     """Scan one page and save a JSON report."""
+    options = _agent_options(ai, max_images) if agents else None
     try:
-        report = asyncio.run(scan_url(url, viewport, out_dir=out, allow_private=allow_local))
+        report = asyncio.run(scan_url(url, viewport, out_dir=out, allow_private=allow_local, agents=options))
     except UnsafeURLError as exc:
         console.print(f"[red]Refused:[/red] {exc}")
         raise typer.Exit(code=2)
@@ -245,20 +281,76 @@ def ask(
 
 
 @app.command()
-def models() -> None:
-    """List the Groq chat models your API key can use."""
-    from parity.llm import GroqLLM, LLMError
+def models(provider: str = typer.Option("groq", help="groq (text answers) or gemini (vision agent)")) -> None:
+    """List the models your API key can use."""
+    if provider == "gemini":
+        from parity.gemini import GeminiError, GeminiVision
 
-    try:
-        llm = GroqLLM()
-        available = llm.list_models()
-    except LLMError as exc:
-        console.print(f"[red]{escape(str(exc))}[/red]")
-        raise typer.Exit(code=1)
-    console.print(f"Current model: [bold]{escape(llm.name)}[/bold]{'' if llm.name in available else ' [red](not available)[/red]'}\n")
+        try:
+            client = GeminiVision()
+            available = client.list_models()
+        except GeminiError as exc:
+            console.print(f"[red]{escape(str(exc))}[/red]")
+            raise typer.Exit(code=1)
+        current, env_var = client.models, "PARITY_VISION_MODELS"
+    else:
+        from parity.llm import GroqLLM, LLMError
+
+        try:
+            llm = GroqLLM()
+            available = llm.list_models()
+        except LLMError as exc:
+            console.print(f"[red]{escape(str(exc))}[/red]")
+            raise typer.Exit(code=1)
+        current, env_var = [llm.name], "PARITY_LLM_MODEL"
+    for m in current:
+        console.print(f"Current model: [bold]{escape(m)}[/bold]{'' if m in available else ' [red](not available)[/red]'}")
+    console.print()
     for m in available:
         console.print(f"  {escape(m)}")
-    console.print("\nTo switch, add to .env:  PARITY_LLM_MODEL=<model>")
+    console.print(f"\nTo switch, add to .env:  {env_var}=<model>" + ("   (comma-separated list = fallbacks)" if provider == "gemini" else ""))
+
+
+@app.command("agent-eval")
+def agent_eval(
+    out: Path = typer.Option(Path("eval/results/agents.json"), help="Where to write metrics."),
+    ai: bool = typer.Option(True, help="Include the Gemini vision agent if GEMINI_API_KEY is set."),
+) -> None:
+    """Compare rules-only vs rules + agents on the labeled pages."""
+    import json
+
+    from parity.eval.baseline import run_eval
+    from parity.scanner import AgentOptions
+
+    runs = [("rules only", None), ("rules + agents (no AI)", AgentOptions(vision=None))]
+    if ai:
+        opts = _agent_options(True)
+        if opts.vision is not None:
+            runs.append((f"rules + agents + vision ({opts.vision.name})", opts))
+    results = []
+    for label, opts in runs:
+        with console.status(f"Scanning labeled pages: {label}..."):
+            results.append((label, asyncio.run(run_eval(opts, label))))
+
+    t = Table(title="Rules vs agents on the labeled benchmark")
+    for col in ["Configuration", "Precision", "Recall (all)", "Recall (AI-only issues)", "False alarms on fixed pages", "Left for human review"]:
+        t.add_column(col, justify="left" if col == "Configuration" else "right")
+    for label, r in results:
+        t.add_row(label, f"{r.precision:.0%}", f"{r.recall_all:.0%} ({r.true_positives}/{r.labeled_total})",
+                  f"{r.recall_ai_only:.0%}", str(r.false_positives_on_clean), str(r.needs_review_total))
+    console.print(t)
+    label, best = results[-1]
+    if best.missed:
+        console.print(f"\n[bold]Still missed by {escape(label)}[/bold]:")
+        for m in best.missed:
+            console.print(f"  - {m.page}: {m.rule} on {m.selector}")
+    if best.false_positive_details:
+        console.print("\n[bold red]False alarms[/bold red]:")
+        for fp in best.false_positive_details:
+            console.print(f"  - {fp.page}: {fp.rule} on {fp.selector}")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps([{"configuration": lbl, **r.model_dump()} for lbl, r in results], indent=2), encoding="utf-8")
+    console.print(f"\nSaved {out}")
 
 
 @app.command("retrieval-eval")

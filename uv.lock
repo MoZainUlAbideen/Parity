@@ -832,6 +832,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "httpx" },
+    { name = "pillow" },
     { name = "playwright" },
     { name = "pydantic" },
     { name = "python-dotenv" },
@@ -856,6 +857,7 @@ dev = [
 requires-dist = [
     { name = "fastembed", marker = "extra == 'dense'", specifier = ">=0.8.1" },
     { name = "httpx", specifier = ">=0.28.1" },
+    { name = "pillow", specifier = ">=11.0" },
     { name = "playwright", specifier = ">=1.56.0" },
     { name = "pydantic", specifier = ">=2.13.5" },
     { name = "python-dotenv", specifier = ">=1.2.3" },

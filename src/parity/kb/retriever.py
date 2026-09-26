@@ -76,9 +76,10 @@ class Retriever:
 
     @property
     def default_method(self) -> str:
-        # Best measured method (eval/results/retrieval.json, 2026-09-26): dense beat
-        # bm25 on hit@5 (92% vs 86%). Hybrid is re-measured after the fusion fix.
-        return "dense" if self.dense else "bm25"
+        # Best measured method (eval/results/retrieval.json, 2026-09-26): hybrid v2
+        # (criterion-level fusion) ties dense on hit@5 (92%) and leads on hit@1
+        # (73% vs 71%), MRR (0.81 vs 0.80) and everyday phrasing hit@1 (62% vs 56%).
+        return "hybrid" if self.dense else "bm25"
 
     @property
     def methods(self) -> list[str]:

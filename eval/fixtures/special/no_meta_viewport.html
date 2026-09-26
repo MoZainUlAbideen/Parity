@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Desktop-only layout (no viewport meta tag)</title></head>
+<!-- Like many older sites (and the Deque Mars demo): no <meta name="viewport">, so phones
+     lay the page out ~980px wide and zoom out. Regression page for the contrast meter. -->
+<body style="margin:0;font-family:Arial,sans-serif">
+<main style="width:960px;padding:16px">
+  <h1>Wide desktop layout</h1>
+  <div style="display:flex;gap:24px">
+    <div style="width:420px"><p>Left column text on white.</p></div>
+    <div style="width:420px;background-image:url(../assets/dark-photo.png);background-size:cover;padding:30px">
+      <p id="right-dark-text" style="color:#3a4250;font-size:18px;margin:0">Dark text over the photo, far right</p>
+      <p id="right-light-text" style="color:#ffffff;font-size:18px;margin:12px 0 0">White text over the photo, far right</p>
+    </div>
+  </div>
+  <div style="height:1400px"></div>
+  <div style="background-image:url(../assets/dark-photo.png);padding:30px;margin-left:520px">
+    <p id="far-down-text" style="color:#3a4250;font-size:18px;margin:0">Dark text far down the page</p>
+  </div>
+</main>
+</body></html>

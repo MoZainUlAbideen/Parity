@@ -33,11 +33,22 @@
 - [x] Bug found by the eval: hybrid v1 worse than both parts (passage-level fusion lost cross-method agreement, e.g. T12); now fuses criteria
 - [x] Query-embedding cache (repeat questions skip the model; eval runs replayable)
 - [x] Groq model discovery: `parity models`, clear error when a model is retired
-- [ ] Re-run retrieval eval to measure hybrid v2
-- [ ] Push to GitHub, CI green
+- [x] Hybrid v2 measured: hit@1 73%, hit@5 92%, MRR 0.81, lay hit@1 62%; now the default
+- [x] Pushed to GitHub
 
-## Milestone 3: Vision agent
-- [ ] Alt-text quality: is the description accurate and useful?
-- [ ] Decorative vs informative images
-- [ ] Contrast over background images (resolve axe's needs-review cases)
-- [ ] Re-run baseline eval: recall on AI-only issues
+## Milestone 3: Vision + measurement agents
+- [x] Benchmark v2: image-quality and text-over-image pages, fixed twins, correct "negative" cases; 24 labeled issues (11 AI-only)
+- [x] Contrast meter: measures text over background images from pixels; settles axe's needs-review cases (pass or fail, with the ratio)
+- [x] Alt-text rules: placeholder and file-name alt text (W3C F30), no model needed
+- [x] Gemini vision client: retries + backoff, model fallbacks, disk cache, rate spacing, model discovery (`parity models --provider gemini`)
+- [x] Vision agent: alt-text quality, hidden informative images, suggested alt text for every image
+- [x] Evidence and suggested fix on every agent finding; "settled as passing" list in reports
+- [x] `parity agent-eval`: rules only 54% recall / AI-only 0% / 5 left for review -> agents without AI 75% / 45% / 0, still 100% precision and no false alarms
+- [x] Agent eval gate in tests (precision, AI-only recall floor, needs-review reduction)
+- [x] Pillow deprecation caught (getdata removed in Pillow 14) and handled with a fallback
+- [x] Bug found on a real site (Deque Mars, mobile): pages without a viewport meta tag are zoomed out on phones and the meter's crop landed outside the screenshot, crashing the scan. Now measures via element screenshots with proportional crops; failures stay with a human and never break the scan
+- [x] Bug caught by tests during that fix: re-reading positions while text was hidden also read text-shadow as "none"
+- [x] 163 tests passing
+- [ ] Run `parity agent-eval` with Gemini on your machine
+- [ ] Scan a real site with the vision agent (Deque Mars: 86 needs-review contrast items)
+- [ ] Push to GitHub, CI green

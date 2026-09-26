@@ -162,4 +162,4 @@ def test_hybrid_ranks_first_what_both_methods_rank_first(tmp_path):
 
 def test_default_method_is_best_measured(tmp_path):
     assert Retriever().default_method == "bm25"
-    assert Retriever(embedder=FakeEmbedder(), cache_dir=tmp_path).default_method == "dense"
+    assert Retriever(embedder=FakeEmbedder(), cache_dir=tmp_path).default_method == "hybrid"

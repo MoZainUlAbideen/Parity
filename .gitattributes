@@ -1,0 +1,8 @@
+# Store text files with LF line endings everywhere (silences "LF will be replaced by CRLF"
+# warnings on Windows and keeps diffs clean across machines and CI).
+* text=auto eol=lf
+
+# Binary files: never touch.
+*.png binary
+*.jpg binary
+*.ico binary

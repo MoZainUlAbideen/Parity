@@ -33,7 +33,9 @@ class Confidence(str, Enum):
 
 class Source(str, Enum):
     axe = "axe"
-    vision_agent = "vision-agent"
+    parity_rules = "parity-rules"  # Parity's own deterministic checks (e.g. placeholder alt text)
+    contrast_meter = "contrast-meter"  # pixel measurement of text over images
+    vision_agent = "vision-agent"  # a vision model's judgment
     interaction_agent = "interaction-agent"
 
 
@@ -55,6 +57,8 @@ class NodeRef(BaseModel):
     target: str  # CSS selector for the element
     html: str  # snippet of the element's markup
     failure_summary: str = ""
+    evidence: str = ""  # how an agent or measurement reached its verdict
+    suggestion: str = ""  # a concrete fix, e.g. proposed alt text
 
 
 class Citation(BaseModel):
@@ -108,6 +112,14 @@ class ScanSummary(BaseModel):
     affected_elements: int
 
 
+class Resolved(BaseModel):
+    """A 'needs review' item an agent settled as passing, with its evidence."""
+
+    rule_id: str
+    target: str
+    evidence: str
+
+
 class ScanReport(BaseModel):
     url: str
     scanned_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -116,3 +128,6 @@ class ScanReport(BaseModel):
     snapshots: list[PageSnapshot]
     findings: list[Finding]
     summary: ScanSummary
+    resolved: list[Resolved] = Field(default_factory=list)
+    agents: list[str] = Field(default_factory=list)  # which agents ran, e.g. ["contrast-meter"]
+    notes: list[str] = Field(default_factory=list)  # agent problems worth knowing (quota, API errors)

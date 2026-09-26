@@ -2,13 +2,15 @@
   "engine": "axe v4.13.0",
   "precision": 1.0,
   "recall_rule_detectable": 1.0,
-  "recall_all": 0.6842,
+  "recall_all": 0.5417,
+  "recall_ai_only": 0.0,
   "true_positives": 13,
   "false_positives": 0,
   "false_positives_on_clean": 0,
-  "labeled_total": 19,
+  "labeled_total": 24,
   "labeled_rule_detectable": 13,
-  "needs_review_total": 1,
+  "labeled_ai_only": 11,
+  "needs_review_total": 5,
   "pages": [
     {
       "page": "broken/images.html",
@@ -46,6 +48,20 @@
       "needs_review": 0
     },
     {
+      "page": "broken/images_quality.html",
+      "true_positives": 0,
+      "false_positives": 0,
+      "labeled": 4,
+      "needs_review": 0
+    },
+    {
+      "page": "broken/contrast_images.html",
+      "true_positives": 0,
+      "false_positives": 0,
+      "labeled": 1,
+      "needs_review": 2
+    },
+    {
       "page": "fixed/images.html",
       "true_positives": 0,
       "false_positives": 0,
@@ -79,6 +95,20 @@
       "false_positives": 0,
       "labeled": 0,
       "needs_review": 0
+    },
+    {
+      "page": "fixed/images_quality.html",
+      "true_positives": 0,
+      "false_positives": 0,
+      "labeled": 0,
+      "needs_review": 0
+    },
+    {
+      "page": "fixed/contrast_images.html",
+      "true_positives": 0,
+      "false_positives": 0,
+      "labeled": 0,
+      "needs_review": 2
     },
     {
       "page": "clean.html",
@@ -123,6 +153,36 @@
       "page": "broken/links_aria.html",
       "rule": "keyboard-inaccessible",
       "selector": "#click-div",
+      "detectable_by": "ai"
+    },
+    {
+      "page": "broken/images_quality.html",
+      "rule": "alt-text-uninformative",
+      "selector": "#sale-banner",
+      "detectable_by": "ai"
+    },
+    {
+      "page": "broken/images_quality.html",
+      "rule": "informative-image-hidden",
+      "selector": "#promo-text",
+      "detectable_by": "ai"
+    },
+    {
+      "page": "broken/images_quality.html",
+      "rule": "alt-text-uninformative",
+      "selector": "#visitors-chart",
+      "detectable_by": "ai"
+    },
+    {
+      "page": "broken/images_quality.html",
+      "rule": "alt-text-uninformative",
+      "selector": "#sales-bars",
+      "detectable_by": "ai"
+    },
+    {
+      "page": "broken/contrast_images.html",
+      "rule": "contrast-over-image",
+      "selector": "#dark-on-dark",
       "detectable_by": "ai"
     }
   ],

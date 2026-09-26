@@ -2,10 +2,11 @@
 
 Kept separate from the browser code so the math is unit-testable.
 
-Matching rule: a confirmed finding matches a labeled issue when the rule id
-AND the element selector are the same. Only confirmed (auto-verified)
-findings count, because those are what we would claim to a customer.
-"needs-review" findings are reported but never counted as detections.
+Matching rule: a claimed finding matches a labeled issue when the rule id
+AND the element selector are the same. Claimed = what we would tell a
+customer is a real problem: "auto-verified" (rules, measurements) and
+"ai-high-confidence" (agents). "needs-review" findings are reported but never
+counted as detections or as false positives.
 """
 
 from __future__ import annotations
@@ -30,6 +31,7 @@ class LabeledIssue(BaseModel):
 class LabeledPage(BaseModel):
     page: str
     issues: list[LabeledIssue]
+    negatives: list[str] = []  # suspicious-looking but correct elements (documentation)
 
 
 class GroundTruth(BaseModel):
@@ -67,22 +69,27 @@ class EvalResult(BaseModel):
     precision: float
     recall_rule_detectable: float
     recall_all: float
+    recall_ai_only: float  # issues only judgment (AI or measurement) can find
     true_positives: int
     false_positives: int
     false_positives_on_clean: int
     labeled_total: int
     labeled_rule_detectable: int
+    labeled_ai_only: int
     needs_review_total: int
     pages: list[PageResult]
     missed: list[Miss]
     false_positive_details: list[FalsePositive]
 
 
+CLAIMED = {Confidence.auto_verified, Confidence.ai_high}
+
+
 def _pairs(findings: list[Finding]) -> tuple[set[tuple[str, str]], int]:
     confirmed, review = set(), 0
     for f in findings:
         for n in f.nodes:
-            if f.confidence == Confidence.auto_verified:
+            if f.confidence in CLAIMED:
                 confirmed.add((f.rule_id, n.target))
             else:
                 review += 1
@@ -97,7 +104,7 @@ def _ratio(num: int, den: int) -> float:
 def score(truth: GroundTruth, findings_by_page: dict[str, list[Finding]], engine: str) -> EvalResult:
     tp = fp = fp_clean = review_total = 0
     labeled_total = labeled_rule = 0
-    detected_rule = 0
+    detected_rule = detected_ai = labeled_ai = 0
     pages, missed, fps = [], [], []
 
     for lp in truth.pages:
@@ -115,6 +122,8 @@ def score(truth: GroundTruth, findings_by_page: dict[str, list[Finding]], engine
         labeled_total += len(lp.issues)
         labeled_rule += sum(1 for i in lp.issues if i.detectable_by == "axe")
         detected_rule += sum(1 for k in confirmed & expected.keys() if expected[k].detectable_by == "axe")
+        labeled_ai += sum(1 for i in lp.issues if i.detectable_by == "ai")
+        detected_ai += sum(1 for k in confirmed & expected.keys() if expected[k].detectable_by == "ai")
 
         for key, issue in expected.items():
             if key not in confirmed:
@@ -129,11 +138,13 @@ def score(truth: GroundTruth, findings_by_page: dict[str, list[Finding]], engine
         precision=_ratio(tp, tp + fp),
         recall_rule_detectable=_ratio(detected_rule, labeled_rule),
         recall_all=_ratio(tp, labeled_total),
+        recall_ai_only=_ratio(detected_ai, labeled_ai),
         true_positives=tp,
         false_positives=fp,
         false_positives_on_clean=fp_clean,
         labeled_total=labeled_total,
         labeled_rule_detectable=labeled_rule,
+        labeled_ai_only=labeled_ai,
         needs_review_total=review_total,
         pages=pages,
         missed=missed,

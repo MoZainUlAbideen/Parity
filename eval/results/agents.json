@@ -1,0 +1,529 @@
+[
+  {
+    "configuration": "rules only",
+    "engine": "rules only",
+    "precision": 1.0,
+    "recall_rule_detectable": 1.0,
+    "recall_all": 0.5417,
+    "recall_ai_only": 0.0,
+    "true_positives": 13,
+    "false_positives": 0,
+    "false_positives_on_clean": 0,
+    "labeled_total": 24,
+    "labeled_rule_detectable": 13,
+    "labeled_ai_only": 11,
+    "needs_review_total": 5,
+    "pages": [
+      {
+        "page": "broken/images.html",
+        "true_positives": 3,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/forms.html",
+        "true_positives": 3,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/contrast.html",
+        "true_positives": 1,
+        "false_positives": 0,
+        "labeled": 2,
+        "needs_review": 1
+      },
+      {
+        "page": "broken/structure.html",
+        "true_positives": 4,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/links_aria.html",
+        "true_positives": 2,
+        "false_positives": 0,
+        "labeled": 5,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/images_quality.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/contrast_images.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 1,
+        "needs_review": 2
+      },
+      {
+        "page": "fixed/images.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/forms.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/contrast.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/structure.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/links_aria.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/images_quality.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/contrast_images.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 2
+      },
+      {
+        "page": "clean.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      }
+    ],
+    "missed": [
+      {
+        "page": "broken/images.html",
+        "rule": "alt-text-uninformative",
+        "selector": "#chart",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/forms.html",
+        "rule": "placeholder-as-label",
+        "selector": "#phone",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/contrast.html",
+        "rule": "contrast-over-image",
+        "selector": "#banner-text",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/links_aria.html",
+        "rule": "link-purpose-unclear",
+        "selector": "#read-more-1",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/links_aria.html",
+        "rule": "link-purpose-unclear",
+        "selector": "#read-more-2",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/links_aria.html",
+        "rule": "keyboard-inaccessible",
+        "selector": "#click-div",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/images_quality.html",
+        "rule": "alt-text-uninformative",
+        "selector": "#sale-banner",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/images_quality.html",
+        "rule": "informative-image-hidden",
+        "selector": "#promo-text",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/images_quality.html",
+        "rule": "alt-text-uninformative",
+        "selector": "#visitors-chart",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/images_quality.html",
+        "rule": "alt-text-uninformative",
+        "selector": "#sales-bars",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/contrast_images.html",
+        "rule": "contrast-over-image",
+        "selector": "#dark-on-dark",
+        "detectable_by": "ai"
+      }
+    ],
+    "false_positive_details": []
+  },
+  {
+    "configuration": "rules + agents (no AI)",
+    "engine": "rules + agents (no AI)",
+    "precision": 1.0,
+    "recall_rule_detectable": 1.0,
+    "recall_all": 0.75,
+    "recall_ai_only": 0.4545,
+    "true_positives": 18,
+    "false_positives": 0,
+    "false_positives_on_clean": 0,
+    "labeled_total": 24,
+    "labeled_rule_detectable": 13,
+    "labeled_ai_only": 11,
+    "needs_review_total": 0,
+    "pages": [
+      {
+        "page": "broken/images.html",
+        "true_positives": 4,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/forms.html",
+        "true_positives": 3,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/contrast.html",
+        "true_positives": 2,
+        "false_positives": 0,
+        "labeled": 2,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/structure.html",
+        "true_positives": 4,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/links_aria.html",
+        "true_positives": 2,
+        "false_positives": 0,
+        "labeled": 5,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/images_quality.html",
+        "true_positives": 2,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/contrast_images.html",
+        "true_positives": 1,
+        "false_positives": 0,
+        "labeled": 1,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/images.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/forms.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/contrast.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/structure.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/links_aria.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/images_quality.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/contrast_images.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "clean.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      }
+    ],
+    "missed": [
+      {
+        "page": "broken/forms.html",
+        "rule": "placeholder-as-label",
+        "selector": "#phone",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/links_aria.html",
+        "rule": "link-purpose-unclear",
+        "selector": "#read-more-1",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/links_aria.html",
+        "rule": "link-purpose-unclear",
+        "selector": "#read-more-2",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/links_aria.html",
+        "rule": "keyboard-inaccessible",
+        "selector": "#click-div",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/images_quality.html",
+        "rule": "informative-image-hidden",
+        "selector": "#promo-text",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/images_quality.html",
+        "rule": "alt-text-uninformative",
+        "selector": "#sales-bars",
+        "detectable_by": "ai"
+      }
+    ],
+    "false_positive_details": []
+  },
+  {
+    "configuration": "rules + agents + vision (gemini-3.1-flash-lite)",
+    "engine": "rules + agents + vision (gemini-3.1-flash-lite)",
+    "precision": 0.8,
+    "recall_rule_detectable": 1.0,
+    "recall_all": 0.8333,
+    "recall_ai_only": 0.6364,
+    "true_positives": 20,
+    "false_positives": 5,
+    "false_positives_on_clean": 4,
+    "labeled_total": 24,
+    "labeled_rule_detectable": 13,
+    "labeled_ai_only": 11,
+    "needs_review_total": 0,
+    "pages": [
+      {
+        "page": "broken/images.html",
+        "true_positives": 4,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/forms.html",
+        "true_positives": 3,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/contrast.html",
+        "true_positives": 2,
+        "false_positives": 0,
+        "labeled": 2,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/structure.html",
+        "true_positives": 4,
+        "false_positives": 0,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/links_aria.html",
+        "true_positives": 2,
+        "false_positives": 0,
+        "labeled": 5,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/images_quality.html",
+        "true_positives": 4,
+        "false_positives": 1,
+        "labeled": 4,
+        "needs_review": 0
+      },
+      {
+        "page": "broken/contrast_images.html",
+        "true_positives": 1,
+        "false_positives": 0,
+        "labeled": 1,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/images.html",
+        "true_positives": 0,
+        "false_positives": 1,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/forms.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/contrast.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/structure.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/links_aria.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/images_quality.html",
+        "true_positives": 0,
+        "false_positives": 2,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "fixed/contrast_images.html",
+        "true_positives": 0,
+        "false_positives": 0,
+        "labeled": 0,
+        "needs_review": 0
+      },
+      {
+        "page": "clean.html",
+        "true_positives": 0,
+        "false_positives": 1,
+        "labeled": 0,
+        "needs_review": 0
+      }
+    ],
+    "missed": [
+      {
+        "page": "broken/forms.html",
+        "rule": "placeholder-as-label",
+        "selector": "#phone",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/links_aria.html",
+        "rule": "link-purpose-unclear",
+        "selector": "#read-more-1",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/links_aria.html",
+        "rule": "link-purpose-unclear",
+        "selector": "#read-more-2",
+        "detectable_by": "ai"
+      },
+      {
+        "page": "broken/links_aria.html",
+        "rule": "keyboard-inaccessible",
+        "selector": "#click-div",
+        "detectable_by": "ai"
+      }
+    ],
+    "false_positive_details": [
+      {
+        "page": "broken/images_quality.html",
+        "rule": "alt-text-uninformative",
+        "selector": "#logo2"
+      },
+      {
+        "page": "fixed/images.html",
+        "rule": "alt-text-uninformative",
+        "selector": "#logo-img"
+      },
+      {
+        "page": "fixed/images_quality.html",
+        "rule": "alt-text-uninformative",
+        "selector": "#logo2"
+      },
+      {
+        "page": "fixed/images_quality.html",
+        "rule": "alt-text-uninformative",
+        "selector": "#visitors-chart"
+      },
+      {
+        "page": "clean.html",
+        "rule": "alt-text-uninformative",
+        "selector": "body:nth-of-type(1) > main:nth-of-type(1) > img:nth-of-type(1)"
+      }
+    ]
+  }
+]

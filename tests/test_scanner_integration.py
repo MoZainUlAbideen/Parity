@@ -89,3 +89,39 @@ async def test_findings_carry_wcag_citations(base_url, browser):
     assert [c.sc for c in image_alt.citations] == ["1.1.1"]
     assert image_alt.citations[0].handle == "Non-text Content"
     assert image_alt.citations[0].understanding_url.endswith("/non-text-content.html")
+
+
+async def test_agents_settle_contrast_over_images(base_url, browser):
+    from parity.scanner import AgentOptions
+
+    report = await scan_url(f"{base_url}/broken/contrast_images.html", allow_private=True, browser=browser, agents=AgentOptions())
+    over = [f for f in report.findings if f.rule_id == "contrast-over-image"]
+    assert [n.target for f in over for n in f.nodes] == ["#dark-on-dark"]
+    assert over[0].viewports == ["desktop", "mobile"]
+    assert over[0].citations[0].sc == "1.4.3"
+    assert {r.target for r in report.resolved} == {"#light-on-dark"}  # measured as passing
+    assert not [f for f in report.findings if f.confidence == Confidence.needs_review]
+    assert report.agents == ["contrast-meter", "parity-rules"]
+
+
+async def test_agents_raise_no_alarms_on_fixed_pages(base_url, browser):
+    from parity.scanner import AgentOptions
+
+    for page in ["fixed/contrast_images.html", "fixed/images_quality.html", "clean.html"]:
+        report = await scan_url(f"{base_url}/{page}", allow_private=True, browser=browser, agents=AgentOptions())
+        assert report.findings == [], page
+
+
+async def test_one_unmeasurable_element_never_breaks_the_scan(base_url, browser, monkeypatch):
+    import parity.scanner as scanner_mod
+    from parity.scanner import AgentOptions
+
+    async def exploding(page, selector, *a, **kw):
+        raise RuntimeError("Page.screenshot: Clipped area is either empty or outside the resulting image")
+
+    monkeypatch.setattr(scanner_mod, "measure_text_over_image", exploding)
+    report = await scan_url(f"{base_url}/broken/contrast_images.html", viewports=["desktop"], allow_private=True, browser=browser, agents=AgentOptions())
+    review = [n for f in report.findings if f.confidence == Confidence.needs_review for n in f.nodes]
+    assert {n.target for n in review} == {"#dark-on-dark", "#light-on-dark"}  # kept for a human
+    assert all("Could not measure" in n.evidence for n in review)
+    assert any("could not be measured" in note for note in report.notes)
