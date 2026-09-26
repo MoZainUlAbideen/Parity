@@ -1,0 +1,3554 @@
+[
+  {
+    "method": "bm25",
+    "overall": {
+      "n": 51,
+      "hit_at": {
+        "1": 0.7059,
+        "3": 0.8431,
+        "5": 0.8627
+      },
+      "mrr": 0.7752
+    },
+    "by_category": {
+      "lay": {
+        "n": 32,
+        "hit_at": {
+          "1": 0.5938,
+          "3": 0.75,
+          "5": 0.7812
+        },
+        "mrr": 0.6729
+      },
+      "named": {
+        "n": 3,
+        "hit_at": {
+          "1": 1.0,
+          "3": 1.0,
+          "5": 1.0
+        },
+        "mrr": 1.0
+      },
+      "technical": {
+        "n": 19,
+        "hit_at": {
+          "1": 0.8947,
+          "3": 1.0,
+          "5": 1.0
+        },
+        "mrr": 0.9474
+      }
+    },
+    "questions": [
+      {
+        "id": "L01",
+        "category": "lay",
+        "question": "My icon-only buttons are announced as just 'button' by screen readers",
+        "relevant": [
+          "4.1.2",
+          "1.1.1"
+        ],
+        "retrieved": [
+          "4.1.3",
+          "3.2.4",
+          "2.5.3",
+          "2.5.8",
+          "3.1.2",
+          "2.5.7",
+          "1.4.13",
+          "3.3.1",
+          "2.5.1",
+          "2.1.1"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L02",
+        "category": "lay",
+        "question": "Blind visitors can't tell what our product photos show",
+        "relevant": [
+          "1.1.1"
+        ],
+        "retrieved": [
+          "1.2.5",
+          "1.2.3",
+          "1.4.11",
+          "3.1.2",
+          "2.5.4",
+          "1.3.5",
+          "3.3.1",
+          "2.5.7",
+          "3.2.1",
+          "4.1.3"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L03",
+        "category": "lay",
+        "question": "Our promo video has no subtitles, so deaf customers miss the offer",
+        "relevant": [
+          "1.2.2"
+        ],
+        "retrieved": [
+          "1.2.2",
+          "1.2.4",
+          "1.2.1",
+          "3.3.1",
+          "2.5.1",
+          "1.3.5",
+          "3.3.4",
+          "1.1.1",
+          "2.1.1",
+          "4.1.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L04",
+        "category": "lay",
+        "question": "The grey text on our pricing page is hard to read",
+        "relevant": [
+          "1.4.3"
+        ],
+        "retrieved": [
+          "1.4.11",
+          "1.2.1",
+          "1.1.1",
+          "1.4.2",
+          "1.4.3",
+          "1.3.1",
+          "1.4.4",
+          "1.2.2",
+          "1.2.4",
+          "2.2.1"
+        ],
+        "first_hit_rank": 5
+      },
+      {
+        "id": "L05",
+        "category": "lay",
+        "question": "People on phones keep tapping the wrong link because the links are tiny and close together",
+        "relevant": [
+          "2.5.8"
+        ],
+        "retrieved": [
+          "2.4.4",
+          "2.5.8",
+          "2.5.7",
+          "2.4.11",
+          "2.4.1",
+          "2.4.2",
+          "1.1.1",
+          "3.2.6",
+          "3.3.1",
+          "1.4.1"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L06",
+        "category": "lay",
+        "question": "I can't use the site without a mouse, the menu won't open with the keyboard",
+        "relevant": [
+          "2.1.1"
+        ],
+        "retrieved": [
+          "1.4.13",
+          "2.4.11",
+          "1.4.5",
+          "3.2.1",
+          "2.5.7",
+          "2.2.2",
+          "3.1.2",
+          "2.1.2",
+          "2.5.2",
+          "2.1.4"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L07",
+        "category": "lay",
+        "question": "When I press Tab I can't see where I am on the page",
+        "relevant": [
+          "2.4.7"
+        ],
+        "retrieved": [
+          "2.4.11",
+          "1.4.13",
+          "2.1.4",
+          "1.1.1",
+          "2.1.2",
+          "3.2.1",
+          "1.2.1",
+          "1.4.11",
+          "4.1.3",
+          "2.4.3"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L08",
+        "category": "lay",
+        "question": "The page kicks me out after a few minutes while I'm still filling in the application",
+        "relevant": [
+          "2.2.1"
+        ],
+        "retrieved": [
+          "2.2.2",
+          "4.1.3",
+          "2.2.1",
+          "2.1.4",
+          "1.4.4",
+          "1.1.1",
+          "1.2.5",
+          "1.3.5",
+          "1.2.3",
+          "3.2.4"
+        ],
+        "first_hit_rank": 3
+      },
+      {
+        "id": "L09",
+        "category": "lay",
+        "question": "An auto-playing carousel keeps moving and I can't stop it",
+        "relevant": [
+          "2.2.2"
+        ],
+        "retrieved": [
+          "2.2.2",
+          "2.5.7",
+          "2.5.1",
+          "1.4.2",
+          "2.4.11",
+          "2.2.1",
+          "2.5.4",
+          "1.4.13",
+          "1.2.5",
+          "3.1.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L10",
+        "category": "lay",
+        "question": "A video starts playing sound automatically and drowns out my screen reader",
+        "relevant": [
+          "1.4.2"
+        ],
+        "retrieved": [
+          "1.4.2",
+          "2.3.1",
+          "1.2.5",
+          "1.2.2",
+          "2.2.2",
+          "1.2.3",
+          "3.3.1",
+          "4.1.3",
+          "2.5.2",
+          "4.1.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L11",
+        "category": "lay",
+        "question": "When I zoom the page to 200% the text gets cut off",
+        "relevant": [
+          "1.4.4",
+          "1.4.10"
+        ],
+        "retrieved": [
+          "1.4.4",
+          "1.4.12",
+          "2.4.1",
+          "2.2.2",
+          "3.1.1",
+          "1.4.10",
+          "1.4.2",
+          "2.5.8",
+          "3.2.6",
+          "3.1.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L12",
+        "category": "lay",
+        "question": "On a small screen I have to scroll sideways to read every line",
+        "relevant": [
+          "1.4.10"
+        ],
+        "retrieved": [
+          "1.4.10",
+          "1.4.5",
+          "1.4.12",
+          "1.4.11",
+          "2.4.3",
+          "2.5.7",
+          "2.1.4",
+          "4.1.3",
+          "2.4.5",
+          "2.2.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L13",
+        "category": "lay",
+        "question": "The form just says 'error' without telling me which field is wrong",
+        "relevant": [
+          "3.3.1"
+        ],
+        "retrieved": [
+          "3.3.1",
+          "1.3.1",
+          "3.3.3",
+          "3.3.8",
+          "3.2.2",
+          "3.3.2",
+          "1.3.5",
+          "1.4.1",
+          "2.4.3",
+          "2.1.4"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L14",
+        "category": "lay",
+        "question": "We mark required fields only by turning them red",
+        "relevant": [
+          "1.4.1",
+          "3.3.2"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "1.4.1",
+          "2.1.4",
+          "1.3.3",
+          "1.4.11",
+          "3.3.8",
+          "1.3.5",
+          "1.4.2",
+          "3.3.2",
+          "3.3.1"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L15",
+        "category": "lay",
+        "question": "My keyboard focus gets stuck inside a popup and I can't get out",
+        "relevant": [
+          "2.1.2"
+        ],
+        "retrieved": [
+          "2.1.2",
+          "2.4.11",
+          "3.2.1",
+          "2.2.1",
+          "2.4.3",
+          "1.4.13",
+          "2.4.5",
+          "3.1.1",
+          "3.3.3",
+          "3.1.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L16",
+        "category": "lay",
+        "question": "Every page has the same browser tab name so I can't tell my tabs apart",
+        "relevant": [
+          "2.4.2"
+        ],
+        "retrieved": [
+          "3.2.1",
+          "2.1.2",
+          "2.4.2",
+          "2.4.3",
+          "2.4.11",
+          "2.5.3",
+          "2.5.7",
+          "2.4.1",
+          "2.4.4",
+          "3.3.1"
+        ],
+        "first_hit_rank": 3
+      },
+      {
+        "id": "L17",
+        "category": "lay",
+        "question": "Screen reader users have to listen to the whole navigation menu on every page before reaching the content",
+        "relevant": [
+          "2.4.1"
+        ],
+        "retrieved": [
+          "2.4.1",
+          "1.4.2",
+          "3.2.3",
+          "3.2.1",
+          "2.4.5",
+          "2.5.1",
+          "2.1.4",
+          "1.4.10",
+          "4.1.3",
+          "1.4.13"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L18",
+        "category": "lay",
+        "question": "The site has strobing animations that could trigger seizures",
+        "relevant": [
+          "2.3.1"
+        ],
+        "retrieved": [
+          "2.3.1",
+          "2.2.2",
+          "1.1.1",
+          "1.2.1",
+          "3.3.8",
+          "2.4.5",
+          "2.2.1",
+          "2.1.4",
+          "3.2.6",
+          "1.4.13"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L19",
+        "category": "lay",
+        "question": "The login asks me to solve a puzzle and I have a cognitive disability",
+        "relevant": [
+          "3.3.8"
+        ],
+        "retrieved": [
+          "3.3.8",
+          "3.3.7",
+          "3.3.2",
+          "2.2.1",
+          "3.2.1",
+          "3.2.6",
+          "2.4.4",
+          "2.4.6",
+          "3.3.1",
+          "2.4.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L20",
+        "category": "lay",
+        "question": "I had to type my shipping address again on the next step of checkout",
+        "relevant": [
+          "3.3.7"
+        ],
+        "retrieved": [
+          "3.3.7",
+          "1.3.5",
+          "3.3.4",
+          "3.3.8",
+          "1.4.1",
+          "1.3.3",
+          "2.5.3",
+          "1.1.1",
+          "3.3.1",
+          "2.4.5"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L21",
+        "category": "lay",
+        "question": "The contact-us link is in a different place on every page",
+        "relevant": [
+          "3.2.6"
+        ],
+        "retrieved": [
+          "3.2.6",
+          "3.2.3",
+          "3.2.4",
+          "2.4.1",
+          "2.4.4",
+          "1.1.1",
+          "2.5.8",
+          "1.3.3",
+          "2.4.2",
+          "1.4.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L22",
+        "category": "lay",
+        "question": "Choosing an option in a dropdown immediately jumps me to a different page",
+        "relevant": [
+          "3.2.2"
+        ],
+        "retrieved": [
+          "3.2.1",
+          "3.2.2",
+          "1.4.10",
+          "2.5.3",
+          "2.4.11",
+          "3.3.2",
+          "2.5.8",
+          "3.2.6",
+          "2.4.3",
+          "2.4.6"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L23",
+        "category": "lay",
+        "question": "The sticky cookie banner covers the button I tabbed to",
+        "relevant": [
+          "2.4.11"
+        ],
+        "retrieved": [
+          "2.4.11",
+          "2.5.8",
+          "2.1.2",
+          "1.1.1",
+          "2.5.3",
+          "3.2.1",
+          "3.2.2",
+          "2.1.1",
+          "1.4.11",
+          "2.4.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L24",
+        "category": "lay",
+        "question": "I can only reorder items by dragging them with the mouse",
+        "relevant": [
+          "2.5.7"
+        ],
+        "retrieved": [
+          "2.5.7",
+          "2.5.2",
+          "2.5.1",
+          "2.5.8",
+          "2.4.11",
+          "2.1.1",
+          "1.3.3",
+          "2.4.3",
+          "1.3.1",
+          "2.4.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L25",
+        "category": "lay",
+        "question": "My screen reader reads our English page with a French accent",
+        "relevant": [
+          "3.1.1"
+        ],
+        "retrieved": [
+          "3.1.2",
+          "4.1.3",
+          "1.4.2",
+          "2.4.3",
+          "2.4.4",
+          "3.1.1",
+          "2.2.1",
+          "1.3.1",
+          "2.4.5",
+          "2.5.1"
+        ],
+        "first_hit_rank": 6
+      },
+      {
+        "id": "L26",
+        "category": "lay",
+        "question": "The 'saved!' message after submitting is never read out by my screen reader",
+        "relevant": [
+          "4.1.3"
+        ],
+        "retrieved": [
+          "4.1.3",
+          "1.4.2",
+          "3.3.1",
+          "2.2.1",
+          "2.5.3",
+          "2.2.2",
+          "1.3.1",
+          "2.4.3",
+          "3.3.4",
+          "2.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L27",
+        "category": "lay",
+        "question": "The checkbox borders are so faint I can't see the boxes",
+        "relevant": [
+          "1.4.11"
+        ],
+        "retrieved": [
+          "1.4.11",
+          "1.4.3",
+          "2.5.8",
+          "1.4.12",
+          "1.1.1",
+          "2.4.11",
+          "1.2.1",
+          "4.1.3",
+          "2.4.3",
+          "2.4.7"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L28",
+        "category": "lay",
+        "question": "Tooltips vanish when I move my mouse towards them",
+        "relevant": [
+          "1.4.13"
+        ],
+        "retrieved": [
+          "1.4.13",
+          "2.5.4",
+          "3.2.1",
+          "2.5.2",
+          "1.4.4",
+          "2.5.1",
+          "2.1.1",
+          "2.4.1",
+          "2.2.2",
+          "2.4.11"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L29",
+        "category": "lay",
+        "question": "Our podcast episodes have no written version",
+        "relevant": [
+          "1.2.1"
+        ],
+        "retrieved": [
+          "3.1.2",
+          "3.1.1",
+          "2.4.4",
+          "2.5.8",
+          "1.4.5",
+          "1.4.11",
+          "2.4.6",
+          "1.1.1",
+          "3.3.8",
+          "1.2.5"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L30",
+        "category": "lay",
+        "question": "The instructions say 'click the round green button on the right'",
+        "relevant": [
+          "1.3.3"
+        ],
+        "retrieved": [
+          "1.3.3",
+          "2.5.7",
+          "2.5.1",
+          "2.5.2",
+          "2.5.3",
+          "3.3.2",
+          "1.4.11",
+          "3.2.2",
+          "2.4.3",
+          "1.3.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L31",
+        "category": "lay",
+        "question": "The site only works when I hold my tablet upright",
+        "relevant": [
+          "1.3.4"
+        ],
+        "retrieved": [
+          "2.2.1",
+          "1.2.1",
+          "1.1.1",
+          "2.5.1",
+          "2.4.3",
+          "4.1.2",
+          "2.5.2",
+          "3.2.6",
+          "3.1.1",
+          "2.5.4"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L32",
+        "category": "lay",
+        "question": "With a screen reader the content comes out in a jumbled order compared to how it looks",
+        "relevant": [
+          "1.3.2",
+          "2.4.3"
+        ],
+        "retrieved": [
+          "2.4.3",
+          "1.4.2",
+          "4.1.3",
+          "3.2.3",
+          "2.2.2",
+          "2.5.1",
+          "3.1.2",
+          "2.4.1",
+          "2.4.5",
+          "4.1.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T01",
+        "category": "technical",
+        "question": "input field without an associated label element",
+        "relevant": [
+          "1.3.1",
+          "3.3.2",
+          "4.1.2"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "3.3.2",
+          "1.4.1",
+          "2.5.3",
+          "4.1.2",
+          "2.4.6",
+          "1.3.5",
+          "1.1.1",
+          "3.3.7",
+          "1.4.11"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T02",
+        "category": "technical",
+        "question": "heading tags used for font size instead of document structure",
+        "relevant": [
+          "1.3.1"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "1.4.5",
+          "2.4.1",
+          "1.4.4",
+          "2.4.4",
+          "2.4.6",
+          "1.1.1",
+          "1.4.12",
+          "1.4.3",
+          "4.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T03",
+        "category": "technical",
+        "question": "several links with the text 'click here' pointing to different pages",
+        "relevant": [
+          "2.4.4"
+        ],
+        "retrieved": [
+          "2.4.4",
+          "2.4.2",
+          "3.2.2",
+          "1.4.3",
+          "3.2.1",
+          "1.1.1",
+          "2.4.1",
+          "2.5.7",
+          "3.2.6",
+          "3.2.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T04",
+        "category": "technical",
+        "question": "minimum contrast ratio for large text",
+        "relevant": [
+          "1.4.3"
+        ],
+        "retrieved": [
+          "1.4.3",
+          "1.4.11",
+          "2.5.8",
+          "1.4.1",
+          "2.4.11",
+          "2.3.1",
+          "1.4.12",
+          "2.4.7",
+          "1.4.5",
+          "2.5.7"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T05",
+        "category": "technical",
+        "question": "autocomplete attribute on name, email and address fields",
+        "relevant": [
+          "1.3.5"
+        ],
+        "retrieved": [
+          "1.3.5",
+          "3.3.1",
+          "3.3.2",
+          "2.4.3",
+          "3.3.8",
+          "2.5.3",
+          "4.1.2",
+          "2.4.6",
+          "1.3.1",
+          "3.3.7"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T06",
+        "category": "technical",
+        "question": "user stylesheet overriding letter-spacing and line-height breaks the layout",
+        "relevant": [
+          "1.4.12"
+        ],
+        "retrieved": [
+          "1.4.12",
+          "1.4.4",
+          "2.5.8",
+          "2.5.2",
+          "1.4.10",
+          "1.4.5",
+          "1.3.2",
+          "2.5.3",
+          "2.1.4",
+          "1.4.11"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T07",
+        "category": "technical",
+        "question": "aria-label does not include the visible text of the button",
+        "relevant": [
+          "2.5.3"
+        ],
+        "retrieved": [
+          "2.5.3",
+          "4.1.2",
+          "3.2.4",
+          "3.3.2",
+          "1.1.1",
+          "1.3.1",
+          "1.4.11",
+          "2.5.1",
+          "1.4.5",
+          "3.2.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T08",
+        "category": "technical",
+        "question": "single letter keyboard shortcuts conflict with speech input",
+        "relevant": [
+          "2.1.4"
+        ],
+        "retrieved": [
+          "2.1.4",
+          "2.5.1",
+          "2.5.7",
+          "2.1.1",
+          "2.5.2",
+          "2.4.11",
+          "2.5.3",
+          "2.4.1",
+          "1.4.5",
+          "1.4.12"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T09",
+        "category": "technical",
+        "question": "shaking the device to undo with no button alternative",
+        "relevant": [
+          "2.5.4"
+        ],
+        "retrieved": [
+          "2.5.4",
+          "2.5.2",
+          "1.1.1",
+          "2.5.8",
+          "1.3.4",
+          "2.1.1",
+          "3.3.8",
+          "3.2.4",
+          "2.5.1",
+          "1.4.5"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T10",
+        "category": "technical",
+        "question": "pinch or two-finger gesture required to zoom a map",
+        "relevant": [
+          "2.5.1"
+        ],
+        "retrieved": [
+          "2.5.1",
+          "1.4.10",
+          "2.5.4",
+          "1.4.4",
+          "2.5.7",
+          "2.5.8",
+          "2.5.2",
+          "3.3.8",
+          "1.2.4",
+          "1.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T11",
+        "category": "technical",
+        "question": "action fires on mousedown before the pointer is released",
+        "relevant": [
+          "2.5.2"
+        ],
+        "retrieved": [
+          "2.5.2",
+          "2.5.7",
+          "2.5.1",
+          "2.1.4",
+          "2.2.1",
+          "3.2.2",
+          "2.1.1",
+          "3.3.4",
+          "2.4.11",
+          "2.3.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T12",
+        "category": "technical",
+        "question": "aria-live region for announcing search result counts",
+        "relevant": [
+          "4.1.3"
+        ],
+        "retrieved": [
+          "4.1.3",
+          "1.3.1",
+          "2.4.5",
+          "3.3.1",
+          "3.2.4",
+          "2.4.1",
+          "2.5.3",
+          "3.3.7",
+          "1.2.4",
+          "1.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T13",
+        "category": "technical",
+        "question": "suggest the correct format when a user types an invalid date",
+        "relevant": [
+          "3.3.3"
+        ],
+        "retrieved": [
+          "3.3.2",
+          "3.3.3",
+          "3.3.1",
+          "2.5.3",
+          "1.3.5",
+          "4.1.3",
+          "2.1.2",
+          "1.1.1",
+          "1.3.1",
+          "3.1.1"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "T14",
+        "category": "technical",
+        "question": "let users review and confirm before a bank transfer is submitted",
+        "relevant": [
+          "3.3.4"
+        ],
+        "retrieved": [
+          "2.4.5",
+          "3.3.4",
+          "2.4.2",
+          "3.3.7",
+          "3.2.2",
+          "2.2.1",
+          "2.5.2",
+          "2.2.2",
+          "1.3.4",
+          "2.1.1"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "T15",
+        "category": "technical",
+        "question": "main menu links appear in a different order on each page",
+        "relevant": [
+          "3.2.3"
+        ],
+        "retrieved": [
+          "3.2.3",
+          "2.4.1",
+          "2.4.11",
+          "2.4.4",
+          "2.4.3",
+          "1.3.2",
+          "1.4.11",
+          "1.4.5",
+          "3.2.6",
+          "2.5.8"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T16",
+        "category": "technical",
+        "question": "tab order skips around instead of following the visual layout",
+        "relevant": [
+          "2.4.3"
+        ],
+        "retrieved": [
+          "2.4.3",
+          "2.4.1",
+          "2.1.2",
+          "3.2.3",
+          "1.3.2",
+          "1.4.11",
+          "2.4.4",
+          "3.2.6",
+          "2.5.8",
+          "2.4.5"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T17",
+        "category": "technical",
+        "question": "form submits automatically when a field receives focus",
+        "relevant": [
+          "3.2.1"
+        ],
+        "retrieved": [
+          "3.2.1",
+          "2.1.1",
+          "3.2.2",
+          "2.4.3",
+          "2.4.7",
+          "3.3.1",
+          "1.4.3",
+          "1.4.11",
+          "3.3.8",
+          "3.3.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T18",
+        "category": "technical",
+        "question": "real-time captions for a live webinar stream",
+        "relevant": [
+          "1.2.4"
+        ],
+        "retrieved": [
+          "1.2.4",
+          "1.2.2",
+          "2.2.1",
+          "1.1.1",
+          "2.2.2",
+          "2.4.3",
+          "1.2.1",
+          "4.1.3",
+          "2.1.1",
+          "1.4.4"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T19",
+        "category": "technical",
+        "question": "narration of visual details for prerecorded video",
+        "relevant": [
+          "1.2.5",
+          "1.2.3"
+        ],
+        "retrieved": [
+          "1.2.3",
+          "1.2.5",
+          "1.2.1",
+          "1.2.2",
+          "1.1.1",
+          "1.2.4",
+          "1.3.5",
+          "2.4.7",
+          "2.3.1",
+          "3.2.6"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "N01",
+        "category": "named",
+        "question": "What does 2.5.8 require?",
+        "relevant": [
+          "2.5.8"
+        ],
+        "retrieved": [
+          "2.5.8",
+          "1.2.5",
+          "1.2.3",
+          "2.5.7",
+          "3.3.8",
+          "2.1.2",
+          "2.5.1",
+          "3.2.4",
+          "1.1.1",
+          "1.4.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "N02",
+        "category": "named",
+        "question": "Explain success criterion 1.4.3 in simple terms",
+        "relevant": [
+          "1.4.3"
+        ],
+        "retrieved": [
+          "1.4.3",
+          "4.1.1",
+          "2.1.1",
+          "2.5.1",
+          "1.4.11",
+          "4.1.3",
+          "2.4.1",
+          "2.4.7",
+          "3.1.2",
+          "3.3.7"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "N03",
+        "category": "named",
+        "question": "Is 3.3.8 a level AA requirement?",
+        "relevant": [
+          "3.3.8"
+        ],
+        "retrieved": [
+          "3.3.8",
+          "1.2.3",
+          "1.2.5",
+          "3.1.1",
+          "1.4.3",
+          "1.4.11",
+          "2.4.7",
+          "1.4.2",
+          "2.3.1",
+          "1.3.5"
+        ],
+        "first_hit_rank": 1
+      }
+    ]
+  },
+  {
+    "method": "dense",
+    "overall": {
+      "n": 51,
+      "hit_at": {
+        "1": 0.7059,
+        "3": 0.8627,
+        "5": 0.9216
+      },
+      "mrr": 0.7958
+    },
+    "by_category": {
+      "lay": {
+        "n": 32,
+        "hit_at": {
+          "1": 0.5625,
+          "3": 0.7812,
+          "5": 0.875
+        },
+        "mrr": 0.6901
+      },
+      "named": {
+        "n": 3,
+        "hit_at": {
+          "1": 1.0,
+          "3": 1.0,
+          "5": 1.0
+        },
+        "mrr": 1.0
+      },
+      "technical": {
+        "n": 19,
+        "hit_at": {
+          "1": 0.9474,
+          "3": 1.0,
+          "5": 1.0
+        },
+        "mrr": 0.9737
+      }
+    },
+    "questions": [
+      {
+        "id": "L01",
+        "category": "lay",
+        "question": "My icon-only buttons are announced as just 'button' by screen readers",
+        "relevant": [
+          "4.1.2",
+          "1.1.1"
+        ],
+        "retrieved": [
+          "1.4.13",
+          "1.4.11",
+          "2.4.11",
+          "4.1.3",
+          "3.2.2",
+          "2.5.3",
+          "2.5.8",
+          "2.1.4",
+          "2.5.2",
+          "1.4.3"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L02",
+        "category": "lay",
+        "question": "Blind visitors can't tell what our product photos show",
+        "relevant": [
+          "1.1.1"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "1.3.3",
+          "1.4.1",
+          "1.4.11",
+          "1.1.1",
+          "4.1.3",
+          "2.3.1",
+          "1.4.3",
+          "1.4.5",
+          "3.2.2"
+        ],
+        "first_hit_rank": 5
+      },
+      {
+        "id": "L03",
+        "category": "lay",
+        "question": "Our promo video has no subtitles, so deaf customers miss the offer",
+        "relevant": [
+          "1.2.2"
+        ],
+        "retrieved": [
+          "1.2.4",
+          "1.2.2",
+          "1.2.1",
+          "1.2.3",
+          "1.2.5",
+          "2.2.2",
+          "1.1.1",
+          "2.2.1",
+          "3.1.2",
+          "3.3.8"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L04",
+        "category": "lay",
+        "question": "The grey text on our pricing page is hard to read",
+        "relevant": [
+          "1.4.3"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "1.4.5",
+          "4.1.3",
+          "1.4.4",
+          "1.1.1",
+          "1.4.11",
+          "1.4.3",
+          "1.4.1",
+          "3.1.1",
+          "2.4.2"
+        ],
+        "first_hit_rank": 7
+      },
+      {
+        "id": "L05",
+        "category": "lay",
+        "question": "People on phones keep tapping the wrong link because the links are tiny and close together",
+        "relevant": [
+          "2.5.8"
+        ],
+        "retrieved": [
+          "2.4.1",
+          "2.5.1",
+          "2.5.8",
+          "3.2.6",
+          "2.2.2",
+          "2.4.4",
+          "2.4.11",
+          "1.4.1",
+          "1.3.1",
+          "1.2.2"
+        ],
+        "first_hit_rank": 3
+      },
+      {
+        "id": "L06",
+        "category": "lay",
+        "question": "I can't use the site without a mouse, the menu won't open with the keyboard",
+        "relevant": [
+          "2.1.1"
+        ],
+        "retrieved": [
+          "2.1.2",
+          "1.4.13",
+          "2.1.1",
+          "2.4.1",
+          "2.4.11",
+          "3.2.1",
+          "2.4.7",
+          "1.4.3",
+          "3.2.6",
+          "2.4.5"
+        ],
+        "first_hit_rank": 3
+      },
+      {
+        "id": "L07",
+        "category": "lay",
+        "question": "When I press Tab I can't see where I am on the page",
+        "relevant": [
+          "2.4.7"
+        ],
+        "retrieved": [
+          "3.2.3",
+          "2.4.11",
+          "2.4.3",
+          "3.2.1",
+          "1.4.13",
+          "2.4.1",
+          "2.1.2",
+          "2.4.7",
+          "3.2.6",
+          "2.4.2"
+        ],
+        "first_hit_rank": 8
+      },
+      {
+        "id": "L08",
+        "category": "lay",
+        "question": "The page kicks me out after a few minutes while I'm still filling in the application",
+        "relevant": [
+          "2.2.1"
+        ],
+        "retrieved": [
+          "2.2.2",
+          "2.2.1",
+          "3.2.6",
+          "2.4.1",
+          "2.4.2",
+          "4.1.3",
+          "2.3.1",
+          "1.4.10",
+          "1.4.2",
+          "2.1.2"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L09",
+        "category": "lay",
+        "question": "An auto-playing carousel keeps moving and I can't stop it",
+        "relevant": [
+          "2.2.2"
+        ],
+        "retrieved": [
+          "2.2.2",
+          "2.5.7",
+          "1.4.2",
+          "2.5.1",
+          "2.5.4",
+          "3.2.3",
+          "2.5.2",
+          "2.1.2",
+          "2.2.1",
+          "2.3.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L10",
+        "category": "lay",
+        "question": "A video starts playing sound automatically and drowns out my screen reader",
+        "relevant": [
+          "1.4.2"
+        ],
+        "retrieved": [
+          "1.4.2",
+          "2.2.2",
+          "1.2.1",
+          "1.2.2",
+          "1.2.3",
+          "2.3.1",
+          "1.2.5",
+          "2.4.1",
+          "2.5.4",
+          "1.2.4"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L11",
+        "category": "lay",
+        "question": "When I zoom the page to 200% the text gets cut off",
+        "relevant": [
+          "1.4.4",
+          "1.4.10"
+        ],
+        "retrieved": [
+          "1.4.4",
+          "2.2.2",
+          "1.4.12",
+          "1.4.5",
+          "1.4.10",
+          "2.4.11",
+          "1.4.13",
+          "1.4.3",
+          "2.3.1",
+          "1.4.11"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L12",
+        "category": "lay",
+        "question": "On a small screen I have to scroll sideways to read every line",
+        "relevant": [
+          "1.4.10"
+        ],
+        "retrieved": [
+          "2.4.1",
+          "1.4.5",
+          "2.2.2",
+          "1.4.12",
+          "1.4.10",
+          "1.4.13",
+          "2.4.3",
+          "1.4.4",
+          "1.3.4",
+          "3.2.3"
+        ],
+        "first_hit_rank": 5
+      },
+      {
+        "id": "L13",
+        "category": "lay",
+        "question": "The form just says 'error' without telling me which field is wrong",
+        "relevant": [
+          "3.3.1"
+        ],
+        "retrieved": [
+          "3.3.1",
+          "3.3.3",
+          "4.1.2",
+          "3.2.2",
+          "2.4.2",
+          "1.3.5",
+          "3.3.2",
+          "1.3.1",
+          "3.3.4",
+          "3.3.7"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L14",
+        "category": "lay",
+        "question": "We mark required fields only by turning them red",
+        "relevant": [
+          "1.4.1",
+          "3.3.2"
+        ],
+        "retrieved": [
+          "1.4.1",
+          "1.3.1",
+          "3.3.2",
+          "1.1.1",
+          "1.3.2",
+          "1.4.3",
+          "3.3.1",
+          "4.1.3",
+          "2.5.3",
+          "1.4.11"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L15",
+        "category": "lay",
+        "question": "My keyboard focus gets stuck inside a popup and I can't get out",
+        "relevant": [
+          "2.1.2"
+        ],
+        "retrieved": [
+          "2.1.2",
+          "1.4.13",
+          "2.4.11",
+          "3.2.1",
+          "2.4.7",
+          "2.2.2",
+          "2.4.3",
+          "2.5.2",
+          "2.1.1",
+          "2.4.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L16",
+        "category": "lay",
+        "question": "Every page has the same browser tab name so I can't tell my tabs apart",
+        "relevant": [
+          "2.4.2"
+        ],
+        "retrieved": [
+          "3.2.4",
+          "3.2.3",
+          "3.2.6",
+          "2.4.2",
+          "2.4.3",
+          "3.3.2",
+          "2.4.1",
+          "1.4.5",
+          "2.4.6",
+          "1.3.1"
+        ],
+        "first_hit_rank": 4
+      },
+      {
+        "id": "L17",
+        "category": "lay",
+        "question": "Screen reader users have to listen to the whole navigation menu on every page before reaching the content",
+        "relevant": [
+          "2.4.1"
+        ],
+        "retrieved": [
+          "2.4.1",
+          "1.4.2",
+          "3.2.3",
+          "2.2.2",
+          "2.4.5",
+          "1.3.1",
+          "1.4.13",
+          "2.5.7",
+          "3.2.1",
+          "2.4.11"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L18",
+        "category": "lay",
+        "question": "The site has strobing animations that could trigger seizures",
+        "relevant": [
+          "2.3.1"
+        ],
+        "retrieved": [
+          "2.3.1",
+          "2.2.2",
+          "2.5.1",
+          "3.2.2",
+          "1.1.1",
+          "2.4.1",
+          "1.4.13",
+          "2.1.2",
+          "2.5.2",
+          "2.4.5"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L19",
+        "category": "lay",
+        "question": "The login asks me to solve a puzzle and I have a cognitive disability",
+        "relevant": [
+          "3.3.8"
+        ],
+        "retrieved": [
+          "3.3.8",
+          "3.2.6",
+          "3.3.7",
+          "2.4.5",
+          "3.2.2",
+          "2.4.1",
+          "2.2.1",
+          "3.3.2",
+          "2.4.4",
+          "3.3.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L20",
+        "category": "lay",
+        "question": "I had to type my shipping address again on the next step of checkout",
+        "relevant": [
+          "3.3.7"
+        ],
+        "retrieved": [
+          "3.3.7",
+          "3.3.4",
+          "2.2.1",
+          "4.1.3",
+          "2.4.3",
+          "3.2.6",
+          "1.3.5",
+          "3.2.3",
+          "2.4.1",
+          "3.3.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L21",
+        "category": "lay",
+        "question": "The contact-us link is in a different place on every page",
+        "relevant": [
+          "3.2.6"
+        ],
+        "retrieved": [
+          "3.2.6",
+          "3.2.4",
+          "1.4.1",
+          "2.4.4",
+          "1.3.1",
+          "1.1.1",
+          "2.4.2",
+          "3.2.3",
+          "4.1.3",
+          "3.3.7"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L22",
+        "category": "lay",
+        "question": "Choosing an option in a dropdown immediately jumps me to a different page",
+        "relevant": [
+          "3.2.2"
+        ],
+        "retrieved": [
+          "3.2.1",
+          "2.4.1",
+          "3.3.7",
+          "1.4.13",
+          "2.4.3",
+          "3.2.6",
+          "2.2.2",
+          "2.4.11",
+          "3.2.3",
+          "2.1.2"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L23",
+        "category": "lay",
+        "question": "The sticky cookie banner covers the button I tabbed to",
+        "relevant": [
+          "2.4.11"
+        ],
+        "retrieved": [
+          "2.4.11",
+          "3.2.4",
+          "2.1.2",
+          "1.4.13",
+          "2.5.1",
+          "2.2.2",
+          "1.4.11",
+          "2.5.8",
+          "2.5.7",
+          "1.4.4"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L24",
+        "category": "lay",
+        "question": "I can only reorder items by dragging them with the mouse",
+        "relevant": [
+          "2.5.7"
+        ],
+        "retrieved": [
+          "2.5.7",
+          "1.4.13",
+          "2.5.2",
+          "2.5.1",
+          "3.2.3",
+          "2.4.3",
+          "2.4.1",
+          "2.4.11",
+          "2.5.8",
+          "2.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L25",
+        "category": "lay",
+        "question": "My screen reader reads our English page with a French accent",
+        "relevant": [
+          "3.1.1"
+        ],
+        "retrieved": [
+          "3.1.2",
+          "3.1.1",
+          "1.3.1",
+          "1.4.5",
+          "2.4.1",
+          "1.4.4",
+          "4.1.3",
+          "1.1.1",
+          "2.2.2",
+          "1.4.12"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L26",
+        "category": "lay",
+        "question": "The 'saved!' message after submitting is never read out by my screen reader",
+        "relevant": [
+          "4.1.3"
+        ],
+        "retrieved": [
+          "4.1.3",
+          "1.4.12",
+          "1.4.10",
+          "3.3.1",
+          "3.2.4",
+          "1.4.13",
+          "2.4.11",
+          "1.1.1",
+          "2.2.2",
+          "1.2.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L27",
+        "category": "lay",
+        "question": "The checkbox borders are so faint I can't see the boxes",
+        "relevant": [
+          "1.4.11"
+        ],
+        "retrieved": [
+          "1.4.11",
+          "2.4.11",
+          "2.5.8",
+          "1.4.13",
+          "1.4.5",
+          "2.4.7",
+          "1.4.3",
+          "1.4.12",
+          "1.4.10",
+          "2.4.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L28",
+        "category": "lay",
+        "question": "Tooltips vanish when I move my mouse towards them",
+        "relevant": [
+          "1.4.13"
+        ],
+        "retrieved": [
+          "1.4.13",
+          "3.2.1",
+          "2.1.1",
+          "2.5.7",
+          "2.5.2",
+          "2.1.2",
+          "1.4.11",
+          "2.5.1",
+          "2.4.11",
+          "2.4.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L29",
+        "category": "lay",
+        "question": "Our podcast episodes have no written version",
+        "relevant": [
+          "1.2.1"
+        ],
+        "retrieved": [
+          "3.1.2",
+          "1.2.1",
+          "1.2.3",
+          "1.2.5",
+          "1.1.1",
+          "1.2.2",
+          "4.1.1",
+          "1.2.4",
+          "1.3.2",
+          "1.4.12"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L30",
+        "category": "lay",
+        "question": "The instructions say 'click the round green button on the right'",
+        "relevant": [
+          "1.3.3"
+        ],
+        "retrieved": [
+          "1.3.3",
+          "2.5.1",
+          "1.4.11",
+          "2.5.3",
+          "2.5.7",
+          "2.4.3",
+          "3.2.2",
+          "2.5.2",
+          "1.4.1",
+          "1.4.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L31",
+        "category": "lay",
+        "question": "The site only works when I hold my tablet upright",
+        "relevant": [
+          "1.3.4"
+        ],
+        "retrieved": [
+          "1.3.4",
+          "2.1.2",
+          "2.2.1",
+          "3.2.6",
+          "2.4.5",
+          "1.4.13",
+          "3.2.3",
+          "2.4.1",
+          "2.5.7",
+          "1.4.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L32",
+        "category": "lay",
+        "question": "With a screen reader the content comes out in a jumbled order compared to how it looks",
+        "relevant": [
+          "1.3.2",
+          "2.4.3"
+        ],
+        "retrieved": [
+          "1.4.5",
+          "2.4.3",
+          "2.2.2",
+          "1.3.1",
+          "2.4.1",
+          "2.4.5",
+          "1.1.1",
+          "3.2.3",
+          "1.4.12",
+          "1.4.3"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "T01",
+        "category": "technical",
+        "question": "input field without an associated label element",
+        "relevant": [
+          "1.3.1",
+          "3.3.2",
+          "4.1.2"
+        ],
+        "retrieved": [
+          "2.5.3",
+          "3.3.2",
+          "1.3.5",
+          "2.4.6",
+          "4.1.2",
+          "1.4.1",
+          "1.3.1",
+          "3.3.1",
+          "1.1.1",
+          "1.4.11"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "T02",
+        "category": "technical",
+        "question": "heading tags used for font size instead of document structure",
+        "relevant": [
+          "1.3.1"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "2.4.6",
+          "1.4.5",
+          "1.1.1",
+          "1.4.12",
+          "1.4.4",
+          "1.3.2",
+          "1.4.3",
+          "2.4.1",
+          "2.5.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T03",
+        "category": "technical",
+        "question": "several links with the text 'click here' pointing to different pages",
+        "relevant": [
+          "2.4.4"
+        ],
+        "retrieved": [
+          "2.4.4",
+          "2.4.1",
+          "2.4.5",
+          "3.2.3",
+          "3.2.4",
+          "1.3.1",
+          "1.4.1",
+          "2.5.1",
+          "1.3.3",
+          "1.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T04",
+        "category": "technical",
+        "question": "minimum contrast ratio for large text",
+        "relevant": [
+          "1.4.3"
+        ],
+        "retrieved": [
+          "1.4.3",
+          "1.4.11",
+          "1.4.1",
+          "1.4.5",
+          "1.4.4",
+          "2.4.11",
+          "2.5.8",
+          "1.1.1",
+          "1.4.10",
+          "1.3.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T05",
+        "category": "technical",
+        "question": "autocomplete attribute on name, email and address fields",
+        "relevant": [
+          "1.3.5"
+        ],
+        "retrieved": [
+          "1.3.5",
+          "3.3.2",
+          "2.4.6",
+          "2.4.3",
+          "4.1.2",
+          "1.3.1",
+          "2.5.3",
+          "3.2.2",
+          "3.3.7",
+          "2.1.4"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T06",
+        "category": "technical",
+        "question": "user stylesheet overriding letter-spacing and line-height breaks the layout",
+        "relevant": [
+          "1.4.12"
+        ],
+        "retrieved": [
+          "1.4.12",
+          "1.4.4",
+          "1.4.5",
+          "1.4.10",
+          "2.4.11",
+          "1.3.2",
+          "2.5.8",
+          "3.2.6",
+          "1.4.11",
+          "1.4.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T07",
+        "category": "technical",
+        "question": "aria-label does not include the visible text of the button",
+        "relevant": [
+          "2.5.3"
+        ],
+        "retrieved": [
+          "2.5.3",
+          "4.1.2",
+          "3.3.2",
+          "1.3.1",
+          "1.1.1",
+          "1.4.11",
+          "2.4.6",
+          "1.4.3",
+          "3.2.4",
+          "4.1.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T08",
+        "category": "technical",
+        "question": "single letter keyboard shortcuts conflict with speech input",
+        "relevant": [
+          "2.1.4"
+        ],
+        "retrieved": [
+          "2.1.4",
+          "2.1.1",
+          "2.5.2",
+          "2.5.7",
+          "2.5.3",
+          "2.5.1",
+          "2.1.2",
+          "3.1.2",
+          "1.2.5",
+          "2.4.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T09",
+        "category": "technical",
+        "question": "shaking the device to undo with no button alternative",
+        "relevant": [
+          "2.5.4"
+        ],
+        "retrieved": [
+          "2.5.4",
+          "2.5.2",
+          "2.5.1",
+          "2.2.2",
+          "1.3.4",
+          "2.1.1",
+          "2.2.1",
+          "2.1.4",
+          "2.5.7",
+          "2.1.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T10",
+        "category": "technical",
+        "question": "pinch or two-finger gesture required to zoom a map",
+        "relevant": [
+          "2.5.1"
+        ],
+        "retrieved": [
+          "2.5.1",
+          "2.5.4",
+          "2.5.8",
+          "2.5.7",
+          "3.2.6",
+          "2.1.1",
+          "2.4.11",
+          "1.4.4",
+          "2.3.1",
+          "4.1.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T11",
+        "category": "technical",
+        "question": "action fires on mousedown before the pointer is released",
+        "relevant": [
+          "2.5.2"
+        ],
+        "retrieved": [
+          "2.5.2",
+          "1.4.13",
+          "2.5.7",
+          "2.5.1",
+          "1.4.11",
+          "2.2.2",
+          "3.2.1",
+          "2.5.4",
+          "2.5.8",
+          "2.4.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T12",
+        "category": "technical",
+        "question": "aria-live region for announcing search result counts",
+        "relevant": [
+          "4.1.3"
+        ],
+        "retrieved": [
+          "4.1.3",
+          "1.3.1",
+          "2.5.3",
+          "3.3.2",
+          "3.3.1",
+          "3.3.3",
+          "2.4.1",
+          "1.2.4",
+          "4.1.2",
+          "1.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T13",
+        "category": "technical",
+        "question": "suggest the correct format when a user types an invalid date",
+        "relevant": [
+          "3.3.3"
+        ],
+        "retrieved": [
+          "3.3.3",
+          "3.3.2",
+          "3.3.4",
+          "3.3.1",
+          "2.5.3",
+          "1.3.2",
+          "2.2.1",
+          "4.1.1",
+          "1.3.1",
+          "1.3.5"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T14",
+        "category": "technical",
+        "question": "let users review and confirm before a bank transfer is submitted",
+        "relevant": [
+          "3.3.4"
+        ],
+        "retrieved": [
+          "3.3.4",
+          "2.4.5",
+          "3.3.1",
+          "2.4.2",
+          "2.2.1",
+          "3.3.7",
+          "2.2.2",
+          "4.1.3",
+          "3.2.6",
+          "1.4.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T15",
+        "category": "technical",
+        "question": "main menu links appear in a different order on each page",
+        "relevant": [
+          "3.2.3"
+        ],
+        "retrieved": [
+          "3.2.3",
+          "3.2.6",
+          "1.3.2",
+          "2.4.3",
+          "2.4.1",
+          "1.4.13",
+          "3.2.4",
+          "1.3.1",
+          "1.4.1",
+          "1.4.5"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T16",
+        "category": "technical",
+        "question": "tab order skips around instead of following the visual layout",
+        "relevant": [
+          "2.4.3"
+        ],
+        "retrieved": [
+          "2.4.3",
+          "3.2.3",
+          "2.4.1",
+          "2.4.11",
+          "1.4.13",
+          "1.3.2",
+          "2.1.2",
+          "1.4.5",
+          "3.2.6",
+          "2.2.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T17",
+        "category": "technical",
+        "question": "form submits automatically when a field receives focus",
+        "relevant": [
+          "3.2.1"
+        ],
+        "retrieved": [
+          "3.2.1",
+          "3.2.2",
+          "2.4.3",
+          "3.3.1",
+          "2.2.2",
+          "2.4.7",
+          "2.1.2",
+          "1.3.5",
+          "2.4.11",
+          "2.5.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T18",
+        "category": "technical",
+        "question": "real-time captions for a live webinar stream",
+        "relevant": [
+          "1.2.4"
+        ],
+        "retrieved": [
+          "1.2.4",
+          "1.2.2",
+          "1.1.1",
+          "1.2.3",
+          "2.2.2",
+          "4.1.1",
+          "4.1.3",
+          "1.2.1",
+          "2.4.2",
+          "2.1.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T19",
+        "category": "technical",
+        "question": "narration of visual details for prerecorded video",
+        "relevant": [
+          "1.2.5",
+          "1.2.3"
+        ],
+        "retrieved": [
+          "1.2.3",
+          "1.2.5",
+          "1.2.1",
+          "1.2.2",
+          "1.1.1",
+          "1.3.3",
+          "1.2.4",
+          "1.4.5",
+          "3.2.2",
+          "2.5.7"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "N01",
+        "category": "named",
+        "question": "What does 2.5.8 require?",
+        "relevant": [
+          "2.5.8"
+        ],
+        "retrieved": [
+          "2.5.8",
+          "2.5.3",
+          "3.3.2",
+          "1.4.10",
+          "1.2.5",
+          "2.2.2",
+          "2.4.11",
+          "1.4.11",
+          "1.2.3",
+          "3.3.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "N02",
+        "category": "named",
+        "question": "Explain success criterion 1.4.3 in simple terms",
+        "relevant": [
+          "1.4.3"
+        ],
+        "retrieved": [
+          "1.4.3",
+          "1.4.5",
+          "4.1.1",
+          "1.2.1",
+          "1.3.2",
+          "3.2.1",
+          "3.2.2",
+          "3.3.2",
+          "4.1.3",
+          "1.4.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "N03",
+        "category": "named",
+        "question": "Is 3.3.8 a level AA requirement?",
+        "relevant": [
+          "3.3.8"
+        ],
+        "retrieved": [
+          "3.3.8",
+          "1.4.3",
+          "2.4.7",
+          "3.3.2",
+          "3.3.1",
+          "2.4.11",
+          "1.2.3",
+          "1.2.5",
+          "3.3.3",
+          "2.5.3"
+        ],
+        "first_hit_rank": 1
+      }
+    ]
+  },
+  {
+    "method": "hybrid",
+    "overall": {
+      "n": 51,
+      "hit_at": {
+        "1": 0.6471,
+        "3": 0.8039,
+        "5": 0.8627
+      },
+      "mrr": 0.7496
+    },
+    "by_category": {
+      "lay": {
+        "n": 32,
+        "hit_at": {
+          "1": 0.5625,
+          "3": 0.7188,
+          "5": 0.7812
+        },
+        "mrr": 0.6713
+      },
+      "named": {
+        "n": 3,
+        "hit_at": {
+          "1": 1.0,
+          "3": 1.0,
+          "5": 1.0
+        },
+        "mrr": 1.0
+      },
+      "technical": {
+        "n": 19,
+        "hit_at": {
+          "1": 0.7895,
+          "3": 0.9474,
+          "5": 1.0
+        },
+        "mrr": 0.8816
+      }
+    },
+    "questions": [
+      {
+        "id": "L01",
+        "category": "lay",
+        "question": "My icon-only buttons are announced as just 'button' by screen readers",
+        "relevant": [
+          "4.1.2",
+          "1.1.1"
+        ],
+        "retrieved": [
+          "4.1.3",
+          "2.5.8",
+          "1.4.11",
+          "3.2.2",
+          "1.4.13",
+          "3.2.4",
+          "2.5.3",
+          "2.4.11",
+          "2.5.2",
+          "2.1.1"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L02",
+        "category": "lay",
+        "question": "Blind visitors can't tell what our product photos show",
+        "relevant": [
+          "1.1.1"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "1.4.11",
+          "1.3.3",
+          "1.2.5",
+          "2.2.2",
+          "4.1.3",
+          "1.2.3",
+          "3.3.1",
+          "1.1.1",
+          "3.2.2"
+        ],
+        "first_hit_rank": 9
+      },
+      {
+        "id": "L03",
+        "category": "lay",
+        "question": "Our promo video has no subtitles, so deaf customers miss the offer",
+        "relevant": [
+          "1.2.2"
+        ],
+        "retrieved": [
+          "1.2.2",
+          "1.2.4",
+          "1.2.1",
+          "1.2.5",
+          "1.2.3",
+          "1.1.1",
+          "2.2.1",
+          "1.3.1",
+          "1.4.11",
+          "2.2.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L04",
+        "category": "lay",
+        "question": "The grey text on our pricing page is hard to read",
+        "relevant": [
+          "1.4.3"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "1.4.11",
+          "1.4.4",
+          "4.1.3",
+          "1.4.5",
+          "1.4.3",
+          "1.1.1",
+          "2.4.3",
+          "1.3.2",
+          "3.1.2"
+        ],
+        "first_hit_rank": 6
+      },
+      {
+        "id": "L05",
+        "category": "lay",
+        "question": "People on phones keep tapping the wrong link because the links are tiny and close together",
+        "relevant": [
+          "2.5.8"
+        ],
+        "retrieved": [
+          "2.4.1",
+          "2.4.4",
+          "2.4.11",
+          "2.5.8",
+          "3.2.6",
+          "2.5.1",
+          "1.4.1",
+          "2.5.7",
+          "1.3.1",
+          "1.4.11"
+        ],
+        "first_hit_rank": 4
+      },
+      {
+        "id": "L06",
+        "category": "lay",
+        "question": "I can't use the site without a mouse, the menu won't open with the keyboard",
+        "relevant": [
+          "2.1.1"
+        ],
+        "retrieved": [
+          "2.1.2",
+          "2.4.11",
+          "1.4.13",
+          "3.2.1",
+          "2.1.1",
+          "2.5.7",
+          "2.4.1",
+          "2.4.7",
+          "2.5.8",
+          "2.5.2"
+        ],
+        "first_hit_rank": 5
+      },
+      {
+        "id": "L07",
+        "category": "lay",
+        "question": "When I press Tab I can't see where I am on the page",
+        "relevant": [
+          "2.4.7"
+        ],
+        "retrieved": [
+          "2.4.11",
+          "3.2.1",
+          "1.4.13",
+          "2.1.2",
+          "2.4.3",
+          "2.4.1",
+          "2.4.2",
+          "4.1.3",
+          "3.2.3",
+          "2.1.4"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L08",
+        "category": "lay",
+        "question": "The page kicks me out after a few minutes while I'm still filling in the application",
+        "relevant": [
+          "2.2.1"
+        ],
+        "retrieved": [
+          "2.2.2",
+          "2.2.1",
+          "4.1.3",
+          "3.2.6",
+          "1.4.2",
+          "3.3.7",
+          "2.1.2",
+          "1.4.12",
+          "2.4.2",
+          "2.4.1"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L09",
+        "category": "lay",
+        "question": "An auto-playing carousel keeps moving and I can't stop it",
+        "relevant": [
+          "2.2.2"
+        ],
+        "retrieved": [
+          "2.2.2",
+          "2.5.7",
+          "2.5.1",
+          "1.4.2",
+          "2.5.4",
+          "2.2.1",
+          "2.3.1",
+          "2.1.2",
+          "2.5.2",
+          "3.2.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L10",
+        "category": "lay",
+        "question": "A video starts playing sound automatically and drowns out my screen reader",
+        "relevant": [
+          "1.4.2"
+        ],
+        "retrieved": [
+          "1.4.2",
+          "2.2.2",
+          "1.2.2",
+          "1.2.5",
+          "1.2.3",
+          "2.3.1",
+          "1.2.1",
+          "4.1.3",
+          "2.5.2",
+          "1.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L11",
+        "category": "lay",
+        "question": "When I zoom the page to 200% the text gets cut off",
+        "relevant": [
+          "1.4.4",
+          "1.4.10"
+        ],
+        "retrieved": [
+          "1.4.4",
+          "2.2.2",
+          "1.4.12",
+          "1.4.10",
+          "2.4.1",
+          "2.2.1",
+          "1.4.3",
+          "2.5.8",
+          "2.3.1",
+          "2.5.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L12",
+        "category": "lay",
+        "question": "On a small screen I have to scroll sideways to read every line",
+        "relevant": [
+          "1.4.10"
+        ],
+        "retrieved": [
+          "1.4.5",
+          "1.4.10",
+          "1.4.12",
+          "2.4.3",
+          "2.4.1",
+          "2.5.7",
+          "1.4.4",
+          "3.2.3",
+          "2.4.5",
+          "1.3.1"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L13",
+        "category": "lay",
+        "question": "The form just says 'error' without telling me which field is wrong",
+        "relevant": [
+          "3.3.1"
+        ],
+        "retrieved": [
+          "3.3.1",
+          "3.3.3",
+          "1.3.1",
+          "3.2.2",
+          "3.3.2",
+          "1.3.5",
+          "2.4.3",
+          "1.4.1",
+          "3.3.7",
+          "3.3.4"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L14",
+        "category": "lay",
+        "question": "We mark required fields only by turning them red",
+        "relevant": [
+          "1.4.1",
+          "3.3.2"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "1.4.1",
+          "3.3.2",
+          "3.3.1",
+          "1.4.11",
+          "1.3.2",
+          "4.1.3",
+          "1.1.1",
+          "3.3.8",
+          "1.4.3"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L15",
+        "category": "lay",
+        "question": "My keyboard focus gets stuck inside a popup and I can't get out",
+        "relevant": [
+          "2.1.2"
+        ],
+        "retrieved": [
+          "2.1.2",
+          "2.4.11",
+          "3.2.1",
+          "1.4.13",
+          "2.2.2",
+          "2.4.7",
+          "2.4.3",
+          "2.4.1",
+          "2.1.1",
+          "2.5.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L16",
+        "category": "lay",
+        "question": "Every page has the same browser tab name so I can't tell my tabs apart",
+        "relevant": [
+          "2.4.2"
+        ],
+        "retrieved": [
+          "3.2.4",
+          "2.4.2",
+          "2.4.11",
+          "2.4.3",
+          "3.2.3",
+          "2.4.1",
+          "2.1.2",
+          "2.5.3",
+          "3.2.6",
+          "1.4.4"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L17",
+        "category": "lay",
+        "question": "Screen reader users have to listen to the whole navigation menu on every page before reaching the content",
+        "relevant": [
+          "2.4.1"
+        ],
+        "retrieved": [
+          "2.4.1",
+          "1.4.2",
+          "3.2.3",
+          "2.4.5",
+          "1.4.13",
+          "2.2.2",
+          "2.5.1",
+          "1.3.1",
+          "2.4.11",
+          "2.5.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L18",
+        "category": "lay",
+        "question": "The site has strobing animations that could trigger seizures",
+        "relevant": [
+          "2.3.1"
+        ],
+        "retrieved": [
+          "2.3.1",
+          "2.2.2",
+          "1.1.1",
+          "2.5.1",
+          "2.4.5",
+          "1.4.13",
+          "1.2.1",
+          "2.5.2",
+          "3.2.2",
+          "2.5.7"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L19",
+        "category": "lay",
+        "question": "The login asks me to solve a puzzle and I have a cognitive disability",
+        "relevant": [
+          "3.3.8"
+        ],
+        "retrieved": [
+          "3.3.8",
+          "3.3.7",
+          "3.2.6",
+          "3.3.2",
+          "3.2.1",
+          "3.2.2",
+          "2.4.5",
+          "2.2.1",
+          "2.4.2",
+          "3.3.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L20",
+        "category": "lay",
+        "question": "I had to type my shipping address again on the next step of checkout",
+        "relevant": [
+          "3.3.7"
+        ],
+        "retrieved": [
+          "3.3.7",
+          "3.3.4",
+          "1.3.5",
+          "2.4.3",
+          "3.2.3",
+          "3.3.1",
+          "2.4.5",
+          "3.3.8",
+          "3.2.6",
+          "3.3.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L21",
+        "category": "lay",
+        "question": "The contact-us link is in a different place on every page",
+        "relevant": [
+          "3.2.6"
+        ],
+        "retrieved": [
+          "3.2.6",
+          "3.2.4",
+          "2.4.4",
+          "3.2.3",
+          "1.1.1",
+          "1.4.1",
+          "2.4.2",
+          "2.4.1",
+          "1.3.1",
+          "1.3.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L22",
+        "category": "lay",
+        "question": "Choosing an option in a dropdown immediately jumps me to a different page",
+        "relevant": [
+          "3.2.2"
+        ],
+        "retrieved": [
+          "3.2.1",
+          "2.4.11",
+          "1.4.13",
+          "1.4.10",
+          "2.4.3",
+          "3.3.7",
+          "2.4.1",
+          "3.2.6",
+          "3.2.2",
+          "3.2.3"
+        ],
+        "first_hit_rank": 9
+      },
+      {
+        "id": "L23",
+        "category": "lay",
+        "question": "The sticky cookie banner covers the button I tabbed to",
+        "relevant": [
+          "2.4.11"
+        ],
+        "retrieved": [
+          "2.4.11",
+          "2.1.2",
+          "2.5.8",
+          "3.2.4",
+          "2.5.1",
+          "2.5.3",
+          "1.4.13",
+          "3.2.1",
+          "2.2.2",
+          "1.4.11"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L24",
+        "category": "lay",
+        "question": "I can only reorder items by dragging them with the mouse",
+        "relevant": [
+          "2.5.7"
+        ],
+        "retrieved": [
+          "2.5.7",
+          "2.5.2",
+          "2.5.1",
+          "2.4.1",
+          "1.4.13",
+          "2.5.8",
+          "2.4.3",
+          "2.1.1",
+          "2.4.11",
+          "3.2.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L25",
+        "category": "lay",
+        "question": "My screen reader reads our English page with a French accent",
+        "relevant": [
+          "3.1.1"
+        ],
+        "retrieved": [
+          "3.1.2",
+          "3.1.1",
+          "1.4.2",
+          "2.4.4",
+          "4.1.3",
+          "1.3.1",
+          "2.4.1",
+          "2.2.1",
+          "2.2.2",
+          "1.4.4"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "L26",
+        "category": "lay",
+        "question": "The 'saved!' message after submitting is never read out by my screen reader",
+        "relevant": [
+          "4.1.3"
+        ],
+        "retrieved": [
+          "4.1.3",
+          "3.3.1",
+          "3.2.4",
+          "2.2.2",
+          "2.2.1",
+          "3.3.4",
+          "1.1.1",
+          "3.3.7",
+          "2.4.4",
+          "1.4.12"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L27",
+        "category": "lay",
+        "question": "The checkbox borders are so faint I can't see the boxes",
+        "relevant": [
+          "1.4.11"
+        ],
+        "retrieved": [
+          "1.4.11",
+          "2.5.8",
+          "1.4.3",
+          "2.4.7",
+          "1.4.12",
+          "2.4.11",
+          "1.4.13",
+          "2.5.3",
+          "1.1.1",
+          "1.2.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L28",
+        "category": "lay",
+        "question": "Tooltips vanish when I move my mouse towards them",
+        "relevant": [
+          "1.4.13"
+        ],
+        "retrieved": [
+          "1.4.13",
+          "3.2.1",
+          "2.5.2",
+          "2.1.1",
+          "2.4.1",
+          "2.5.7",
+          "2.5.1",
+          "2.1.2",
+          "1.4.11",
+          "2.4.11"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L29",
+        "category": "lay",
+        "question": "Our podcast episodes have no written version",
+        "relevant": [
+          "1.2.1"
+        ],
+        "retrieved": [
+          "3.1.2",
+          "1.2.3",
+          "1.2.5",
+          "1.4.5",
+          "1.1.1",
+          "4.1.1",
+          "1.2.1",
+          "3.1.1",
+          "2.4.4",
+          "2.5.8"
+        ],
+        "first_hit_rank": 7
+      },
+      {
+        "id": "L30",
+        "category": "lay",
+        "question": "The instructions say 'click the round green button on the right'",
+        "relevant": [
+          "1.3.3"
+        ],
+        "retrieved": [
+          "1.3.3",
+          "2.5.1",
+          "2.5.3",
+          "2.5.7",
+          "1.4.11",
+          "2.4.3",
+          "3.3.2",
+          "2.5.2",
+          "3.2.1",
+          "3.2.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "L31",
+        "category": "lay",
+        "question": "The site only works when I hold my tablet upright",
+        "relevant": [
+          "1.3.4"
+        ],
+        "retrieved": [
+          "2.2.1",
+          "2.4.5",
+          "3.2.6",
+          "2.1.1",
+          "2.4.1",
+          "2.5.4",
+          "2.4.3",
+          "3.2.3",
+          "2.5.1",
+          "2.2.2"
+        ],
+        "first_hit_rank": null
+      },
+      {
+        "id": "L32",
+        "category": "lay",
+        "question": "With a screen reader the content comes out in a jumbled order compared to how it looks",
+        "relevant": [
+          "1.3.2",
+          "2.4.3"
+        ],
+        "retrieved": [
+          "2.4.3",
+          "2.2.2",
+          "3.2.3",
+          "4.1.3",
+          "1.3.1",
+          "2.4.1",
+          "2.4.5",
+          "1.4.13",
+          "1.1.1",
+          "1.3.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T01",
+        "category": "technical",
+        "question": "input field without an associated label element",
+        "relevant": [
+          "1.3.1",
+          "3.3.2",
+          "4.1.2"
+        ],
+        "retrieved": [
+          "2.5.3",
+          "1.4.1",
+          "2.4.6",
+          "1.3.1",
+          "3.3.2",
+          "1.3.5",
+          "4.1.2",
+          "1.1.1",
+          "1.4.11",
+          "3.3.7"
+        ],
+        "first_hit_rank": 4
+      },
+      {
+        "id": "T02",
+        "category": "technical",
+        "question": "heading tags used for font size instead of document structure",
+        "relevant": [
+          "1.3.1"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "1.4.5",
+          "1.1.1",
+          "1.4.4",
+          "2.4.1",
+          "1.4.12",
+          "2.4.6",
+          "1.3.2",
+          "1.4.3",
+          "2.5.3"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T03",
+        "category": "technical",
+        "question": "several links with the text 'click here' pointing to different pages",
+        "relevant": [
+          "2.4.4"
+        ],
+        "retrieved": [
+          "2.4.4",
+          "2.4.1",
+          "2.4.2",
+          "1.1.1",
+          "3.2.3",
+          "3.2.6",
+          "1.4.1",
+          "2.4.5",
+          "3.2.4",
+          "2.5.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T04",
+        "category": "technical",
+        "question": "minimum contrast ratio for large text",
+        "relevant": [
+          "1.4.3"
+        ],
+        "retrieved": [
+          "1.4.3",
+          "1.4.11",
+          "1.4.1",
+          "2.5.8",
+          "1.4.5",
+          "1.4.4",
+          "1.4.12",
+          "2.4.11",
+          "1.1.1",
+          "1.4.10"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T05",
+        "category": "technical",
+        "question": "autocomplete attribute on name, email and address fields",
+        "relevant": [
+          "1.3.5"
+        ],
+        "retrieved": [
+          "1.3.5",
+          "2.4.3",
+          "3.3.2",
+          "2.4.6",
+          "3.3.1",
+          "4.1.2",
+          "2.5.3",
+          "3.3.7",
+          "3.3.8",
+          "1.3.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T06",
+        "category": "technical",
+        "question": "user stylesheet overriding letter-spacing and line-height breaks the layout",
+        "relevant": [
+          "1.4.12"
+        ],
+        "retrieved": [
+          "1.4.12",
+          "1.4.4",
+          "1.4.5",
+          "1.4.10",
+          "2.5.8",
+          "1.3.2",
+          "1.4.11",
+          "2.4.11",
+          "3.2.6",
+          "1.3.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T07",
+        "category": "technical",
+        "question": "aria-label does not include the visible text of the button",
+        "relevant": [
+          "2.5.3"
+        ],
+        "retrieved": [
+          "2.5.3",
+          "4.1.2",
+          "3.3.2",
+          "1.1.1",
+          "3.2.4",
+          "1.3.1",
+          "1.4.11",
+          "2.4.6",
+          "1.4.3",
+          "3.2.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T08",
+        "category": "technical",
+        "question": "single letter keyboard shortcuts conflict with speech input",
+        "relevant": [
+          "2.1.4"
+        ],
+        "retrieved": [
+          "2.1.4",
+          "2.5.7",
+          "2.5.1",
+          "2.5.2",
+          "2.5.3",
+          "2.1.1",
+          "2.1.2",
+          "2.4.11",
+          "2.4.1",
+          "1.4.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T09",
+        "category": "technical",
+        "question": "shaking the device to undo with no button alternative",
+        "relevant": [
+          "2.5.4"
+        ],
+        "retrieved": [
+          "2.5.4",
+          "2.5.2",
+          "1.3.4",
+          "2.1.1",
+          "2.5.1",
+          "2.5.7",
+          "1.1.1",
+          "3.2.2",
+          "1.4.13",
+          "2.5.8"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T10",
+        "category": "technical",
+        "question": "pinch or two-finger gesture required to zoom a map",
+        "relevant": [
+          "2.5.1"
+        ],
+        "retrieved": [
+          "2.5.1",
+          "2.5.4",
+          "2.5.8",
+          "2.5.7",
+          "1.4.4",
+          "1.4.10",
+          "3.2.6",
+          "2.3.1",
+          "2.4.6",
+          "2.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T11",
+        "category": "technical",
+        "question": "action fires on mousedown before the pointer is released",
+        "relevant": [
+          "2.5.2"
+        ],
+        "retrieved": [
+          "2.5.2",
+          "2.5.7",
+          "2.5.1",
+          "1.4.13",
+          "1.4.11",
+          "2.1.1",
+          "3.2.2",
+          "2.2.2",
+          "2.1.4",
+          "2.4.11"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T12",
+        "category": "technical",
+        "question": "aria-live region for announcing search result counts",
+        "relevant": [
+          "4.1.3"
+        ],
+        "retrieved": [
+          "1.3.1",
+          "4.1.3",
+          "3.3.1",
+          "2.5.3",
+          "2.4.1",
+          "3.2.4",
+          "3.3.2",
+          "1.2.4",
+          "1.1.1",
+          "2.4.5"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "T13",
+        "category": "technical",
+        "question": "suggest the correct format when a user types an invalid date",
+        "relevant": [
+          "3.3.3"
+        ],
+        "retrieved": [
+          "3.3.2",
+          "3.3.3",
+          "3.3.1",
+          "2.5.3",
+          "1.3.5",
+          "2.1.2",
+          "3.3.4",
+          "4.1.3",
+          "3.3.7",
+          "4.1.1"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "T14",
+        "category": "technical",
+        "question": "let users review and confirm before a bank transfer is submitted",
+        "relevant": [
+          "3.3.4"
+        ],
+        "retrieved": [
+          "2.4.5",
+          "3.3.4",
+          "2.4.2",
+          "3.3.7",
+          "2.2.1",
+          "2.2.2",
+          "3.2.2",
+          "3.3.1",
+          "4.1.3",
+          "2.5.2"
+        ],
+        "first_hit_rank": 2
+      },
+      {
+        "id": "T15",
+        "category": "technical",
+        "question": "main menu links appear in a different order on each page",
+        "relevant": [
+          "3.2.3"
+        ],
+        "retrieved": [
+          "3.2.3",
+          "1.3.2",
+          "2.4.1",
+          "3.2.6",
+          "2.4.3",
+          "2.4.11",
+          "2.4.4",
+          "1.4.5",
+          "2.5.8",
+          "2.4.5"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T16",
+        "category": "technical",
+        "question": "tab order skips around instead of following the visual layout",
+        "relevant": [
+          "2.4.3"
+        ],
+        "retrieved": [
+          "2.4.3",
+          "3.2.3",
+          "2.4.1",
+          "1.3.2",
+          "2.1.2",
+          "3.2.6",
+          "1.4.13",
+          "2.4.11",
+          "1.4.10",
+          "2.5.8"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T17",
+        "category": "technical",
+        "question": "form submits automatically when a field receives focus",
+        "relevant": [
+          "3.2.1"
+        ],
+        "retrieved": [
+          "3.2.1",
+          "2.4.3",
+          "3.2.2",
+          "3.3.1",
+          "2.4.7",
+          "2.1.1",
+          "1.3.5",
+          "2.1.2",
+          "1.4.3",
+          "2.2.2"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T18",
+        "category": "technical",
+        "question": "real-time captions for a live webinar stream",
+        "relevant": [
+          "1.2.4"
+        ],
+        "retrieved": [
+          "1.2.4",
+          "1.2.2",
+          "1.1.1",
+          "2.2.1",
+          "2.2.2",
+          "1.2.1",
+          "4.1.3",
+          "1.2.3",
+          "1.4.12",
+          "3.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "T19",
+        "category": "technical",
+        "question": "narration of visual details for prerecorded video",
+        "relevant": [
+          "1.2.5",
+          "1.2.3"
+        ],
+        "retrieved": [
+          "1.2.3",
+          "1.2.5",
+          "1.2.1",
+          "1.2.2",
+          "1.1.1",
+          "1.2.4",
+          "1.4.1",
+          "3.2.3",
+          "3.2.2",
+          "1.4.5"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "N01",
+        "category": "named",
+        "question": "What does 2.5.8 require?",
+        "relevant": [
+          "2.5.8"
+        ],
+        "retrieved": [
+          "2.5.8",
+          "1.2.5",
+          "1.2.3",
+          "2.5.3",
+          "2.1.2",
+          "3.3.8",
+          "2.5.7",
+          "3.3.2",
+          "2.5.1",
+          "1.1.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "N02",
+        "category": "named",
+        "question": "Explain success criterion 1.4.3 in simple terms",
+        "relevant": [
+          "1.4.3"
+        ],
+        "retrieved": [
+          "1.4.3",
+          "4.1.3",
+          "2.4.6",
+          "1.4.5",
+          "4.1.1",
+          "1.3.1",
+          "3.3.2",
+          "3.3.7",
+          "1.4.1",
+          "2.5.1"
+        ],
+        "first_hit_rank": 1
+      },
+      {
+        "id": "N03",
+        "category": "named",
+        "question": "Is 3.3.8 a level AA requirement?",
+        "relevant": [
+          "3.3.8"
+        ],
+        "retrieved": [
+          "3.3.8",
+          "1.2.3",
+          "1.4.3",
+          "1.2.5",
+          "3.3.2",
+          "2.4.7",
+          "3.3.1",
+          "2.4.11",
+          "2.5.3",
+          "3.2.6"
+        ],
+        "first_hit_rank": 1
+      }
+    ]
+  }
+]

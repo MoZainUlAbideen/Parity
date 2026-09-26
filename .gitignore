@@ -15,6 +15,9 @@ reports/
 # Secrets
 .env
 
+# Embedding cache (rebuilt automatically)
+.cache/
+
 # Editors / OS
 .vscode/
 .idea/

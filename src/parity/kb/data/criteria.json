@@ -1,0 +1,1610 @@
+[
+ {
+  "num": "1.1.1",
+  "id": "non-text-content",
+  "handle": "Non-text Content",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.1 Text Alternatives",
+  "normative_text": "All non-text content that is presented to the user has a text alternative that serves the equivalent purpose, except for the situations listed below.\n- Controls, Input: If non-text content is a control or accepts user input, then it has a name that describes its purpose. (Refer to Success Criterion 4.1.2 for additional requirements for controls and content that accepts user input.)\n- Time-Based Media: If non-text content is time-based media, then text alternatives at least provide descriptive identification of the non-text content. (Refer to Guideline 1.2 for additional requirements for media.)\n- Test: If non-text content is a test or exercise that would be invalid if presented in text, then text alternatives at least provide descriptive identification of the non-text content.\n- Sensory: If non-text content is primarily intended to create a specific sensory experience, then text alternatives at least provide descriptive identification of the non-text content.\n- CAPTCHA: If the purpose of non-text content is to confirm that content is being accessed by a person rather than a computer, then text alternatives that identify and describe the purpose of the non-text content are provided, and alternative forms of CAPTCHA using output modes for different types of sensory perception are provided to accommodate different disabilities.\n- Decoration, Formatting, Invisible: If non-text content is pure decoration, is used only for visual formatting, or is not presented to users, then it is implemented in a way that it can be ignored by assistive technology.",
+  "goal": "Non-text information is available to more people.",
+  "what_to_do": "Create a text alternative for visual and auditory content.",
+  "why_important": "People who can’t fully see or hear content can understand it.",
+  "failures": [
+   "F3: Failure of Success Criterion 1.1.1 due to using CSS to include images that convey important information",
+   "F13: Failure of Success Criterion 1.1.1 and 1.4.1 due to having a text alternative that does not include information that is conveyed by color differences in the image",
+   "F20: Failure of Success Criterion 1.1.1 and 4.1.2 due to not updating text alternatives when changes to non-text content occur",
+   "F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)",
+   "F38: Failure of Success Criterion 1.1.1 due to not marking up decorative images in HTML in a way that allows assistive technology to ignore them",
+   "F39: Failure of Success Criterion 1.1.1 due to providing a text alternative that is not null (e.g., alt=\"spacer\" or alt=\"image\") for images that should be ignored by assistive technology",
+   "F65: Failure of Success Criterion 1.1.1 due to omitting the alt attribute or text alternative on img elements, area elements, and input elements of type \"image\"",
+   "F67: Failure of Success Criterion 1.1.1 and 1.2.1 due to providing long descriptions for non-text content that does not serve the same purpose or does not present the same information",
+   "F71: Failure of Success Criterion 1.1.1 due to using text look-alikes to represent text without providing a text alternative",
+   "F72: Failure of Success Criterion 1.1.1 due to using ASCII art without providing a text alternative"
+  ]
+ },
+ {
+  "num": "1.2.1",
+  "id": "audio-only-and-video-only-prerecorded",
+  "handle": "Audio-only and Video-only (Prerecorded)",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.2 Time-based Media",
+  "normative_text": "For prerecorded audio-only and prerecorded video-only media, the following are true, except when the audio or video is a media alternative for text and is clearly labeled as such:\n- Prerecorded Audio-only: An alternative for time-based media is provided that presents equivalent information for prerecorded audio-only content.\n- Prerecorded Video-only: Either an alternative for time-based media or an audio track is provided that presents equivalent information for prerecorded video-only content.",
+  "goal": "Audio and video-only content can be understood by more people.",
+  "what_to_do": "Provide an alternative when content is perceivable with only one sense.",
+  "why_important": "People who can’t fully see or hear content can understand it.",
+  "failures": [
+   "F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)",
+   "F67: Failure of Success Criterion 1.1.1 and 1.2.1 due to providing long descriptions for non-text content that does not serve the same purpose or does not present the same information"
+  ]
+ },
+ {
+  "num": "1.2.2",
+  "id": "captions-prerecorded",
+  "handle": "Captions (Prerecorded)",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.2 Time-based Media",
+  "normative_text": "Captions are provided for all prerecorded audio content in synchronized media, except when the media is a media alternative for text and is clearly labeled as such.",
+  "goal": "Videos can be played with captions.",
+  "what_to_do": "Provide synchronized text for audio content in existing videos.",
+  "why_important": "People who are deaf or hard of hearing can understand audio in videos.",
+  "failures": [
+   "F8: Failure of Success Criterion 1.2.2 due to captions omitting some dialogue or important sound effects",
+   "F75: Failure of Success Criterion 1.2.2 by providing synchronized media without captions when the synchronized media presents more information than is presented on the page",
+   "F74: Failure of Success Criterion 1.2.2 and 1.2.8 due to not labeling a synchronized media alternative to text as an alternative"
+  ]
+ },
+ {
+  "num": "1.2.3",
+  "id": "audio-description-or-media-alternative-prerecorded",
+  "handle": "Audio Description or Media Alternative (Prerecorded)",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.2 Time-based Media",
+  "normative_text": "An alternative for time-based media or audio description of the prerecorded video content is provided for synchronized media, except when the media is a media alternative for text and is clearly labeled as such.",
+  "goal": "Prerecorded videos can be understood by more people.",
+  "what_to_do": "Provide a description of the visual content in videos.",
+  "why_important": "People who are blind or who cannot understand the visual content can have it described.",
+  "failures": []
+ },
+ {
+  "num": "1.2.4",
+  "id": "captions-live",
+  "handle": "Captions (Live)",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.2 Time-based Media",
+  "normative_text": "Captions are provided for all live audio content in synchronized media.",
+  "goal": "Live videos have captions.",
+  "what_to_do": "Provide synchronized text for audio content in real-time videos.",
+  "why_important": "People who are deaf or hard of hearing can understand audio in real-time video content.",
+  "failures": []
+ },
+ {
+  "num": "1.2.5",
+  "id": "audio-description-prerecorded",
+  "handle": "Audio Description (Prerecorded)",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.2 Time-based Media",
+  "normative_text": "Audio description is provided for all prerecorded video content in synchronized media.",
+  "goal": "Videos can be played with audio descriptions.",
+  "what_to_do": "Provide a synchronized spoken description of the visual content in videos.",
+  "why_important": "People who cannot see or understand the visual content can hear about it while playing videos.",
+  "failures": [
+   "F113: Failure of Success Criterion 1.2.5 due to not using available pauses in dialogue to provide audio descriptions of important visual content"
+  ]
+ },
+ {
+  "num": "1.2.6",
+  "id": "sign-language-prerecorded",
+  "handle": "Sign Language (Prerecorded)",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.2 Time-based Media",
+  "normative_text": "Sign language interpretation is provided for all prerecorded audio content in synchronized media.",
+  "goal": "Videos can be accompanied by sign language.",
+  "what_to_do": "Provide sign language interpretation for audio content in existing videos.",
+  "why_important": "People who are deaf or hard of hearing have more ways to understand multimedia content.",
+  "failures": []
+ },
+ {
+  "num": "1.2.7",
+  "id": "extended-audio-description-prerecorded",
+  "handle": "Extended Audio Description (Prerecorded)",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.2 Time-based Media",
+  "normative_text": "Where pauses in foreground audio are insufficient to allow audio descriptions to convey the sense of the video, extended audio description is provided for all prerecorded video content in synchronized media.",
+  "goal": "Videos can be played with more detailed audio descriptions.",
+  "what_to_do": "Provide extended spoken descriptions of the visual content in videos.",
+  "why_important": "People who are blind or who cannot understand the visual content can have it described to them while playing videos.",
+  "failures": []
+ },
+ {
+  "num": "1.2.8",
+  "id": "media-alternative-prerecorded",
+  "handle": "Media Alternative (Prerecorded)",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.2 Time-based Media",
+  "normative_text": "An alternative for time-based media is provided for all prerecorded synchronized media and for all prerecorded video-only media.",
+  "goal": "Prerecorded videos can be understood by more people.",
+  "what_to_do": "Provide a text equivalent for all content in videos.",
+  "why_important": "More people, including those who are deaf-blind, can better understand the content at their own pace.",
+  "failures": [
+   "F74: Failure of Success Criterion 1.2.2 and 1.2.8 due to not labeling a synchronized media alternative to text as an alternative"
+  ]
+ },
+ {
+  "num": "1.2.9",
+  "id": "audio-only-live",
+  "handle": "Audio-only (Live)",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.2 Time-based Media",
+  "normative_text": "An alternative for time-based media that presents equivalent information for live audio-only content is provided.",
+  "goal": "Live audio can be understood by more people.",
+  "what_to_do": "Provide a text equivalent for live audio-only content.",
+  "why_important": "People who cannot hear or understand real-time audio can read an equivalent.",
+  "failures": []
+ },
+ {
+  "num": "1.3.1",
+  "id": "info-and-relationships",
+  "handle": "Info and Relationships",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.3 Adaptable",
+  "normative_text": "Information, structure, and relationships conveyed through presentation can be programmatically determined or are available in text.",
+  "goal": "Information about content structure is available to more people.",
+  "what_to_do": "Use code to reinforce relationships and information conveyed through presentation.",
+  "why_important": "People can adapt the presentation to suit their needs while preserving the original meaning.",
+  "failures": [
+   "F2: Failure of Success Criterion 1.3.1 due to using changes in text presentation to convey information without using the appropriate markup or text",
+   "F33: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to create multiple columns in plain text content",
+   "F34: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to format tables in plain text content",
+   "F42: Failure of Success Criteria 1.3.1, 2.1.1, 2.1.3, or 4.1.2 when emulating links",
+   "F43: Failure of Success Criterion 1.3.1 due to using structural markup in a way that does not represent relationships in the content",
+   "F46: Failure of Success Criterion 1.3.1 due to using th elements, caption elements, or non-empty summary attributes in layout tables",
+   "F48: Failure of Success Criterion 1.3.1 due to using the pre element to markup tabular information",
+   "F90: Failure of Success Criterion 1.3.1 for incorrectly associating table headers and content via the headers and id attributes",
+   "F91: Failure of Success Criterion 1.3.1 for not correctly marking up table headers",
+   "F92: Failure of Success Criterion 1.3.1 due to the use of role presentation on content which conveys semantic information",
+   "F111: Failure of Success Criteria 1.3.1, 2.5.3, and 4.1.2 due to a control with visible label text but no accessible name"
+  ]
+ },
+ {
+  "num": "1.3.2",
+  "id": "meaningful-sequence",
+  "handle": "Meaningful Sequence",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.3 Adaptable",
+  "normative_text": "When the sequence in which content is presented affects its meaning, a correct reading sequence can be programmatically determined.",
+  "goal": "The order of content can be understood by more people.",
+  "what_to_do": "Use code to preserve meaningful content order.",
+  "why_important": "Assistive technology can present content to users in the proper order.",
+  "failures": [
+   "F34: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to format tables in plain text content",
+   "F33: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to create multiple columns in plain text content",
+   "F32: Failure of Success Criterion 1.3.2 due to using white space characters to control spacing within a word",
+   "F49: Failure of Success Criterion 1.3.2 due to using an HTML layout table that does not make sense when linearized",
+   "F1: Failure of Success Criterion 1.3.2 due to changing the meaning of content by positioning information with CSS"
+  ]
+ },
+ {
+  "num": "1.3.3",
+  "id": "sensory-characteristics",
+  "handle": "Sensory Characteristics",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.3 Adaptable",
+  "normative_text": "Instructions provided for understanding and operating content do not rely solely on sensory characteristics of components such as shape, color, size, visual location, orientation, or sound.\nNote: For requirements related to color, refer to Guideline 1.4.",
+  "goal": "Instructions are understandable by more people.",
+  "what_to_do": "Describe controls by name, not just by appearance or location.",
+  "why_important": "People who are blind or have low vision need non-visual instructions.",
+  "failures": [
+   "F14: Failure of Success Criterion 1.3.3 due to identifying content only by its shape or location",
+   "F26: Failure of Success Criterion 1.3.3 due to using a graphical symbol alone to convey information"
+  ]
+ },
+ {
+  "num": "1.3.4",
+  "id": "orientation",
+  "handle": "Orientation",
+  "level": "AA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.3 Adaptable",
+  "normative_text": "Content does not restrict its view and operation to a single display orientation, such as portrait or landscape, unless a specific display orientation is essential.\nNote: Examples where a particular display orientation may be essential are a bank check, a piano application, slides for a projector or television, or virtual reality content where content is not necessarily restricted to landscape or portrait display orientation.",
+  "goal": "Devices can be used in any orientation.",
+  "what_to_do": "Don't lock content to either portrait or landscape presentation.",
+  "why_important": "Wheelchair users and others may have devices mounted in a fixed orientation.",
+  "failures": [
+   "F97: Failure due to locking the orientation to landscape or portrait view",
+   "F100: Failure of Success Criterion 1.3.4 due to showing a message asking to reorient device"
+  ]
+ },
+ {
+  "num": "1.3.5",
+  "id": "identify-input-purpose",
+  "handle": "Identify Input Purpose",
+  "level": "AA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.3 Adaptable",
+  "normative_text": "The purpose of each input field collecting information about the user can be programmatically determined when:\n- The input field serves a purpose identified in the Input Purposes for user interface components section; and\n- The content is implemented using technologies with support for identifying the expected meaning for form input data.",
+  "goal": "It is easier to fill out forms.",
+  "what_to_do": "Use code to indicate the purpose of common inputs, where technology allows.",
+  "why_important": "Some people with cognitive disabilities may not understand the input's purpose from the label alone.",
+  "failures": [
+   "F107: Failure of Success Criterion 1.3.5 due to incorrect autocomplete attribute values"
+  ]
+ },
+ {
+  "num": "1.3.6",
+  "id": "identify-purpose",
+  "handle": "Identify Purpose",
+  "level": "AAA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.3 Adaptable",
+  "normative_text": "In content implemented using markup languages, the purpose of user interface components, icons, and regions can be programmatically determined.",
+  "goal": "It is easier to operate and navigate content.",
+  "what_to_do": "Use code to indicate the meaning of all controls and other key information, where available.",
+  "why_important": "Some people with cognitive disabilities may not understand a control's purpose from the name alone.",
+  "failures": []
+ },
+ {
+  "num": "1.4.1",
+  "id": "use-of-color",
+  "handle": "Use of Color",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "Color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element.\nNote: This success criterion addresses color perception specifically. Other forms of perception are covered in Guideline 1.3 including programmatic access to color and other visual presentation coding.",
+  "goal": "Color is not the only way of distinguishing information.",
+  "what_to_do": "Use information in addition to color, such as shape or text, to convey meaning.",
+  "why_important": "Not everyone sees colors or sees them the same way.",
+  "failures": [
+   "F13: Failure of Success Criterion 1.1.1 and 1.4.1 due to having a text alternative that does not include information that is conveyed by color differences in the image",
+   "F73: Failure of Success Criterion 1.4.1 due to creating links that are not visually evident without color vision",
+   "F81: Failure of Success Criterion 1.4.1 due to identifying required or error fields using color differences only"
+  ]
+ },
+ {
+  "num": "1.4.2",
+  "id": "audio-control",
+  "handle": "Audio Control",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "If any audio on a web page plays automatically for more than 3 seconds, either a mechanism is available to pause or stop the audio, or a mechanism is available to control audio volume independently from the overall system volume level.\nNote: Since any content that does not meet this success criterion can interfere with a user's ability to use the whole page, all content on the web page (whether or not it is used to meet other success criteria) must meet this success criterion. See Conformance Requirement 5: Non-Interference.",
+  "goal": "A page that plays music or sounds doesn't disrupt people.",
+  "what_to_do": "If you play audio content automatically, let people turn it down or off.",
+  "why_important": "Sound distracts some people, and also interferes with screen readers.",
+  "failures": [
+   "F23: Failure of 1.4.2 due to playing a sound longer than 3 seconds where there is no mechanism to turn it off",
+   "F93: Failure of Success Criterion 1.4.2 for absence of a way to pause or stop an HTML5 media element that autoplays"
+  ]
+ },
+ {
+  "num": "1.4.3",
+  "id": "contrast-minimum",
+  "handle": "Contrast (Minimum)",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for the following:\n- Large Text: Large-scale text and images of large-scale text have a contrast ratio of at least 3:1;\n- Incidental: Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.\n- Logotypes: Text that is part of a logo or brand name has no contrast requirement.",
+  "goal": "Text can be seen by more people.",
+  "what_to_do": "Provide sufficient contrast between text and its background.",
+  "why_important": "Some people cannot read faint text.",
+  "failures": [
+   "F24: Failure of Success Criterion 1.4.3, 1.4.6 and 1.4.8 due to specifying foreground colors without specifying background colors or vice versa",
+   "F83: Failure of Success Criterion 1.4.3 and 1.4.6 due to using background images that do not provide sufficient contrast with foreground text (or images of text)"
+  ]
+ },
+ {
+  "num": "1.4.4",
+  "id": "resize-text",
+  "handle": "Resize Text",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "Except for captions and images of text, text can be resized without assistive technology up to 200 percent without loss of content or functionality.",
+  "goal": "Text can be enlarged.",
+  "what_to_do": "Ensure text can be doubled in size.",
+  "why_important": "Some people can only read text when it is bigger.",
+  "failures": [
+   "F69: Failure of Success Criterion 1.4.4 when resizing visually rendered text up to 200 percent causes the text, image or controls to be clipped, truncated or obscured",
+   "F80: Failure of Success Criterion 1.4.4 when text-based form controls do not resize when visually rendered text is resized up to 200%",
+   "F94: Failure of Success Criterion 1.4.4 due to incorrect use of viewport units to resize text"
+  ]
+ },
+ {
+  "num": "1.4.5",
+  "id": "images-of-text",
+  "handle": "Images of Text",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "If the technologies being used can achieve the visual presentation, text is used to convey information rather than images of text except for the following:\n- Customizable: The image of text can be visually customized to the user's requirements;\n- Essential: A particular presentation of text is essential to the information being conveyed.\nNote: Logotypes (text that is part of a logo or brand name) are considered essential.",
+  "goal": "Users can adjust how text is presented.",
+  "what_to_do": "Use text instead of pictures of text.",
+  "why_important": "People cannot alter how text looks in images.",
+  "failures": []
+ },
+ {
+  "num": "1.4.6",
+  "id": "contrast-enhanced",
+  "handle": "Contrast (Enhanced)",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "The visual presentation of text and images of text has a contrast ratio of at least 7:1, except for the following:\n- Large Text: Large-scale text and images of large-scale text have a contrast ratio of at least 4.5:1;\n- Incidental: Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.\n- Logotypes: Text that is part of a logo or brand name has no contrast requirement.",
+  "goal": "Text can be seen by people who need strong contrast.",
+  "what_to_do": "Strongly contrast text against its background.",
+  "why_important": "Some people cannot read text with minimum contrast.",
+  "failures": [
+   "F24: Failure of Success Criterion 1.4.3, 1.4.6 and 1.4.8 due to specifying foreground colors without specifying background colors or vice versa",
+   "F83: Failure of Success Criterion 1.4.3 and 1.4.6 due to using background images that do not provide sufficient contrast with foreground text (or images of text)"
+  ]
+ },
+ {
+  "num": "1.4.7",
+  "id": "low-or-no-background-audio",
+  "handle": "Low or No Background Audio",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "For prerecorded audio-only content that (1) contains primarily speech in the foreground, (2) is not an audio CAPTCHA or audio logo, and (3) is not vocalization intended to be primarily musical expression such as singing or rapping, at least one of the following is true:\n- No Background: The audio does not contain background sounds.\n- Turn Off: The background sounds can be turned off.\n- 20 dB: The background sounds are at least 20 decibels lower than the foreground speech content, with the exception of occasional sounds that last for only one or two seconds.\nNote: Per the definition of \"decibel,\" background sound that meets this requirement will be approximately four times quieter than the foreground speech content.",
+  "goal": "Prerecorded speech is not disrupted by background sound.",
+  "what_to_do": "Avoid or lessen background sound, or let users turn it off.",
+  "why_important": "People who are hard of hearing may have difficulty distinguishing speech from music and other sounds.",
+  "failures": []
+ },
+ {
+  "num": "1.4.8",
+  "id": "visual-presentation",
+  "handle": "Visual Presentation",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "For the visual presentation of blocks of text, a mechanism is available to achieve the following:\n- Foreground and background colors can be selected by the user.\n- Width is no more than 80 characters or glyphs (40 if CJK).\n- Text is not justified (aligned to both the left and the right margins).\n- Line spacing (leading) is at least space-and-a-half within paragraphs, and paragraph spacing is at least 1.5 times larger than the line spacing.\n- Text can be resized without assistive technology up to 200 percent in a way that does not require the user to scroll horizontally to read a line of text on a full-screen window.\nNote 1: Content is not required to use these values. The requirement is that a mechanism is available for users to change these presentation aspects. The mechanism can be provided by the browser or other user agent. Content is not required to provide the mechanism.\nNote 2: Writing systems for some languages use different presentation aspects to improve readability and legibility. If a presentation aspect in this success criterion is not used in a writing system, content in that writing system does not need to use that presentation setting and can conform without it. Authors are encouraged to follow guidance for improving readability and legibility of text in their writing system.",
+  "goal": "Text appearance can be altered by users to meet preferences.",
+  "what_to_do": "Meet text display requirements or allow users to adjust them.",
+  "why_important": "Some text formats are more readable for people with cognitive disabilities and low vision.",
+  "failures": [
+   "F24: Failure of Success Criterion 1.4.3, 1.4.6 and 1.4.8 due to specifying foreground colors without specifying background colors or vice versa",
+   "F88: Failure of Success Criterion 1.4.8 due to using text that is justified (aligned to both the left and the right margins)"
+  ]
+ },
+ {
+  "num": "1.4.9",
+  "id": "images-of-text-no-exception",
+  "handle": "Images of Text (No Exception)",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "Images of text are only used for pure decoration or where a particular presentation of text is essential to the information being conveyed.\nNote: Logotypes (text that is part of a logo or brand name) are considered essential.",
+  "goal": "Users can always adjust how text is presented.",
+  "what_to_do": "Do not use pictures of text unless there is no other way to present information.",
+  "why_important": "People cannot alter how text looks in images.",
+  "failures": []
+ },
+ {
+  "num": "1.4.10",
+  "id": "reflow",
+  "handle": "Reflow",
+  "level": "AA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "Content can be presented without loss of information or functionality, and without requiring scrolling in two dimensions for:\n- Vertical scrolling content at a width equivalent to 320 CSS pixels;\n- Horizontal scrolling content at a height equivalent to 256 CSS pixels.\nExcept for parts of the content which require two-dimensional layout for usage or meaning.\nNote 1: 320 CSS pixels is equivalent to a starting viewport width of 1280 CSS pixels wide at 400% zoom. For web content which is designed to scroll horizontally (e.g., with vertical text), 256 CSS pixels is equivalent to a starting viewport height of 1024 CSS pixels at 400% zoom.\nNote 2: Examples of content which requires two-dimensional layout are images required for understanding (such as maps and diagrams), video, games, presentations, data tables (not individual cells), and interfaces where it is necessary to keep toolbars in view while manipulating content. It is acceptable to provide two-dimensional scrolling for such parts of the content.",
+  "goal": "Content can be enlarged without increasing line length.",
+  "what_to_do": "Make lines of text reflow within the viewport.",
+  "why_important": "People who need bigger text find it difficult if they must scroll to read long lines.",
+  "failures": [
+   "F102: Failure of Success Criterion 1.4.10 due to content disappearing and not being available when content has reflowed"
+  ]
+ },
+ {
+  "num": "1.4.11",
+  "id": "non-text-contrast",
+  "handle": "Non-text Contrast",
+  "level": "AA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "The visual presentation of the following have a contrast ratio of at least 3:1 against adjacent color(s):\n- User Interface Components: Visual information required to identify user interface components and states, except for inactive components or where the appearance of the component is determined by the user agent and not modified by the author;\n- Graphical Objects: Parts of graphics required to understand the content, except when a particular presentation of graphics is essential to the information being conveyed.",
+  "goal": "Important visual information meets the same minimum contrast required for larger text.",
+  "what_to_do": "Ensure meaningful visual cues achieve 3:1 against the background.",
+  "why_important": "Some people cannot see elements with low contrast.",
+  "failures": [
+   "F78: Failure of Success Criterion 1.4.11, 2.4.7 and 2.4.13 due to styling element outlines and borders in a way that removes or renders non-visible the visual focus indicator"
+  ]
+ },
+ {
+  "num": "1.4.12",
+  "id": "text-spacing",
+  "handle": "Text Spacing",
+  "level": "AA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "In content implemented using markup languages that support the following text style properties, no loss of content or functionality occurs by setting all of the following and by changing no other style property:\n- Line height (line spacing) to at least 1.5 times the font size;\n- Spacing following paragraphs to at least 2 times the font size;\n- Letter spacing (tracking) to at least 0.12 times the font size;\n- Word spacing to at least 0.16 times the font size.\nException: Human languages and scripts that do not make use of one or more of these text style properties in written text can conform using only the properties that exist for that combination of language and script.\nNote 1: Content is not required to use these text spacing values. The requirement is to ensure that when a user overrides the authored text spacing, content or functionality is not lost.\nNote 2: Writing systems for some languages use different text spacing settings, such as paragraph start indent. Authors are encouraged to follow locally available guidance for improving readability and legibility of text in their writing system.",
+  "goal": "Users can adjust text spacing to make it easier to read.",
+  "what_to_do": "Ensure content adapts to user-defined text settings.",
+  "why_important": "Some people need text with different spacing or font characteristics.",
+  "failures": [
+   "F104: Failure of Success Criterion 1.4.12 due to clipped or overlapped content when text spacing is adjusted"
+  ]
+ },
+ {
+  "num": "1.4.13",
+  "id": "content-on-hover-or-focus",
+  "handle": "Content on Hover or Focus",
+  "level": "AA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "1.4 Distinguishable",
+  "normative_text": "Where receiving and then removing pointer hover or keyboard focus triggers additional content to become visible and then hidden, the following are true:\n- Dismissible: A mechanism is available to dismiss the additional content without moving pointer hover or keyboard focus, unless the additional content communicates an input error or does not obscure or replace other content;\n- Hoverable: If pointer hover can trigger the additional content, then the pointer can be moved over the additional content without the additional content disappearing;\n- Persistent: The additional content remains visible until the hover or focus trigger is removed, the user dismisses it, or its information is no longer valid.\nException: The visual presentation of the additional content is controlled by the user agent and is not modified by the author.\nNote 1: Examples of additional content controlled by the user agent include browser tooltips created through use of the HTML title attribute [HTML].\nNote 2: Custom tooltips, sub-menus, and other nonmodal popups that display on hover and focus are examples of additional content covered by this criterion.\nNote 3: This criterion applies to content that appears in addition to the triggering component itself. Since hidden components that are made visible on keyboard focus (such as links used to skip to another part of a page) do not present additional content they are not covered by this criterion.",
+  "goal": "More users can perceive and dismiss non-persistent content.",
+  "what_to_do": "If hover or focus causes content changes, ensure interaction is predictable.",
+  "why_important": "Unpredictable temporary content can be hard for some to consume and may disrupt others.",
+  "failures": [
+   "F95: Failure of Success Criterion 1.4.13 due to content shown on hover not being hoverable"
+  ]
+ },
+ {
+  "num": "2.1.1",
+  "id": "keyboard",
+  "handle": "Keyboard",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.1 Keyboard Accessible",
+  "normative_text": "All functionality of the content is operable through a keyboard interface without requiring specific timings for individual keystrokes, except where the underlying function requires input that depends on the path of the user's movement and not just the endpoints.\nNote 1: This exception relates to the underlying function, not the input technique. For example, if using handwriting to enter text, the input technique (handwriting) requires path-dependent input but the underlying function (text input) does not.\nNote 2: This does not forbid and should not discourage providing mouse input or other input methods in addition to keyboard operation.",
+  "goal": "Everything can be done with a keyboard except freehand movements.",
+  "what_to_do": "Ensure pointer actions have a keyboard equivalent.",
+  "why_important": "Many people rely on the keyboard interface, including blind and some mobility impaired people.",
+  "failures": [
+   "F54: Failure of Success Criterion 2.1.1 due to using only pointing-device-specific event handlers (including gesture) for a function",
+   "F55: Failure of Success Criteria 2.1.1, 2.4.7, 2.4.13, and 3.2.1 due to using script to remove focus when focus is received",
+   "F42: Failure of Success Criteria 1.3.1, 2.1.1, 2.1.3, or 4.1.2 when emulating links"
+  ]
+ },
+ {
+  "num": "2.1.2",
+  "id": "no-keyboard-trap",
+  "handle": "No Keyboard Trap",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.1 Keyboard Accessible",
+  "normative_text": "If keyboard focus can be moved to a component of the page using a keyboard interface, then focus can be moved away from that component using only a keyboard interface, and, if it requires more than unmodified arrow or tab keys or other standard exit methods, the user is advised of the method for moving focus away.\nNote: Since any content that does not meet this success criterion can interfere with a user's ability to use the whole page, all content on the web page (whether it is used to meet other success criteria or not) must meet this success criterion. See Conformance Requirement 5: Non-Interference.",
+  "goal": "Keyboard users don't get stuck.",
+  "what_to_do": "Ensure users always know how to navigate away from components.",
+  "why_important": "People who rely on the keyboard often have no other means to navigate.",
+  "failures": [
+   "F10: Failure of Success Criterion 2.1.2 and Conformance Requirement 5 due to combining multiple content formats in a way that traps users inside one format type"
+  ]
+ },
+ {
+  "num": "2.1.3",
+  "id": "keyboard-no-exception",
+  "handle": "Keyboard (No Exception)",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.1 Keyboard Accessible",
+  "normative_text": "All functionality of the content is operable through a keyboard interface without requiring specific timings for individual keystrokes.",
+  "goal": "Everything can be done with a keyboard.",
+  "what_to_do": "Ensure all pointer actions have a keyboard equivalent.",
+  "why_important": "People who can only use the keyboard interface need to be able to accomplish everything.",
+  "failures": []
+ },
+ {
+  "num": "2.1.4",
+  "id": "character-key-shortcuts",
+  "handle": "Character Key Shortcuts",
+  "level": "A",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.1 Keyboard Accessible",
+  "normative_text": "If a keyboard shortcut is implemented in content using only letter (including upper- and lower-case letters), punctuation, number, or symbol characters, then at least one of the following is true:\n- Turn off: A mechanism is available to turn the shortcut off;\n- Remap: A mechanism is available to remap the shortcut to include one or more non-printable keyboard keys (e.g., Ctrl, Alt);\n- Active only on focus: The keyboard shortcut for a user interface component is only active when that component has focus.",
+  "goal": "Reduce accidental activation of keyboard shortcuts.",
+  "what_to_do": "Ensure character-only shortcut keys can be turned off or modified.",
+  "why_important": "Character-key shortcuts are easy to accidentally trigger, especially with speech input.",
+  "failures": [
+   "F99: Failure of Success Criterion 2.1.4 due to implementing character key shortcuts that cannot be turned off or remapped"
+  ]
+ },
+ {
+  "num": "2.2.1",
+  "id": "timing-adjustable",
+  "handle": "Timing Adjustable",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.2 Enough Time",
+  "normative_text": "For each time limit that is set by the content, at least one of the following is true:\n- Turn off: The user is allowed to turn off the time limit before encountering it; or\n- Adjust: The user is allowed to adjust the time limit before encountering it over a wide range that is at least ten times the length of the default setting; or\n- Extend: The user is warned before time expires and given at least 20 seconds to extend the time limit with a simple action (for example, \"press the space bar\"), and the user is allowed to extend the time limit at least ten times; or\n- Real-time Exception: The time limit is a required part of a real-time event (for example, an auction), and no alternative to the time limit is possible; or\n- Essential Exception: The time limit is essential and extending it would invalidate the activity; or\n- 20 Hour Exception: The time limit is longer than 20 hours.\nNote: This success criterion helps ensure that users can complete tasks without unexpected changes in content or context that are a result of a time limit. This success criterion should be considered in conjunction with Success Criterion 3.2.1, which puts limits on changes of content or context as a result of user action.",
+  "goal": "Users have adequate time to complete tasks.",
+  "what_to_do": "Let users turn off, adjust, or extend time limits.",
+  "why_important": "People with disabilities may need more time to complete activities.",
+  "failures": [
+   "F40: Failure due to using meta redirect with a time limit",
+   "F41: Failure of Success Criterion 2.2.1, 2.2.4, and 3.2.5 due to using meta refresh to reload the page",
+   "F58: Failure of Success Criterion 2.2.1 due to using server-side techniques to automatically redirect pages after a time-out"
+  ]
+ },
+ {
+  "num": "2.2.2",
+  "id": "pause-stop-hide",
+  "handle": "Pause, Stop, Hide",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.2 Enough Time",
+  "normative_text": "For moving, blinking, scrolling, or auto-updating information, all of the following are true:\n- Moving, blinking, scrolling: For any moving, blinking or scrolling information that (1) starts automatically, (2) lasts more than five seconds, and (3) is presented in parallel with other content, there is a mechanism for the user to pause, stop, or hide it unless the movement, blinking, or scrolling is part of an activity where it is essential; and\n- Auto-updating: For any auto-updating information that (1) starts automatically and (2) is presented in parallel with other content, there is a mechanism for the user to pause, stop, or hide it or to control the frequency of the update unless the auto-updating is part of an activity where it is essential.\nNote 1: For requirements related to flickering or flashing content, refer to Guideline 2.3.\nNote 2: Since any content that does not meet this success criterion can interfere with a user's ability to use the whole page, all content on the web page (whether it is used to meet other success criteria or not) must meet this success criterion. See Conformance Requirement 5: Non-Interference.\nNote 3: Content that is updated periodically by software or that is streamed to the user agent is not required to preserve or present information that is generated or received between the initiation of the pause and resuming presentation, as this may not be technically possible, and in many situations could be misleading to do so.\nNote 4: An animation that occurs as part of a preload phase or similar situation can be considered essential if interaction cannot occur during that phase for all users and if not indicating progress could confuse users or cause them to think that content was frozen or broken.",
+  "goal": "Fewer users are distracted by content that updates or moves.",
+  "what_to_do": "Let users control content changes that occur in parallel with other content.",
+  "why_important": "Some people with cognitive disabilities and attention deficits are distracted by continuous movement.",
+  "failures": [
+   "F16: Failure of Success Criterion 2.2.2 due to including scrolling content where movement is not essential to the activity without also including a mechanism to pause and restart the content",
+   "F112: Failure of Success Criterion 2.2.2 due to using blinking content that lasts for more than five seconds without a mechanism to stop it",
+   "F50: Failure of Success Criterion 2.2.2 due to a script that causes a blink effect without a mechanism to stop the blinking at 5 seconds or less",
+   "F7: Failure of Success Criterion 2.2.2 due to an object or applet that has blinking content without a mechanism to pause the content that blinks for more than five seconds"
+  ]
+ },
+ {
+  "num": "2.2.3",
+  "id": "no-timing",
+  "handle": "No Timing",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.2 Enough Time",
+  "normative_text": "Timing is not an essential part of the event or activity presented by the content, except for non-interactive synchronized media and real-time events.",
+  "goal": "Users do not face time limits.",
+  "what_to_do": "Do not use time limits, except for video and live events.",
+  "why_important": "People with disabilities often need more time to complete actions.",
+  "failures": []
+ },
+ {
+  "num": "2.2.4",
+  "id": "interruptions",
+  "handle": "Interruptions",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.2 Enough Time",
+  "normative_text": "Interruptions can be postponed or suppressed by the user, except interruptions involving an emergency.",
+  "goal": "Users are not interrupted.",
+  "what_to_do": "Let people delay or turn off updates, except in emergencies.",
+  "why_important": "Updates distract and disrupt assistive technology users and people with attention deficits.",
+  "failures": [
+   "F40: Failure due to using meta redirect with a time limit",
+   "F41: Failure of Success Criterion 2.2.1, 2.2.4, and 3.2.5 due to using meta refresh to reload the page"
+  ]
+ },
+ {
+  "num": "2.2.5",
+  "id": "re-authenticating",
+  "handle": "Re-authenticating",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.2 Enough Time",
+  "normative_text": "When an authenticated session expires, the user can continue the activity without loss of data after re-authenticating.",
+  "goal": "Users do not lose information or context due to reauthentication.",
+  "what_to_do": "Preserve users' prior activity and data through reauthentication.",
+  "why_important": "Some people may require additional time to complete an activity.",
+  "failures": [
+   "F12: Failure of Success Criterion 2.2.5 due to having a session time limit without a mechanism for saving user's input and re-establishing that information upon re-authentication"
+  ]
+ },
+ {
+  "num": "2.2.6",
+  "id": "timeouts",
+  "handle": "Timeouts",
+  "level": "AAA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.2 Enough Time",
+  "normative_text": "Users are warned of the duration of any user inactivity that could cause data loss, unless the data is preserved for more than 20 hours when the user does not take any actions.\nNote: Privacy regulations may require explicit user consent before user identification has been authenticated and before user data is preserved. In cases where the user is a minor, explicit consent may not be solicited in most jurisdictions, countries or regions. Consultation with privacy professionals and legal counsel is advised when considering data preservation as an approach to satisfy this success criterion.",
+  "goal": "Users do not lose data due to unknown timeouts.",
+  "what_to_do": "Tell users how long their session can be inactive before they may lose information.",
+  "why_important": "People with disabilities may need more time to complete actions.",
+  "failures": []
+ },
+ {
+  "num": "2.3.1",
+  "id": "three-flashes-or-below-threshold",
+  "handle": "Three Flashes or Below Threshold",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.3 Seizures and Physical Reactions",
+  "normative_text": "Web pages do not contain anything that flashes more than three times in any one second period, or the flash is below the general flash and red flash thresholds.\nNote: Since any content that does not meet this success criterion can interfere with a user's ability to use the whole page, all content on the web page (whether it is used to meet other success criteria or not) must meet this success criterion. See Conformance Requirement 5: Non-Interference.",
+  "goal": "Content does not trigger seizures.",
+  "what_to_do": "Avoid content that flashes, or keep it under thresholds.",
+  "why_important": "Flashing content can cause migraines, dizziness, nausea, and seizures.",
+  "failures": []
+ },
+ {
+  "num": "2.3.2",
+  "id": "three-flashes",
+  "handle": "Three Flashes",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.3 Seizures and Physical Reactions",
+  "normative_text": "Web pages do not contain anything that flashes more than three times in any one second period.",
+  "goal": "Content does not trigger seizures.",
+  "what_to_do": "Do not flash content more than 3 times a second.",
+  "why_important": "Flashing content can cause migraines, dizziness, nausea, and seizures.",
+  "failures": []
+ },
+ {
+  "num": "2.3.3",
+  "id": "animation-from-interactions",
+  "handle": "Animation from Interactions",
+  "level": "AAA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.3 Seizures and Physical Reactions",
+  "normative_text": "Motion animation triggered by interaction can be disabled, unless the animation is essential to the functionality or the information being conveyed.",
+  "goal": "Users are not harmed or distracted by motion.",
+  "what_to_do": "Support user preferences for motion, and eliminate unnecessary motion effects.",
+  "why_important": "People can get sick from motion effects.",
+  "failures": []
+ },
+ {
+  "num": "2.4.1",
+  "id": "bypass-blocks",
+  "handle": "Bypass Blocks",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "A mechanism is available to bypass blocks of content that are repeated on multiple web pages.",
+  "goal": "Users can more easily navigate by keyboard.",
+  "what_to_do": "Provide a means of skipping repeating content.",
+  "why_important": "Users reliant on the keyboard interface can move around pages efficiently.",
+  "failures": []
+ },
+ {
+  "num": "2.4.2",
+  "id": "page-titled",
+  "handle": "Page Titled",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "Web pages have titles that describe topic or purpose.",
+  "goal": "Each web page has a meaningful title.",
+  "what_to_do": "Provide a descriptive page title using appropriate technology.",
+  "why_important": "Page titles help users identify and distinguish different pages.",
+  "failures": [
+   "F25: Failure of Success Criterion 2.4.2 due to the title of a web page not identifying the contents"
+  ]
+ },
+ {
+  "num": "2.4.3",
+  "id": "focus-order",
+  "handle": "Focus Order",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "If a web page can be navigated sequentially and the navigation sequences affect meaning or operation, focusable components receive focus in an order that preserves meaning and operability.",
+  "goal": "Keyboard users navigate content in a correct order.",
+  "what_to_do": "Elements receive focus in an order that preserves meaning.",
+  "why_important": "Navigating a site or application with only the keyboard will make sense.",
+  "failures": [
+   "F44: Failure of Success Criterion 2.4.3 due to using tabindex to create a tab order that does not preserve meaning and operability",
+   "F85: Failure of Success Criterion 2.4.3 due to using dialogs or menus that are not adjacent to their trigger control in the sequential navigation order"
+  ]
+ },
+ {
+  "num": "2.4.4",
+  "id": "link-purpose-in-context",
+  "handle": "Link Purpose (In Context)",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "The purpose of each link can be determined from the link text alone or from the link text together with its programmatically determined link context, except where the purpose of the link would be ambiguous to users in general.",
+  "goal": "Users understand what each link will do.",
+  "what_to_do": "Provide descriptive names or context for all links.",
+  "why_important": "People with visual and cognitive disabilities can navigate more easily.",
+  "failures": [
+   "F63: Failure of Success Criterion 2.4.4 due to providing link context only in content that is not related to the link",
+   "F89: Failure of Success Criteria 2.4.4, 2.4.9 and 4.1.2 due to not providing an accessible name for an image which is the only content in a link"
+  ]
+ },
+ {
+  "num": "2.4.5",
+  "id": "multiple-ways",
+  "handle": "Multiple Ways",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "More than one way is available to locate a web page within a set of web pages except where the web page is the result of, or a step in, a process.",
+  "goal": "Users can get to content in multiple ways.",
+  "what_to_do": "Provide at least two options for reaching the same content.",
+  "why_important": "Not everyone can navigate content in the same way.",
+  "failures": []
+ },
+ {
+  "num": "2.4.6",
+  "id": "headings-and-labels",
+  "handle": "Headings and Labels",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "Headings and labels describe topic or purpose.",
+  "goal": "A page's content is described in headings and labels",
+  "what_to_do": "Provide descriptive headings and labels",
+  "why_important": "People can orient themselves, especially those with cognitive or visual disabilities.",
+  "failures": []
+ },
+ {
+  "num": "2.4.7",
+  "id": "focus-visible",
+  "handle": "Focus Visible",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "Any keyboard operable user interface has a mode of operation where the keyboard focus indicator is visible.",
+  "goal": "Users know which element has keyboard focus.",
+  "what_to_do": "Ensure each item receiving focus has a visible indicator.",
+  "why_important": "Without a focus indicator, sighted keyboard users cannot operate the page.",
+  "failures": [
+   "F55: Failure of Success Criteria 2.1.1, 2.4.7, 2.4.13, and 3.2.1 due to using script to remove focus when focus is received",
+   "F78: Failure of Success Criterion 1.4.11, 2.4.7 and 2.4.13 due to styling element outlines and borders in a way that removes or renders non-visible the visual focus indicator"
+  ]
+ },
+ {
+  "num": "2.4.8",
+  "id": "location",
+  "handle": "Location",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "Information about the user's location within a set of web pages is available.",
+  "goal": "Users know where they are in a set of pages.",
+  "what_to_do": "Use breadcrumbs, site maps, or other indicators to give context.",
+  "why_important": "Location indicators reduce confusion for people with cognitive disabilities.",
+  "failures": []
+ },
+ {
+  "num": "2.4.9",
+  "id": "link-purpose-link-only",
+  "handle": "Link Purpose (Link Only)",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "A mechanism is available to allow the purpose of each link to be identified from link text alone, except where the purpose of the link would be ambiguous to users in general.",
+  "goal": "Users understand what each link will do.",
+  "what_to_do": "Provide descriptive names for all links.",
+  "why_important": "Descriptive link text is more understandable for all users, especially when using assistive technology.",
+  "failures": [
+   "F84: Failure of Success Criterion 2.4.9 due to using a non-specific link such as \"click here\" or \"more\" without a mechanism to change the link text to specific text.",
+   "F89: Failure of Success Criteria 2.4.4, 2.4.9 and 4.1.2 due to not providing an accessible name for an image which is the only content in a link"
+  ]
+ },
+ {
+  "num": "2.4.10",
+  "id": "section-headings",
+  "handle": "Section Headings",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "Section headings are used to organize the content.\nNote 1: \"Heading\" is used in its general sense and includes titles and other ways to add a heading to different types of content.\nNote 2: This success criterion covers sections within writing, not user interface components. User interface components are covered under Success Criterion 4.1.2.",
+  "goal": "Users understand how content is organized in sections.",
+  "what_to_do": "Where content is organized in sections, provide section headings.",
+  "why_important": "People can orient themselves, especially those with cognitive or visual disabilities.",
+  "failures": []
+ },
+ {
+  "num": "2.4.11",
+  "id": "focus-not-obscured-minimum",
+  "handle": "Focus Not Obscured (Minimum)",
+  "level": "AA",
+  "versions": [
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "When a user interface component receives keyboard focus, the component is not entirely hidden due to author-created content.\nNote 1: Where content in a configurable interface can be repositioned by the user, then only the initial positions of user-movable content are considered for testing and conformance of this success criterion.\nNote 2: Content opened by the user may obscure the component receiving focus. If the user can reveal the focused component without advancing the keyboard focus, the component with focus is not considered visually hidden due to author-created content.",
+  "goal": "Keep the focused item visible.",
+  "what_to_do": "Ensure when an item gets keyboard focus, it is at least partially visible.",
+  "why_important": "People who can't use a mouse need to see what has keyboard focus.",
+  "failures": [
+   "F110: Failure of Success Criterion 2.4.11 Focus Not Obscured (Minimum) due to a sticky footer or header completely hiding focused elements"
+  ]
+ },
+ {
+  "num": "2.4.12",
+  "id": "focus-not-obscured-enhanced",
+  "handle": "Focus Not Obscured (Enhanced)",
+  "level": "AAA",
+  "versions": [
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "When a user interface component receives keyboard focus, no part of the component is hidden by author-created content.",
+  "goal": "Don't cover any part of the item with focus.",
+  "what_to_do": "Ensure when an item gets keyboard focus, it is fully visible.",
+  "why_important": "People who can't use a mouse need to see what has keyboard focus.",
+  "failures": []
+ },
+ {
+  "num": "2.4.13",
+  "id": "focus-appearance",
+  "handle": "Focus Appearance",
+  "level": "AAA",
+  "versions": [
+   "2.2"
+  ],
+  "guideline": "2.4 Navigable",
+  "normative_text": "When the keyboard focus indicator is visible, an area of the focus indicator meets all the following:\n- is at least as large as the area of a 2 CSS pixel thick perimeter of the unfocused component or sub-component, and\n- has a contrast ratio of at least 3:1 between the same pixels in the focused and unfocused states.\nExceptions:\n- The focus indicator is determined by the user agent and cannot be adjusted by the author, or\n- The focus indicator and the indicator's background color are not modified by the author.\nNote 1: What is perceived as the user interface component or sub-component (to determine the perimeter) depends on its visual presentation. The visual presentation includes the component's visible content, border, and component-specific background. It does not include shadow and glow effects outside the component's content, background, or border.\nNote 2: Examples of sub-components that may receive a focus indicator are menu items in an opened drop-down menu, or focusable cells in a grid.\nNote 3: Contrast calculations can be based on colors defined within the technology (such as HTML, CSS, and SVG). Pixels modified by user agent resolution enhancements and anti-aliasing can be ignored.",
+  "goal": "Make it easier to spot the keyboard focus.",
+  "what_to_do": "Use a focus indicator of sufficient size and contrast.",
+  "why_important": "Many people can't see small changes in visual appearance, including older people.",
+  "failures": [
+   "F55: Failure of Success Criteria 2.1.1, 2.4.7, 2.4.13, and 3.2.1 due to using script to remove focus when focus is received",
+   "F78: Failure of Success Criterion 1.4.11, 2.4.7 and 2.4.13 due to styling element outlines and borders in a way that removes or renders non-visible the visual focus indicator"
+  ]
+ },
+ {
+  "num": "2.5.1",
+  "id": "pointer-gestures",
+  "handle": "Pointer Gestures",
+  "level": "A",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.5 Input Modalities",
+  "normative_text": "All functionality that uses multipoint or path-based gestures for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.\nNote: This requirement applies to web content that interprets pointer actions (i.e., this does not apply to actions that are required to operate the user agent or assistive technology).",
+  "goal": "Let users operate touchscreens with one finger and reduced gestures.",
+  "what_to_do": "Provide single-point operation for all functions.",
+  "why_important": "Not everyone can perform complex and multi-touch gestures.",
+  "failures": [
+   "F105: Failure of Success Criterion 2.5.1 due to providing functionality via a path-based gesture without simple pointer alternative"
+  ]
+ },
+ {
+  "num": "2.5.2",
+  "id": "pointer-cancellation",
+  "handle": "Pointer Cancellation",
+  "level": "A",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.5 Input Modalities",
+  "normative_text": "For functionality that can be operated using a single pointer, at least one of the following is true:\n- No Down-Event: The down-event of the pointer is not used to execute any part of the function;\n- Abort or Undo: Completion of the function is on the up-event, and a mechanism is available to abort the function before completion or to undo the function after completion;\n- Up Reversal: The up-event reverses any outcome of the preceding down-event;\n- Essential: Completing the function on the down-event is essential.\nNote 1: Functions that emulate a keyboard or numeric keypad key press are considered essential.\nNote 2: This requirement applies to web content that interprets pointer actions (i.e., this does not apply to actions that are required to operate the user agent or assistive technology).",
+  "goal": "Reduce accidental activation of controls by mouse or touch.",
+  "what_to_do": "Make pointer cancellation predictable and consistent.",
+  "why_important": "Make it easier for anyone to recover from something they didn’t mean to do.",
+  "failures": [
+   "F101: Failure of Success Criterion 2.5.2 due to activating a control on the down-event"
+  ]
+ },
+ {
+  "num": "2.5.3",
+  "id": "label-in-name",
+  "handle": "Label in Name",
+  "level": "A",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.5 Input Modalities",
+  "normative_text": "For user interface components with labels that include text or images of text, the name contains the text that is presented visually.\nNote: A best practice is to have the text of the label at the start of the name.",
+  "goal": "The visual label for controls is a trigger for speech activation.",
+  "what_to_do": "Where practical, make the control’s text label and name match.",
+  "why_important": "People who operate with voice interaction use the visible labels in their commands.",
+  "failures": [
+   "F96: Failure due to the accessible name not containing the visible label text",
+   "F111: Failure of Success Criteria 1.3.1, 2.5.3, and 4.1.2 due to a control with visible label text but no accessible name"
+  ]
+ },
+ {
+  "num": "2.5.4",
+  "id": "motion-actuation",
+  "handle": "Motion Actuation",
+  "level": "A",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.5 Input Modalities",
+  "normative_text": "Functionality that can be operated by device motion or user motion can also be operated by user interface components and responding to the motion can be disabled to prevent accidental actuation, except when:\n- Supported Interface: The motion is used to operate functionality through an accessibility supported interface;\n- Essential: The motion is essential for the function and doing so would invalidate the activity.",
+  "goal": "Content is not dependent on a user's ability to move a device.",
+  "what_to_do": "Don't rely solely on device motion to control page content.",
+  "why_important": "Some people cannot hold or move a device steadily.",
+  "failures": [
+   "F106: Failure due to inability to deactivate motion actuation"
+  ]
+ },
+ {
+  "num": "2.5.5",
+  "id": "target-size-enhanced",
+  "handle": "Target Size (Enhanced)",
+  "level": "AAA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.5 Input Modalities",
+  "normative_text": "The size of the target for pointer inputs is at least 44 by 44 CSS pixels except when:\n- Equivalent: The target is available through an equivalent link or control on the same page that is at least 44 by 44 CSS pixels;\n- Inline: The target is in a sentence or block of text;\n- User Agent Control: The size of the target is determined by the user agent and is not modified by the author;\n- Essential: A particular presentation of the target is essential to the information being conveyed.",
+  "goal": "Controls can be operated more easily, especially on touchscreens.",
+  "what_to_do": "Make custom targets at least 44 by 44 pixels.",
+  "why_important": "Some people cannot tap small objects.",
+  "failures": []
+ },
+ {
+  "num": "2.5.6",
+  "id": "concurrent-input-mechanisms",
+  "handle": "Concurrent Input Mechanisms",
+  "level": "AAA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "2.5 Input Modalities",
+  "normative_text": "Web content does not restrict use of input modalities available on a platform except where the restriction is essential, required to ensure the security of the content, or required to respect user settings.",
+  "goal": "Users can choose different ways of inputting content.",
+  "what_to_do": "Do not prevent users from switching their mode of input.",
+  "why_important": "People may not be able to work using just one input method.",
+  "failures": [
+   "F98: Failure due to interactions being limited to touch-only on touchscreen devices"
+  ]
+ },
+ {
+  "num": "2.5.7",
+  "id": "dragging-movements",
+  "handle": "Dragging Movements",
+  "level": "AA",
+  "versions": [
+   "2.2"
+  ],
+  "guideline": "2.5 Input Modalities",
+  "normative_text": "All functionality that uses a dragging movement for operation can be achieved by a single pointer without dragging, unless dragging is essential or the functionality is determined by the user agent and not modified by the author.\nNote: This requirement applies to web content that interprets pointer actions (i.e., this does not apply to actions that are required to operate the user agent or assistive technology).",
+  "goal": "Don’t rely on dragging for user actions.",
+  "what_to_do": "For any action that involves dragging, provide a simple pointer alternative.",
+  "why_important": "Some people cannot use a mouse to drag items.",
+  "failures": [
+   "F108: Failure of Success Criterion 2.5.7 Dragging Movements due to not providing a single pointer method that does not require a dragging movement"
+  ]
+ },
+ {
+  "num": "2.5.8",
+  "id": "target-size-minimum",
+  "handle": "Target Size (Minimum)",
+  "level": "AA",
+  "versions": [
+   "2.2"
+  ],
+  "guideline": "2.5 Input Modalities",
+  "normative_text": "The size of the target for pointer inputs is at least 24 by 24 CSS pixels, except when:\n- Spacing: Undersized targets (those less than 24 by 24 CSS pixels) are positioned so that if a 24 CSS pixel diameter circle is centered on the bounding box of each, the circles do not intersect another target or the circle for another undersized target;\n- Equivalent: The function can be achieved through a different control on the same page that meets this criterion;\n- Inline: The target is in a sentence or its size is otherwise constrained by the line-height of non-target text;\n- User Agent Control: The size of the target is determined by the user agent and is not modified by the author;\n- Essential: A particular presentation of the target is essential or is legally required for the information being conveyed.\nNote 1: Targets that allow for values to be selected spatially based on position within the target are considered one target for the purpose of the success criterion. Examples include sliders, color pickers displaying a gradient of colors, or editable areas where you position the cursor.\nNote 2: For inline targets the line-height should be interpreted as perpendicular to the flow of text. For example, in a language displayed vertically, the line-height would be horizontal.",
+  "goal": "Make controls easier to activate.",
+  "what_to_do": "Ensure targets meet a minimum size or have sufficient spacing around them.",
+  "why_important": "Some people with physical impairments cannot click small buttons that are close together.",
+  "failures": []
+ },
+ {
+  "num": "3.1.1",
+  "id": "language-of-page",
+  "handle": "Language of Page",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.1 Readable",
+  "normative_text": "The default human language of each web page can be programmatically determined.",
+  "goal": "Assistive technology can determine the language of a page.",
+  "what_to_do": "Indicate the predominant language on a page.",
+  "why_important": "People using assistive technology get information in the correct language.",
+  "failures": []
+ },
+ {
+  "num": "3.1.2",
+  "id": "language-of-parts",
+  "handle": "Language of Parts",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.1 Readable",
+  "normative_text": "The human language of each passage or phrase in the content can be programmatically determined except for proper names, technical terms, words of indeterminate language, and words or phrases that have become part of the vernacular of the immediately surrounding text.",
+  "goal": "Assistive technology can identify the languages used within a page.",
+  "what_to_do": "Indicate when words are in a different language.",
+  "why_important": "People using assistive technology get information in the correct language.",
+  "failures": []
+ },
+ {
+  "num": "3.1.3",
+  "id": "unusual-words",
+  "handle": "Unusual Words",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.1 Readable",
+  "normative_text": "A mechanism is available for identifying specific definitions of words or phrases used in an unusual or restricted way, including idioms and jargon.",
+  "goal": "Users can identify and learn what unusual words mean.",
+  "what_to_do": "Provide definitions for technical jargon and unusual terms.",
+  "why_important": "More people, especially those with cognitive disabilities, can understand the meaning of content.",
+  "failures": []
+ },
+ {
+  "num": "3.1.4",
+  "id": "abbreviations",
+  "handle": "Abbreviations",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.1 Readable",
+  "normative_text": "A mechanism for identifying the expanded form or meaning of abbreviations is available.",
+  "goal": "Users can identify and learn what abbreviations mean.",
+  "what_to_do": "Provide the expanded form of abbreviations to users.",
+  "why_important": "Some people, including those with cognitive disabilities, may not understand the shortened form of words.",
+  "failures": []
+ },
+ {
+  "num": "3.1.5",
+  "id": "reading-level",
+  "handle": "Reading Level",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.1 Readable",
+  "normative_text": "When text requires reading ability more advanced than the lower secondary education level after removal of proper names and titles, supplemental content, or a version that does not require reading ability more advanced than the lower secondary education level, is available.",
+  "goal": "Users can get a simplified version of complex information.",
+  "what_to_do": "When text information becomes complex, create a more easily understood version.",
+  "why_important": "More people, especially those with cognitive disabilities, can understand the meaning of content.",
+  "failures": []
+ },
+ {
+  "num": "3.1.6",
+  "id": "pronunciation",
+  "handle": "Pronunciation",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.1 Readable",
+  "normative_text": "A mechanism is available for identifying specific pronunciation of words where meaning of the words, in context, is ambiguous without knowing the pronunciation.",
+  "goal": "Users can identify the pronunciation of ambiguous words.",
+  "what_to_do": "Indicate how to pronounce a word, where its meaning is otherwise unclear.",
+  "why_important": "Some people, including those with cognitive disabilities, may not understand the meaning of content.",
+  "failures": []
+ },
+ {
+  "num": "3.2.1",
+  "id": "on-focus",
+  "handle": "On Focus",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.2 Predictable",
+  "normative_text": "When any user interface component receives focus, it does not initiate a change of context.",
+  "goal": "Content can be navigated more predictably.",
+  "what_to_do": "Do not change a user's context when items get focus.",
+  "why_important": "Content that behaves predictably is especially important to people with disabilities.",
+  "failures": [
+   "F55: Failure of Success Criteria 2.1.1, 2.4.7, 2.4.13, and 3.2.1 due to using script to remove focus when focus is received"
+  ]
+ },
+ {
+  "num": "3.2.2",
+  "id": "on-input",
+  "handle": "On Input",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.2 Predictable",
+  "normative_text": "Changing the setting of any user interface component does not automatically cause a change of context unless the user has been advised of the behavior before using the component.",
+  "goal": "Content can be operated more predictably.",
+  "what_to_do": "Forewarn users if their context will change based on their input.",
+  "why_important": "Content that behaves predictably is especially important to people with disabilities.",
+  "failures": [
+   "F36: Failure of Success Criterion 3.2.2 due to automatically submitting a form and presenting new content without prior warning when the last field in the form is given a value",
+   "F37: Failure of Success Criterion 3.2.2 due to launching a new window without prior warning when the selection of a radio button, check box or select list is changed"
+  ]
+ },
+ {
+  "num": "3.2.3",
+  "id": "consistent-navigation",
+  "handle": "Consistent Navigation",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.2 Predictable",
+  "normative_text": "Navigational mechanisms that are repeated on multiple web pages within a set of web pages occur in the same relative order each time they are repeated, unless a change is initiated by the user.",
+  "goal": "Content can be navigated more predictably.",
+  "what_to_do": "Consistently order navigation that repeats across multiple pages.",
+  "why_important": "Content that behaves predictably is especially important to people with disabilities.",
+  "failures": [
+   "F66: Failure of Success Criterion 3.2.3 due to presenting navigation links in a different relative order on different pages"
+  ]
+ },
+ {
+  "num": "3.2.4",
+  "id": "consistent-identification",
+  "handle": "Consistent Identification",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.2 Predictable",
+  "normative_text": "Components that have the same functionality within a set of web pages are identified consistently.",
+  "goal": "Users can recognize the same functionality when it appears on different web pages.",
+  "what_to_do": "Consistently identify components that have the same functionality throughout a set of web pages.",
+  "why_important": "Consistent identification helps users recognize familiar functionality when it appears on different web pages, making websites easier to learn, navigate, and use.",
+  "failures": [
+   "F31: Failure of Success Criterion 3.2.4 due to using two different labels for the same function on different web pages within a set of web pages"
+  ]
+ },
+ {
+  "num": "3.2.5",
+  "id": "change-on-request",
+  "handle": "Change on Request",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.2 Predictable",
+  "normative_text": "Changes of context are initiated only by user request or a mechanism is available to turn off such changes.",
+  "goal": "Users have full control of major content changes.",
+  "what_to_do": "Provide ways for users to trigger or turn off changes of context.",
+  "why_important": "Content that behaves predictably is especially important to people with disabilities.",
+  "failures": [
+   "F60: Failure of Success Criterion 3.2.5 due to launching a new window when a user enters text into an input field",
+   "F61: Failure of Success Criterion 3.2.5 due to complete change of main content through an automatic update that the user cannot disable from within the content",
+   "F9: Failure of Success Criterion 3.2.5 due to changing the context when the user removes focus from a form element",
+   "F22: Failure of Success Criterion 3.2.5 due to opening windows that are not requested by the user",
+   "F52: Failure of Success Criterion 3.2.5 due to opening a new window as soon as a new page is loaded",
+   "F40: Failure due to using meta redirect with a time limit",
+   "F41: Failure of Success Criterion 2.2.1, 2.2.4, and 3.2.5 due to using meta refresh to reload the page"
+  ]
+ },
+ {
+  "num": "3.2.6",
+  "id": "consistent-help",
+  "handle": "Consistent Help",
+  "level": "A",
+  "versions": [
+   "2.2"
+  ],
+  "guideline": "3.2 Predictable",
+  "normative_text": "If a web page contains any of the following help mechanisms, and those mechanisms are repeated on multiple web pages within a set of web pages, they occur in the same order relative to other page content, unless a change is initiated by the user:\n- Human contact details;\n- Human contact mechanism;\n- Self-help option;\n- A fully automated contact mechanism.\nNote 1: Help mechanisms may be provided directly on the page, or may be provided via a direct link to a different page containing the information.\nNote 2: For this success criterion, \"the same order relative to other page content\" can be thought of as how the content is ordered when the page is serialized. The visual position of a help mechanism is likely to be consistent across pages for the same page variation (e.g., CSS break-point). The user can initiate a change, such as changing the page's zoom or orientation, which may trigger a different page variation. This criterion is concerned with relative order across pages displayed in the same page variation (e.g., same zoom level and orientation).",
+  "goal": "Make it easier to find help and support.",
+  "what_to_do": "Put help in the same place when it is on multiple pages.",
+  "why_important": "People who need help can find it more easily if it's in the same place.",
+  "failures": []
+ },
+ {
+  "num": "3.3.1",
+  "id": "error-identification",
+  "handle": "Error Identification",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.3 Input Assistance",
+  "normative_text": "If an input error is automatically detected, the item that is in error is identified and the error is described to the user in text.",
+  "goal": "Users know an error exists and what is wrong.",
+  "what_to_do": "Provide descriptive notification of errors.",
+  "why_important": "Flagging errors helps people with reduced sight and cognitive disabilities resolve them.",
+  "failures": []
+ },
+ {
+  "num": "3.3.2",
+  "id": "labels-or-instructions",
+  "handle": "Labels or Instructions",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.3 Input Assistance",
+  "normative_text": "Labels or instructions are provided when content requires user input.",
+  "goal": "Users know what information to enter.",
+  "what_to_do": "Provide labels or instructions for inputs.",
+  "why_important": "Everyone, especially those with cognitive disabilities, will know how to respond.",
+  "failures": [
+   "F82: Failure of Success Criterion 3.3.2 by visually formatting a set of phone number fields but not including a text label"
+  ]
+ },
+ {
+  "num": "3.3.3",
+  "id": "error-suggestion",
+  "handle": "Error Suggestion",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.3 Input Assistance",
+  "normative_text": "If an input error is automatically detected and suggestions for correction are known, then the suggestions are provided to the user, unless it would jeopardize the security or purpose of the content.",
+  "goal": "Users get suggestions on how to resolve errors.",
+  "what_to_do": "Where errors are detected, suggest known ways to correct them.",
+  "why_important": "People can address errors faster and with reduced effort.",
+  "failures": []
+ },
+ {
+  "num": "3.3.4",
+  "id": "error-prevention-legal-financial-data",
+  "handle": "Error Prevention (Legal, Financial, Data)",
+  "level": "AA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.3 Input Assistance",
+  "normative_text": "For web pages that cause legal commitments or financial transactions for the user to occur, that modify or delete user-controllable data in data storage systems, or that submit user test responses, at least one of the following is true:\n- Reversible: Submissions are reversible.\n- Checked: Data entered by the user is checked for input errors and the user is provided an opportunity to correct them.\n- Confirmed: A mechanism is available for reviewing, confirming, and correcting information before finalizing the submission.",
+  "goal": "Users can avoid submitting incorrect important information.",
+  "what_to_do": "Provide ways for users to confirm, correct, or reverse important submissions.",
+  "why_important": "People with disabilities may be more likely to make mistakes, or not notice them.",
+  "failures": []
+ },
+ {
+  "num": "3.3.5",
+  "id": "help",
+  "handle": "Help",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.3 Input Assistance",
+  "normative_text": "Context-sensitive help is available.",
+  "goal": "Users can avoid making mistakes.",
+  "what_to_do": "Provide help to users on the function currently being performed.",
+  "why_important": "People with cognitive or other disabilities can complete their tasks more easily.",
+  "failures": []
+ },
+ {
+  "num": "3.3.6",
+  "id": "error-prevention-all",
+  "handle": "Error Prevention (All)",
+  "level": "AAA",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "3.3 Input Assistance",
+  "normative_text": "For web pages that require the user to submit information, at least one of the following is true:\n- Reversible: Submissions are reversible.\n- Checked: Data entered by the user is checked for input errors and the user is provided an opportunity to correct them.\n- Confirmed: A mechanism is available for reviewing, confirming, and correcting information before finalizing the submission.",
+  "goal": "Users can avoid submitting incorrect information.",
+  "what_to_do": "Provide ways for users to confirm, correct, or reverse any submissions.",
+  "why_important": "People with disabilities may be more likely to make mistakes, or not notice them.",
+  "failures": []
+ },
+ {
+  "num": "3.3.7",
+  "id": "redundant-entry",
+  "handle": "Redundant Entry",
+  "level": "A",
+  "versions": [
+   "2.2"
+  ],
+  "guideline": "3.3 Input Assistance",
+  "normative_text": "Information previously entered by or provided to the user that is required to be entered again in the same process is either:\n- auto-populated, or\n- available for the user to select.\nExcept when:\n- re-entering the information is essential,\n- the information is required to ensure the security of the content, or\n- previously entered information is no longer valid.",
+  "goal": "Make it easier for users to complete multi-step processes.",
+  "what_to_do": "Don't ask for the same information twice in the same activity.",
+  "why_important": "Some people with cognitive disabilities have difficulty remembering what they entered before.",
+  "failures": []
+ },
+ {
+  "num": "3.3.8",
+  "id": "accessible-authentication-minimum",
+  "handle": "Accessible Authentication (Minimum)",
+  "level": "AA",
+  "versions": [
+   "2.2"
+  ],
+  "guideline": "3.3 Input Assistance",
+  "normative_text": "A cognitive function test (such as remembering a password or solving a puzzle) is not required for any step in an authentication process unless that step provides at least one of the following:\n- Alternative: Another authentication method that does not rely on a cognitive function test.\n- Mechanism: A mechanism is available to assist the user in completing the cognitive function test.\n- Object Recognition: The cognitive function test is to recognize objects.\n- Personal Content: The cognitive function test is to identify non-text content the user provided to the website.\nNote 1: \"Object recognition\" and \"Personal content\" may be represented by images, video, or audio.\nNote 2: Examples of mechanisms that satisfy this criterion include: support for password entry by password managers to reduce memory need, and copy and paste to reduce the cognitive burden of re-typing.",
+  "goal": "Make logins possible with less mental effort.",
+  "what_to_do": "Don't make people solve, recall, or transcribe something to log in.",
+  "why_important": "Some people with cognitive disabilities cannot solve puzzles, memorize a username and password, or retype one-time passcodes.",
+  "failures": [
+   "F109: Failure of Success Criterion 3.3.8 and 3.3.9 due to preventing password or code re-entry in the same format"
+  ]
+ },
+ {
+  "num": "3.3.9",
+  "id": "accessible-authentication-enhanced",
+  "handle": "Accessible Authentication (Enhanced)",
+  "level": "AAA",
+  "versions": [
+   "2.2"
+  ],
+  "guideline": "3.3 Input Assistance",
+  "normative_text": "A cognitive function test (such as remembering a password or solving a puzzle) is not required for any step in an authentication process unless that step provides at least one of the following:\n- Alternative: Another authentication method that does not rely on a cognitive function test.\n- Mechanism: A mechanism is available to assist the user in completing the cognitive function test.",
+  "goal": "Make logins possible with less mental effort.",
+  "what_to_do": "Don't make people recognize objects or user-supplied images and media to login.",
+  "why_important": "Some people with cognitive disabilities can't do puzzles, including identifying objects and non-text information they previously supplied.",
+  "failures": [
+   "F109: Failure of Success Criterion 3.3.8 and 3.3.9 due to preventing password or code re-entry in the same format"
+  ]
+ },
+ {
+  "num": "4.1.1",
+  "id": "parsing",
+  "handle": "Parsing",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1"
+  ],
+  "guideline": "4.1 Compatible",
+  "normative_text": "In content implemented using markup languages, elements have complete start and end tags, elements are nested according to their specifications, elements do not contain duplicate attributes, and any IDs are unique, except where the specifications allow these features.\nNote 1: This success criterion should be considered as always satisfied for any content using HTML or XML.\nNote 2: Since this criterion was written, the HTML Living Standard has adopted specific requirements governing how user agents must handle incomplete tags, incorrect element nesting, duplicate attributes, and non-unique IDs. [HTML] Although the HTML standard treats some of these cases as non-conforming for authors, it is considered to \"allow these features\" for the purposes of this success criterion because the specification requires that user agents support handling these cases consistently. In practice, this criterion no longer provides any benefit to people with disabilities in itself. Issues such as missing roles due to inappropriately nested elements or incorrect states or names due to a duplicate ID are covered by different success criteria and should be reported under those criteria rather than as issues with 4.1.1.",
+  "goal": "Assistive technology can properly present page content.",
+  "what_to_do": "Create web pages according to specifications.",
+  "why_important": "People can browse web content more easily with their assistive technology.",
+  "failures": []
+ },
+ {
+  "num": "4.1.2",
+  "id": "name-role-value",
+  "handle": "Name, Role, Value",
+  "level": "A",
+  "versions": [
+   "2.0",
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "4.1 Compatible",
+  "normative_text": "For all user interface components (including but not limited to: form elements, links and components generated by scripts), the name and role can be programmatically determined; states, properties, and values that can be set by the user can be programmatically set; and notification of changes to these items is available to user agents, including assistive technologies.\nNote: This success criterion is primarily for web authors who develop or script their own user interface components. For example, standard HTML controls already meet this success criterion when used according to specification.",
+  "goal": "People using assistive technology understand all components.",
+  "what_to_do": "Give components correct names, roles, states, and values.",
+  "why_important": "Assistive technology only works well when code is done properly.",
+  "failures": [
+   "F59: Failure of Success Criterion 4.1.2 due to using script to make div or span a user interface control in HTML without providing a role for the control",
+   "F15: Failure of Success Criterion 4.1.2 due to implementing custom controls that do not use an accessibility API for the technology, or do so incompletely",
+   "F20: Failure of Success Criterion 1.1.1 and 4.1.2 due to not updating text alternatives when changes to non-text content occur",
+   "F42: Failure of Success Criteria 1.3.1, 2.1.1, 2.1.3, or 4.1.2 when emulating links",
+   "F68: Failure of Success Criterion 4.1.2 due to a user interface control not having a programmatically determined name",
+   "F79: Failure of Success Criterion 4.1.2 due to the focus state of a user interface component not being programmatically determinable or no notification of change of focus state available",
+   "F86: Failure of Success Criterion 4.1.2 due to not providing names for each part of a multi-part form field, such as a US telephone number",
+   "F89: Failure of Success Criteria 2.4.4, 2.4.9 and 4.1.2 due to not providing an accessible name for an image which is the only content in a link",
+   "F111: Failure of Success Criteria 1.3.1, 2.5.3, and 4.1.2 due to a control with visible label text but no accessible name"
+  ]
+ },
+ {
+  "num": "4.1.3",
+  "id": "status-messages",
+  "handle": "Status Messages",
+  "level": "AA",
+  "versions": [
+   "2.1",
+   "2.2"
+  ],
+  "guideline": "4.1 Compatible",
+  "normative_text": "In content implemented using markup languages, status messages can be programmatically determined through role or properties such that they can be presented to the user by assistive technologies without receiving focus.",
+  "goal": "Make users aware of important changes in content.",
+  "what_to_do": "Let assistive technology notify users about status changes that don't take focus.",
+  "why_important": "People who do not see messages need to be informed about them.",
+  "failures": [
+   "F103: Failure of Success Criterion 4.1.3 due to providing status messages that cannot be programmatically determined through role or properties"
+  ]
+ }
+]

@@ -11,12 +11,19 @@ dependencies = [
     "httpx>=0.28.1",
     "playwright>=1.56.0",
     "pydantic>=2.13.5",
+    "python-dotenv>=1.2.3",
     "rich>=15.0.0",
+    "snowballstemmer>=3.1.1",
     "typer>=0.27.2",
 ]
 
 [project.scripts]
 parity = "parity:main"
+
+[project.optional-dependencies]
+dense = [
+    "fastembed>=0.8.1",
+]
 
 [build-system]
 requires = ["uv_build>=0.8.17,<0.9.0"]
@@ -24,6 +31,7 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
+    "beautifulsoup4>=4.15.0",
     "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
 ]

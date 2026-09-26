@@ -81,3 +81,11 @@ async def test_bot_challenge_page_is_reported_as_blocked_not_audited(base_url, b
     # reporting 1 issue for the wrong page. Now we refuse to report on it.
     with pytest.raises(ScanBlockedError, match="Cloudflare"):
         await scan_url(f"{base_url}/special/bot_challenge.html", viewports=["desktop"], allow_private=True, browser=browser)
+
+
+async def test_findings_carry_wcag_citations(base_url, browser):
+    report = await scan_url(f"{base_url}/broken/images.html", viewports=["desktop"], allow_private=True, browser=browser)
+    image_alt = next(f for f in report.findings if f.rule_id == "image-alt")
+    assert [c.sc for c in image_alt.citations] == ["1.1.1"]
+    assert image_alt.citations[0].handle == "Non-text Content"
+    assert image_alt.citations[0].understanding_url.endswith("/non-text-content.html")

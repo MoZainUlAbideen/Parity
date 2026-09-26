@@ -57,6 +57,22 @@ class NodeRef(BaseModel):
     failure_summary: str = ""
 
 
+class Citation(BaseModel):
+    """The exact WCAG rule a finding breaks, in W3C's own words."""
+
+    sc: str  # "1.4.3"
+    handle: str  # "Contrast (Minimum)"
+    level: str  # "AA"
+    guideline: str
+    rule_text: str  # normative text of the success criterion
+    goal: str = ""  # W3C "In brief" plain-language summary
+    what_to_do: str = ""
+    why_important: str = ""
+    understanding_url: str
+    normative_url: str
+    obsolete: bool = False  # true for 4.1.1 Parsing, removed in WCAG 2.2
+
+
 class Finding(BaseModel):
     rule_id: str
     description: str
@@ -69,6 +85,7 @@ class Finding(BaseModel):
     confidence: Confidence = Confidence.auto_verified
     viewports: list[str] = Field(default_factory=list)
     nodes: list[NodeRef] = Field(default_factory=list)
+    citations: list[Citation] = Field(default_factory=list)  # empty = best practice, not a WCAG rule
 
 
 class PageSnapshot(BaseModel):

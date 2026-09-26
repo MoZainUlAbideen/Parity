@@ -16,6 +16,7 @@ from pathlib import Path
 from playwright.async_api import Browser, TimeoutError as PWTimeout, async_playwright
 
 from parity.bot_detection import Challenge, detect_bot_challenge
+from parity.kb.cite import cite_findings
 from parity.models import (
     Confidence,
     Finding,
@@ -149,7 +150,7 @@ async def scan_url(
             snap, findings = await _scan_viewport(b, url, vp, out_dir)
             snapshots.append(snap)
             per_vp.append(findings)
-        findings = merge_findings(per_vp)
+        findings = cite_findings(merge_findings(per_vp))
         return ScanReport(
             url=url,
             engine=axe_version(),
