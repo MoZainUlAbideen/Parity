@@ -123,3 +123,21 @@ def test_ask_without_key_is_a_clear_503(tmp_path):
 def test_health(tmp_path):
     with TestClient(create_app(make_settings(tmp_path))) as client:
         assert client.get("/api/health").json()["ok"] is True
+
+
+def test_allowed_origins_forgive_trailing_slashes_and_spaces():
+    from parity.api.app import parse_origins
+    assert parse_origins(" https://parity.vercel.app/ ,https://b.com") == ["https://parity.vercel.app", "https://b.com"]
+    assert parse_origins("") == ["*"]
+
+
+def test_browser_preflight_from_the_website_is_allowed(monkeypatch):
+    monkeypatch.setenv("ALLOWED_ORIGINS", "https://parity.vercel.app/")
+    from fastapi.testclient import TestClient
+    from parity.api.app import Settings, create_app
+    client = TestClient(create_app(Settings()))
+    r = client.options("/api/ask", headers={"Origin": "https://parity.vercel.app",
+                                            "Access-Control-Request-Method": "POST",
+                                            "Access-Control-Request-Headers": "content-type"})
+    assert r.status_code == 200
+    assert r.headers["access-control-allow-origin"] == "https://parity.vercel.app"

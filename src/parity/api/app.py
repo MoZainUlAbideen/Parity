@@ -41,9 +41,23 @@ def _env_int(name: str, default: int) -> int:
         return default
 
 
+def parse_origins(raw: str) -> list[str]:
+    """ "https://site.vercel.app/ , https://b.com" -> ["https://site.vercel.app", "https://b.com"].
+
+    Browsers send Origin without a trailing slash or path, and CORS compares exactly, so
+    the natural copy-paste "https://site.vercel.app/" silently blocked every request.
+    """
+    out = []
+    for o in raw.replace(";", ",").split(","):
+        o = o.strip().strip('"').strip("'").rstrip("/")
+        if o:
+            out.append(o)
+    return out or ["*"]
+
+
 class Settings:
     def __init__(self):
-        self.allowed_origins = [o.strip() for o in os.environ.get("ALLOWED_ORIGINS", "*").split(",") if o.strip()]
+        self.allowed_origins = parse_origins(os.environ.get("ALLOWED_ORIGINS", "*"))
         self.scans_per_hour = _env_int("PARITY_SCANS_PER_HOUR", 3)
         self.asks_per_hour = _env_int("PARITY_ASKS_PER_HOUR", 20)
         self.max_queue = _env_int("PARITY_MAX_QUEUE", 5)
