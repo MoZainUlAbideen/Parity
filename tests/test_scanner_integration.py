@@ -101,7 +101,7 @@ async def test_agents_settle_contrast_over_images(base_url, browser):
     assert over[0].citations[0].sc == "1.4.3"
     assert {r.target for r in report.resolved} == {"#light-on-dark"}  # measured as passing
     assert not [f for f in report.findings if f.confidence == Confidence.needs_review]
-    assert report.agents == ["contrast-meter", "parity-rules"]
+    assert report.agents == ["contrast-meter", "interaction-agent", "parity-rules"]
 
 
 async def test_agents_raise_no_alarms_on_fixed_pages(base_url, browser):
@@ -125,3 +125,20 @@ async def test_one_unmeasurable_element_never_breaks_the_scan(base_url, browser,
     assert {n.target for n in review} == {"#dark-on-dark", "#light-on-dark"}  # kept for a human
     assert all("Could not measure" in n.evidence for n in review)
     assert any("could not be measured" in note for note in report.notes)
+
+
+async def test_findings_know_where_they_are_on_the_screenshot(base_url, browser):
+    report = await scan_url(f"{base_url}/broken/images.html", allow_private=True, browser=browser)
+    hero = next(n for f in report.findings for n in f.nodes if n.target == "#hero")
+    assert hero.box and hero.box["width"] > 100 and hero.box["y"] > 0
+
+
+async def test_hidden_carousel_slides_get_no_pin(base_url, browser):
+    # Regression (Mars demo, 2026-09-27): clipped carousel clones got pins at negative y.
+    from parity.scanner import _BOXES_JS
+    page = await browser.new_page()
+    await page.goto(f"{base_url}/special/clipped_carousel.html")
+    sel = [f".track li:nth-of-type({i}) img" for i in (1, 2, 3)]
+    boxes = await page.evaluate(_BOXES_JS, sel)
+    assert boxes[0] is None and boxes[1] is None
+    assert boxes[2] and boxes[2]["y"] > 0 and boxes[2]["height"] > 100

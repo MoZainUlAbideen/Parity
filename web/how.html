@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Parity works, and how accurate it is</title>
+<meta name="description" content="How Parity audits accessibility: rules, pixel measurement, a keyboard walk and a vision model, with honest benchmarks and known limits.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,650&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script src="config.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span></span>Parity</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li class="nav-home"><a href="index.html">Home</a></li>
+        <li><a href="report.html?example=mars">See a report</a></li>
+        <li><a href="how.html" aria-current="page">How it works</a></li>
+        <li class="nav-hide-sm"><a data-github href="#">GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="t">
+    <div class="wrap" style="max-width:900px">
+      <p class="eyebrow">How it works</p>
+      <h1 id="t">Rules first. Measurements second. AI only where judgment is needed.</h1>
+      <p class="lede">A language model asked "is this page accessible?" will confidently guess. Parity uses AI only for the questions rules and measurements can't answer, checks what the AI says, and tells you how sure it is.</p>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="pipeline">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">The pipeline</p><h2 id="pipeline">What happens when you scan a page</h2></div>
+      <div class="steps">
+        <div class="step"><h3>1. Real browser</h3><p>Headless Chromium loads the page on desktop (1366px) and mobile (390px), with screenshots of each. Bot-protection pages are detected and reported, never audited by mistake.</p></div>
+        <div class="step"><h3>2. Rule engine</h3><p>axe-core, the industry-standard open-source engine, checks the rendered page. Every finding is tied to its WCAG 2.2 success criterion and quoted from W3C's own text.</p></div>
+        <div class="step"><h3>3. Agents</h3><p>A <strong>contrast meter</strong> measures text over images from pixels. A <strong>keyboard agent</strong> presses Tab through the page. <strong>Alt-text rules</strong> catch file names and placeholders.</p></div>
+        <div class="step"><h3>4. Vision model</h3><p>Gemini looks at each image in context, judges its description and writes a better one. Code then cross-checks its answer before anything reaches the report.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="checks">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Checking the AI</p><h2 id="checks">Why you can trust the AI parts</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Consistency checks</h3><p>If the model says a description is "inadequate" but its own suggested fix adds nothing new, the verdict is dropped. On real Gemini answers this removed every false alarm without losing a single real problem.</p></div>
+        <div class="card"><h3>Recorded-answer tests</h3><p>Real model answers are saved and replayed in the test suite, so a code change can't quietly bring old mistakes back, and tests run without calling the API.</p></div>
+        <div class="card"><h3>Verified quotes</h3><p>The assistant answers only from W3C's text. Every quote it gives is checked word for word against the passage; unverifiable answers are replaced with "I couldn't verify that".</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="accuracy">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Accuracy</p><h2 id="accuracy">The numbers, and what they do and don't mean</h2>
+        <p>24 labelled problems across 15 test pages, including pages that are deliberately correct, so false alarms are measured, not assumed.</p></div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Benchmark results (scrollable)">
+        <table>
+          <caption>Benchmark results</caption>
+          <thead><tr><th scope="col">Configuration</th><th scope="col" class="num">Precision</th><th scope="col" class="num">Problems found</th><th scope="col" class="num">Judgment-call problems found</th><th scope="col" class="num">False alarms</th></tr></thead>
+          <tbody>
+            <tr><td>Rule engine alone (axe-core)</td><td class="num">100%</td><td class="num">54%</td><td class="num">0%</td><td class="num">0</td></tr>
+            <tr><td>+ contrast meter, alt-text rules, keyboard agent (no AI)</td><td class="num">100%</td><td class="num">92%</td><td class="num">82%</td><td class="num">0</td></tr>
+            <tr><td>+ vision model, before consistency checks</td><td class="num">80%</td><td class="num">83%*</td><td class="num">64%*</td><td class="num">4</td></tr>
+            <tr class="highlight"><td>Everything, with consistency checks</td><td class="num">100%</td><td class="num">100%</td><td class="num">100%</td><td class="num">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:10px;font-size:.92rem">*Measured before the keyboard agent existed. Vision rows use gemini-3.1-flash-lite answers recorded on 26 Sep 2026 and replayed through today's code.</p>
+      <div class="callout" style="margin-top:22px">
+        <p><strong>Read this before quoting 100%.</strong> The benchmark was built alongside Parity, so a perfect score means it does what it was designed to do, not that it's perfect on the open web. The real-world test is real sites: on Mars Commuter, rule checkers left 86 contrast cases undecided; Parity's meter settled 66 as passing and confirmed 11 real failures, with the measured ratio for each.</p>
+      </div>
+
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Retrieval results (scrollable)" style="margin-top:34px">
+        <table>
+          <caption>Finding the right WCAG rule for a question (54 questions, written in everyday words)</caption>
+          <thead><tr><th scope="col">Search method</th><th scope="col" class="num">Right rule first</th><th scope="col" class="num">In top 5</th><th scope="col" class="num">Everyday phrasing, first</th></tr></thead>
+          <tbody>
+            <tr><td>Keyword (BM25)</td><td class="num">71%</td><td class="num">86%</td><td class="num">59%</td></tr>
+            <tr><td>Semantic (bge-small embeddings)</td><td class="num">71%</td><td class="num">92%</td><td class="num">56%</td></tr>
+            <tr><td>Hybrid v1 (fused paragraph rankings)</td><td class="num">65%</td><td class="num">86%</td><td class="num">56%</td></tr>
+            <tr class="highlight"><td>Hybrid v2 (fused rule rankings)</td><td class="num">73%</td><td class="num">92%</td><td class="num">62%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="bugs">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Built by finding real problems</p><h2 id="bugs">Bugs the tests and real sites caught</h2>
+        <p>Each one was reproduced, fixed, and locked in with a test, so it can't come back.</p></div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Bugs found and fixed (scrollable)">
+        <table>
+          <thead><tr><th scope="col">What happened</th><th scope="col">Found by</th><th scope="col">Fix</th></tr></thead>
+          <tbody>
+            <tr><td>w3.org's security policy blocked the rule engine from running</td><td>Live scan of w3.org</td><td>Audit browser bypasses page security policy (the site is never modified)</td></tr>
+            <tr><td>Cloudflare's "checking your browser" page was audited as if it were the site</td><td>Live scan of w3.org</td><td>Bot-protection pages are detected and reported as blocked</td></tr>
+            <tr><td>Hybrid search was worse than both of its parts</td><td>Retrieval eval</td><td>Fuse rankings of rules, not paragraphs</td></tr>
+            <tr><td>Answers quoted W3C's examples instead of the rule itself</td><td>Live use</td><td>The rule's text is always offered to the model</td></tr>
+            <tr><td>Contrast meter crashed on zoomed-out mobile pages</td><td>Live scan of Mars Commuter</td><td>Measure from element screenshots with proportional crops</td></tr>
+            <tr><td>A wrapping link read neighbouring words as "background": false 1.28:1 fail</td><td>Mars Commuter report</td><td>Hide all text while photographing the background</td></tr>
+            <tr><td>The same element could be "passing" on desktop and "failing" on mobile</td><td>Mars Commuter report</td><td>A failure on any screen size wins</td></tr>
+            <tr><td>Vision model flagged correct descriptions (precision 80%)</td><td>Agent eval</td><td>Consistency checks + W3C guidance in the prompt</td></tr>
+            <tr><td>Carousel slides hidden off-screen were photographed where they sat, so the vision model described the badge covering them ("a circle with the number 1") instead of the photo</td><td>Mars Commuter report</td><td>The model now gets the image's own pixels; repeated slides are judged once, with one answer</td></tr>
+            <tr><td>Only the address you type was checked for safety; a page could still embed internal addresses (iframes, images) and our screenshot would show them</td><td>Code review during the fix above</td><td>Every request the audit browser makes is checked, and so is where redirects land</td></tr>
+            <tr><td>This website's own report page: 15 "What W3C says" links that sound identical to a screen reader, and tables a keyboard couldn't scroll</td><td>Parity scanning its own site</td><td>Links name their rule; scrollable areas are focusable. Now a test: the site must pass its own audit</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="limits">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Known limits</p><h2 id="limits">What Parity can't do (yet)</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Not a conformance certificate</h3><p>Automated checks, even with AI, can't prove a site meets WCAG. Use Parity to find and fix problems fast, then test with disabled people.</p></div>
+        <div class="card"><h3>One page at a time</h3><p>The demo scans a single public page. Pages behind a login, multi-page crawls and PDFs are on the roadmap.</p></div>
+        <div class="card"><h3>Free-tier limits</h3><p>The vision model checks up to 8 images per page on the live demo, and scans run one at a time. Bot-protected sites can't be scanned unless the owner allows Parity.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="stack">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Under the hood</p><h2 id="stack">Tech stack</h2></div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Tech stack (scrollable)">
+        <table>
+          <tbody>
+            <tr><th scope="row">Browser automation</th><td>Playwright + Chromium, axe-core 4.13</td></tr>
+            <tr><th scope="row">Vision</th><td>Gemini (gemini-3.1-flash-lite) with retries, model fallbacks, disk cache and consistency checks</td></tr>
+            <tr><th scope="row">Knowledge base</th><td>All 87 WCAG 2.2 success criteria and Understanding documents from W3C's GitHub, 1,092 passages</td></tr>
+            <tr><th scope="row">Retrieval</th><td>BM25 + bge-small embeddings, fused with reciprocal rank fusion over rules</td></tr>
+            <tr><th scope="row">Answers</th><td>Groq (gpt-oss-120b), quotes verified word for word</td></tr>
+            <tr><th scope="row">Backend</th><td>Python, FastAPI, job queue, rate limits, SSRF protection; Docker on Render</td></tr>
+            <tr><th scope="row">Frontend</th><td>Accessible static site on Vercel (it passes its own audit)</td></tr>
+            <tr><th scope="row">Quality</th><td>190+ tests, eval gates in CI, recorded-answer replay tests</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:22px"><a class="btn btn-dark" data-github href="#">Read the code on GitHub</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap"><p>Parity is an open-source portfolio project by Zain Ul Abideen. WCAG text © W3C. Not affiliated with W3C or Deque.</p></div>
+</footer>
+<script type="module">
+  import { mountChat, setGithubLinks } from "./assets/site.js";
+  setGithubLinks();
+  mountChat();
+</script>
+</body>
+</html>

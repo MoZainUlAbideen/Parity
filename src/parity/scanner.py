@@ -19,6 +19,7 @@ from playwright.async_api import Browser, TimeoutError as PWTimeout, async_playw
 from parity.bot_detection import Challenge, detect_bot_challenge
 from parity.agents.contrast import measure_text_over_image
 from parity.agents.images import audit_images
+from parity.agents.interaction import audit_interaction
 from parity.gemini import GeminiVision
 from parity.kb.cite import cite_findings
 from parity.models import (
@@ -34,7 +35,7 @@ from parity.models import (
     VIEWPORTS,
 )
 from parity.rules.axe_runner import axe_version, merge_findings, normalize_axe_results, run_axe
-from parity.url_safety import validate_target_url
+from parity.url_safety import install_request_guard, validate_target_url
 
 NAV_TIMEOUT_MS = 30_000
 SETTLE_TIMEOUT_MS = 5_000
@@ -86,17 +87,20 @@ class AgentOptions:
 
     contrast: bool = True
     images: bool = True
+    interaction: bool = True
     vision: GeminiVision | None = None
     max_images: int = 15
 
     @classmethod
     def rules_only(cls) -> "AgentOptions":
-        return cls(contrast=False, images=False)
+        return cls(contrast=False, images=False, interaction=False)
 
     def names(self) -> list[str]:
         out = []
         if self.contrast:
             out.append(Source.contrast_meter.value)
+        if self.interaction:
+            out.append(Source.interaction_agent.value)
         if self.images:
             out.append(Source.parity_rules.value)
         if self.images and self.vision:
@@ -167,9 +171,46 @@ async def _run_contrast_meter(page, findings: list[Finding], viewport: str) -> t
     return [f for f in findings if f.nodes] + new, resolved, notes
 
 
+_BOXES_JS = """
+(selectors) => selectors.map((sel) => {
+  let el = null;
+  try { el = document.querySelector(sel); } catch (e) { return null; }
+  if (!el) return null;
+  const r = el.getBoundingClientRect();
+  if (r.width === 0 && r.height === 0) return null;
+  // Only where it can actually be seen: clip by every scrolling/clipping ancestor and the page.
+  // (Carousel clones clipped by overflow:hidden sat at negative y on the Mars demo.)
+  let x1 = r.left, y1 = r.top, x2 = r.right, y2 = r.bottom;
+  for (let a = el.parentElement; a && a !== document.documentElement; a = a.parentElement) {
+    const cs = getComputedStyle(a);
+    if (cs.overflowX !== 'visible' || cs.overflowY !== 'visible') {
+      const c = a.getBoundingClientRect();
+      x1 = Math.max(x1, c.left); y1 = Math.max(y1, c.top); x2 = Math.min(x2, c.right); y2 = Math.min(y2, c.bottom);
+    }
+  }
+  const sx = window.scrollX, sy = window.scrollY;
+  const docW = document.documentElement.scrollWidth, docH = document.documentElement.scrollHeight;
+  x1 = Math.max(x1 + sx, 0); y1 = Math.max(y1 + sy, 0); x2 = Math.min(x2 + sx, docW); y2 = Math.min(y2 + sy, docH);
+  if (x2 - x1 < 2 || y2 - y1 < 2) return null;  // hidden from view: no pin rather than a wrong one
+  return {x: x1, y: y1, width: x2 - x1, height: y2 - y1};
+})
+"""
+
+
+async def _attach_boxes(page, findings: list[Finding]) -> None:
+    """Record each node's position in full-page coordinates (for pins on the screenshot)."""
+    nodes = [n for f in findings for n in f.nodes if ">>>" not in n.target and "|" not in n.target]
+    if not nodes:
+        return
+    boxes = await page.evaluate(_BOXES_JS, [n.target for n in nodes])
+    for node, box in zip(nodes, boxes):
+        if box:
+            node.box = {k: round(v, 1) for k, v in box.items()}
+
+
 async def _scan_viewport(
     browser: Browser, url: str, viewport: Viewport, out_dir: Path | None,
-    agents: AgentOptions, run_image_agent: bool,
+    agents: AgentOptions, run_image_agent: bool, allow_private: bool = False,
 ) -> ViewportResult:
     context = await browser.new_context(
         viewport={"width": viewport.width, "height": viewport.height},
@@ -180,9 +221,15 @@ async def _scan_viewport(
         # audit browser ignores CSP. This never touches the real website.
         bypass_csp=True,
     )
+    if not allow_private:
+        # The first URL was checked, but the page can still pull in internal addresses
+        # (iframes, images, redirects). Every request the browser makes is checked too.
+        await install_request_guard(context)
     try:
         page = await context.new_page()
         await page.goto(url, wait_until="load", timeout=NAV_TIMEOUT_MS)
+        if not allow_private:
+            validate_target_url(page.url)  # where redirects actually landed
         try:
             # Let late JavaScript finish; many sites never go fully idle, so cap it.
             await page.wait_for_load_state("networkidle", timeout=SETTLE_TIMEOUT_MS)
@@ -219,9 +266,18 @@ async def _scan_viewport(
                 result.notes += notes
             except Exception as exc:
                 result.notes.append(f"Contrast meter failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
+        if agents.interaction and run_image_agent:  # keyboard behaviour: once, on the first viewport
+            try:
+                ia = await audit_interaction(page)
+                for f in ia.findings:
+                    f.viewports = [viewport.name]
+                result.findings += ia.findings
+                result.notes += ia.notes
+            except Exception as exc:
+                result.notes.append(f"Interaction agent failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
         if agents.images and run_image_agent:
             try:
-                audit = await audit_images(page, agents.vision, agents.max_images)
+                audit = await audit_images(page, agents.vision, agents.max_images, allow_private=allow_private)
                 for f in audit.findings:
                     f.viewports = [viewport.name]
                 result.findings += audit.findings
@@ -229,6 +285,11 @@ async def _scan_viewport(
                 result.notes += audit.errors
             except Exception as exc:
                 result.notes.append(f"Image agent failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
+        if run_image_agent:  # first viewport: locate every problem on its full-page screenshot
+            try:
+                await _attach_boxes(page, result.findings)
+            except Exception as exc:
+                result.notes.append(f"Could not locate elements for the annotated screenshot: {str(exc).splitlines()[0][:120]}")
         return result
     finally:
         await context.close()
@@ -272,13 +333,17 @@ async def scan_url(
         snapshots, per_vp, resolved, suggestions, notes = [], [], [], {}, []
         for i, vp in enumerate(vps):
             # Images look the same at every size, so the (paid) image agent runs once.
-            r = await _scan_viewport(b, url, vp, out_dir, agents, run_image_agent=(i == 0))
+            r = await _scan_viewport(b, url, vp, out_dir, agents, run_image_agent=(i == 0), allow_private=allow_private)
             snapshots.append(r.snapshot)
             per_vp.append(r.findings)
             resolved += [x for x in r.resolved if (x.rule_id, x.target) not in {(y.rule_id, y.target) for y in resolved}]
             suggestions.update(r.suggestions)
             notes += r.notes
         findings = cite_findings(merge_findings(per_vp))
+        # A failure on ANY screen size wins: an element can't be "settled as passing" on
+        # desktop while failing on mobile. Regression (2026-09-27, Deque Mars footer).
+        failing = {n.target for f in findings if f.rule_id == "contrast-over-image" for n in f.nodes}
+        resolved = [x for x in resolved if x.target not in failing]
         # A resolved item must not linger as "needs review" from another viewport.
         done = {(x.rule_id, x.target) for x in resolved}
         for f in findings:

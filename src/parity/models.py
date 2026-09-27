@@ -59,6 +59,7 @@ class NodeRef(BaseModel):
     failure_summary: str = ""
     evidence: str = ""  # how an agent or measurement reached its verdict
     suggestion: str = ""  # a concrete fix, e.g. proposed alt text
+    box: dict[str, float] | None = None  # where it is on the desktop screenshot: x, y, width, height (CSS px)
 
 
 class Citation(BaseModel):

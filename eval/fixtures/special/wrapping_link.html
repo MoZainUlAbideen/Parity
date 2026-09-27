@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Wrapping link over an image</title>
+<style>.sep::after{content:" ████ ";color:#fff}</style></head>
+<!-- Regression page (Deque Mars footer on mobile, 2026-09-27): a long white link wraps
+     across two lines, so its box covers dense neighbouring white text. The meter used to
+     hide only the link's own text, and read the neighbours as background (~1:1). The
+     "████" blocks make the neighbours dense enough to show the effect at any zoom. -->
+<body style="margin:0;font-family:Arial,sans-serif">
+<main><h1 style="margin:16px">Footer</h1>
+<div id="copyright" style="background-image:url(../assets/dark-photo.png);padding:20px;width:230px;color:#fff;font-size:16px;font-weight:bold;text-align:center">
+  ████████ ████████<span class="sep"></span><a id="terms" href="#" style="color:#fff">Mars Commuter Express Terms and Conditions</a><span class="sep"></span>████████ ████
+</div></main>
+</body></html>

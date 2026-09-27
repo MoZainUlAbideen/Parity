@@ -1,8 +1,9 @@
 """Eval gate for the agents (no AI model needed, so it runs in CI).
 
-Recorded 2026-09-26 on the 24-issue benchmark:
-  rules only:              precision 100%, recall 54%, AI-only recall 0%,  5 left for review
-  rules + agents (no AI):  precision 100%, recall 75%, AI-only recall 45%, 0 left for review
+Recorded on the 24-issue benchmark:
+  rules only:                     precision 100%, recall 54%, AI-only recall 0%,  5 left for review
+  + contrast/alt-text (09-26):    precision 100%, recall 75%, AI-only recall 45%, 0 left for review
+  + interaction agent (09-27):    precision 100%, recall 92%, AI-only recall 82%, 0 left for review
 A change that makes the agents noisier or weaker fails here.
 """
 
@@ -33,7 +34,7 @@ def test_agents_never_raise_false_alarms(results):
 def test_agents_find_judgment_issues_rules_cannot(results):
     rules, agents = results
     assert rules.recall_ai_only == 0.0
-    assert agents.recall_ai_only >= 0.45
+    assert agents.recall_ai_only >= 0.8
     assert agents.recall_all > rules.recall_all
 
 

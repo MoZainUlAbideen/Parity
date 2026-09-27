@@ -5,7 +5,7 @@ gradient, so it marks those cases "needs review". Real sites have many (the
 Deque Mars demo had 86). A vision model could guess, but here a measurement
 is cheaper, deterministic and explainable:
 
-  1. render the element with its text made transparent (background only)
+  1. render the page with all text made transparent (background only)
   2. screenshot the element and crop to exactly the area the text covers
   3. compare the text's real color against every background pixel
   4. judge on the worst 5% of the background (the hardest-to-read part),
@@ -24,10 +24,15 @@ from dataclasses import dataclass
 from PIL import Image
 
 HIDE_STYLE_ID = "parity-hide-text-style"
+# While photographing the background, ALL text on the page is hidden, including text
+# drawn by ::before/::after. Regression (2026-09-27, Deque Mars footer on mobile): a
+# wrapping link's box covered neighbouring white words; hiding only the link's own text
+# let those words count as "background" and produced a false 1.28:1 fail.
 HIDE_CSS = (
-    "[data-parity-hide], [data-parity-hide] * {"
+    "[data-parity-hide], [data-parity-hide] *, [data-parity-hide] *::before, [data-parity-hide] *::after {"
     " color: transparent !important; -webkit-text-fill-color: transparent !important;"
-    " text-shadow: none !important; -webkit-text-stroke: 0 !important; caret-color: transparent !important; }"
+    " text-shadow: none !important; -webkit-text-stroke: 0 !important; caret-color: transparent !important;"
+    " text-decoration-color: transparent !important; }"
 )
 WORST_FRACTION = 0.05
 MAX_SAMPLES = 40_000
@@ -57,12 +62,12 @@ _HIDE_JS = """
     const s = document.createElement('style'); s.id = styleId; s.textContent = css;
     document.head.appendChild(s);
   }
-  document.querySelector(sel).setAttribute('data-parity-hide', '');
+  document.documentElement.setAttribute('data-parity-hide', '');
 }
 """
 
 _UNHIDE_JS = """
-(sel) => { const el = document.querySelector(sel); if (el) el.removeAttribute('data-parity-hide'); }
+(sel) => { document.documentElement.removeAttribute('data-parity-hide'); }
 """
 
 

@@ -82,3 +82,43 @@ def validate_target_url(
         if _is_internal(ip):
             raise UnsafeURLError(f"'{host}' points to an internal address ({ip}); refusing to scan.")
     return url
+
+
+def is_safe_request_url(url: str, *, resolver=socket.getaddrinfo, _cache: dict | None = None) -> bool:
+    """For every request the page makes (images, iframes, scripts), not just the page itself.
+
+    A public page can embed <iframe src="http://169.254.169.254/..."> or an internal admin
+    page, and the screenshot we hand back would show it. Non-network schemes (data:, blob:)
+    never leave the browser, so they're fine. Results are cached per host.
+    """
+    parsed = urlparse(url)
+    if parsed.scheme not in ALLOWED_SCHEMES:
+        return parsed.scheme in ("data", "blob", "about")
+    key = (parsed.hostname, parsed.port)
+    if _cache is not None and key in _cache:
+        return _cache[key]
+    try:
+        validate_target_url(url, resolver=resolver)
+        ok = True
+    except UnsafeURLError:
+        ok = False
+    if _cache is not None:
+        _cache[key] = ok
+    return ok
+
+
+async def install_request_guard(context, *, resolver=socket.getaddrinfo) -> None:
+    """Abort any browser request to an internal address (SSRF through page content)."""
+    import asyncio
+
+    cache: dict = {}
+
+    async def guard(route):
+        url = route.request.url
+        ok = await asyncio.to_thread(is_safe_request_url, url, resolver=resolver, _cache=cache)
+        if ok:
+            await route.continue_()
+        else:
+            await route.abort("blockedbyclient")
+
+    await context.route("**/*", guard)

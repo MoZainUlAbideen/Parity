@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parity: find what locks disabled people out of your website</title>
+<meta name="description" content="Parity scans a web page the way disabled people use it (screen reader, keyboard, low vision), then shows what's broken, who it hurts and how to fix it, citing the exact WCAG rule.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,650&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script src="config.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span></span>Parity</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li class="nav-home"><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="report.html?example=mars">See a report</a></li>
+        <li><a href="how.html">How it works</a></li>
+        <li class="nav-hide-sm"><a data-github href="#">GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Web accessibility, checked the way people actually use the web</p>
+        <h1 id="hero-title">96% of websites lock <span class="accent">someone</span> out.</h1>
+        <p class="lede">Parity checks a page the way disabled people experience it: through a screen reader, with only a keyboard, and with low vision. Then it shows what's broken, who it hurts and how to fix it, citing the exact rule it breaks.</p>
+        <form class="scan-form" id="scan-form" novalidate>
+          <label for="scan-url">Web page to check</label>
+          <input id="scan-url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="https://your-website.com" aria-describedby="scan-note scan-error" required>
+          <button class="btn btn-primary" type="submit" id="scan-btn">Scan this page</button>
+        </form>
+        <p class="form-note" id="scan-note">Free demo: 3 scans per hour, about a minute each. Or <a href="report.html?example=mars">open a real report first</a>.</p>
+        <p class="form-error" id="scan-error" role="alert"></p>
+      </div>
+
+      <figure class="hear-card" aria-labelledby="hear-caption">
+        <div class="hear-label"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>Same image, two experiences</div>
+        <div class="hear-compare">
+          <div><span class="cap">You see</span><img src="assets/story-iss.jpg" width="210" height="120" alt="The International Space Station in orbit, against black space."></div>
+          <div><span class="cap">A screen reader says</span><p class="bubble">“Link, graphic: Martian sunrise.”</p></div>
+        </div>
+        <p class="truth" id="hear-caption">The picture shows <strong>the International Space Station</strong>, but its hidden description says "Martian sunrise". Blind visitors are told something false, and can't tell where the link goes.</p>
+        <button class="speak-btn" type="button" data-speak="Link. Graphic. Martian sunrise."><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Hear it</button>
+        <p class="hear-source">From Parity's scan of <a href="report.html?example=mars">Mars Commuter</a>, Deque's public demo of real-world accessibility mistakes.</p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="problem-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The problem, in three moments</p>
+        <h2 id="problem-title">Most barriers are invisible to the people who build the site</h2>
+        <p>If you can see the screen and use a mouse, the page looks fine. These three moments come from the same real page, and show why it isn't.</p>
+      </div>
+      <div class="cards">
+        <article class="card" aria-labelledby="c1">
+          <span class="who"><span aria-hidden="true">👂</span>Blind &amp; screen-reader users</span>
+          <h3 id="c1">Hear it</h3>
+          <p>Screen readers read out each image's hidden description. On this page, a photo of a sunrise over Mars is announced as:</p>
+          <p class="quote">“Beautiful baboon, blowing bubbles, biking backward.”</p>
+          <button class="btn btn-ghost" type="button" data-speak="Link. Graphic. Beautiful baboon, blowing bubbles, biking backward.">Hear what they hear</button>
+          <p class="foot" style="margin-top:14px">Parity's vision agent compares every picture with its description and writes a correct one.</p>
+        </article>
+
+        <article class="card" aria-labelledby="c2">
+          <span class="who"><span aria-hidden="true">👁</span>People with low vision</span>
+          <h3 id="c2">See it</h3>
+          <div class="contrast-demo" id="contrast-demo">
+            <img src="assets/story-footer.jpg" width="320" height="90" alt="Footer headings 'FAQs' and 'Connect With Us' in white text over a bright, rocky Mars photo.">
+          </div>
+          <div class="meter" aria-hidden="true">
+            <div class="meter-row"><span>Measured: <strong>2.9 : 1</strong></span><span>Needed: 4.5 : 1</span></div>
+            <div class="meter-track"><div class="meter-fill" style="width:40%"></div><div class="meter-target" style="left:62%"></div></div>
+          </div>
+          <p class="visually-hidden">Measured contrast 2.9 to 1; WCAG requires 4.5 to 1.</p>
+          <label class="toggle"><input type="checkbox" id="lowvision-toggle"> Approximate a low-vision view</label>
+          <p class="foot" style="margin-top:12px">Rule checkers can't judge text over photos. Parity measures the actual pixels behind the text.</p>
+        </article>
+
+        <article class="card" aria-labelledby="c3">
+          <span class="who"><span aria-hidden="true">⌨</span>Keyboard-only users</span>
+          <h3 id="c3">Try it</h3>
+          <p>Many people can't use a mouse; they move with the <kbd>Tab</kbd> key. Anything built as a clickable box instead of a real button is simply skipped.</p>
+          <div class="kbd-demo">
+            <div class="kbd-row" id="kbd-row" aria-hidden="true">
+              <span class="kbd-item">Home</span><span class="kbd-item">Book tickets</span><span class="kbd-item" data-skip>Help center</span><span class="kbd-item">Contact</span>
+            </div>
+            <div class="kbd-controls">
+              <button class="key" type="button" id="tab-key" aria-describedby="kbd-status">Tab ⇥</button>
+              <p class="kbd-status" id="kbd-status" aria-live="polite">Press Tab to move like a keyboard user.</p>
+            </div>
+          </div>
+          <p class="foot" style="margin-top:14px">Parity presses Tab through your whole page and reports what it could never reach.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="stakes-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why it matters now</p>
+        <h2 id="stakes-title">It's a lot of people, and increasingly the law</h2>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num">95.9%</div><p>of the top one million home pages had detectable accessibility failures, on average 56 per page.</p><p class="src">WebAIM Million, Feb 2026</p></div>
+        <div class="stat"><div class="num">1 in 6</div><p>people worldwide live with a significant disability: about 1.3 billion potential visitors.</p><p class="src">World Health Organization</p></div>
+        <div class="stat"><div class="num">Apr 2027</div><p>US state and local governments serving 50,000+ people must meet WCAG 2.1 AA under the ADA Title II rule.</p><p class="src">US Department of Justice</p></div>
+        <div class="stat"><div class="num">Jun 2025</div><p>The European Accessibility Act began applying to many digital products and services, including online shops.</p><p class="src">European Union, Directive 2019/882</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What Parity does</p>
+        <h2 id="how-title">Four checks, one plain-language report</h2>
+        <p>Rule checkers catch about half the problems. Parity adds agents for the judgment calls, uses AI only where a rule or a measurement can't decide, and tells you how sure it is.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Opens a real browser</h3><p>Loads your page on desktop and mobile, runs the industry-standard axe-core rules, and cites the exact WCAG rule for each problem.</p><p style="margin-top:12px"><span class="tag tag-free">No AI</span></p></div>
+        <div class="step"><h3>Measures contrast</h3><p>For text over photos and gradients, which rules can't judge, it measures the real pixels and settles each case as pass or fail.</p><p style="margin-top:12px"><span class="tag tag-free">No AI</span></p></div>
+        <div class="step"><h3>Uses the keyboard</h3><p>Tabs through the whole page like a keyboard user, and flags clickable things it can't reach, vague links and missing labels.</p><p style="margin-top:12px"><span class="tag tag-free">No AI</span></p></div>
+        <div class="step"><h3>Looks at every image</h3><p>A vision model checks each picture against its description and writes a better one. Its answers are cross-checked before you see them.</p><p style="margin-top:12px"><span class="tag tag-ai">AI: Gemini</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="report-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">A real report</p>
+        <h2 id="report-title">Mars Commuter, scanned by Parity</h2>
+        <p>A public demo site full of real-world mistakes. Here's what Parity found, in plain words.</p>
+      </div>
+      <div class="preview">
+        <a class="preview-shot" href="report.html?example=mars" aria-label="Open the full Mars Commuter report">
+          <img src="examples/mars/desktop.jpg" width="1366" height="1870" alt="Screenshot of the Mars Commuter home page that was scanned." loading="lazy">
+        </a>
+        <div>
+          <div class="kpis" id="kpis" aria-live="polite"></div>
+          <h3>Biggest problems</h3>
+          <ol class="top-issues" id="top-issues"></ol>
+          <a class="btn btn-dark" href="report.html?example=mars">Open the full report</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="trust-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Honest by design</p>
+        <h2 id="trust-title">Every finding says how sure Parity is</h2>
+        <p>An accessibility report you can't trust is worse than none. So nothing is presented as more certain than it is.</p>
+      </div>
+      <div class="legend">
+        <div><span class="badge b-confirmed">✓ Confirmed</span><p>A deterministic rule or a pixel measurement proved it. Safe to act on.</p></div>
+        <div><span class="badge b-ai">◆ AI, high confidence</span><p>Found by an AI agent that is at least 80% sure, after automatic consistency checks.</p></div>
+        <div><span class="badge b-review">? Needs a human</span><p>Parity couldn't decide. You get the evidence it gathered, so the check takes seconds.</p></div>
+      </div>
+      <p style="margin-top:28px"><a href="how.html">How accurate is it? See the benchmarks and known limits →</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span></span>Parity</a>
+      <p style="margin-top:12px">An AI accessibility auditor. Built by Zain Ul Abideen as an open-source portfolio project.</p>
+      <p><a data-github href="#">Source code on GitHub</a> · <a href="https://mo-zain-portfolio.netlify.app">Portfolio</a></p>
+    </div>
+    <div>
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://webaim.org/projects/million/">WebAIM Million 2026</a></li>
+        <li><a href="https://www.who.int/news-room/fact-sheets/detail/disability-and-health">WHO: Disability and health</a></li>
+        <li><a href="https://www.ada.gov/resources/2024-03-08-web-rule/">ADA Title II web rule</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/dir/2019/882/oj">European Accessibility Act</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Notes</h2>
+      <p>WCAG text © W3C, quoted to explain requirements. Parity is not affiliated with W3C or Deque. Automated tools can't prove full conformance; use Parity alongside testing with disabled people.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/home.js"></script>
+</body>
+</html>

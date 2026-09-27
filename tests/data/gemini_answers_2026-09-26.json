@@ -1,0 +1,229 @@
+{
+ "model": "gemini-3.1-flash-lite",
+ "recorded": "2026-09-26",
+ "prompt_version": "v1 (before W3C chart/link guidance)",
+ "notes": "Real answers from the user's agent-eval run, keyed by image file name and the alt text shown in the prompt (MISSING / EMPTY / quoted alt / OTHER = any other alt). Replayed in tests so the consistency checks are verified against genuine model behaviour, including the 5 answers that were false alarms.",
+ "answers": [
+  {
+   "file": "logo.svg",
+   "alt": "\"Northwind home\"",
+   "answer": {
+    "role": "functional",
+    "visible_text": "Northwind",
+    "description": "A logo consisting of a teal circle followed by the text 'Northwind'.",
+    "alt_verdict": "inadequate",
+    "suggested_alt": "Northwind home",
+    "confidence": 0.9,
+    "reason": "The alt text should describe the destination or purpose of the link, and 'Northwind home' is appropriate for a logo linking to the homepage."
+   }
+  },
+  {
+   "file": "logo.svg",
+   "alt": "MISSING",
+   "answer": {
+    "role": "functional",
+    "visible_text": "Northwind",
+    "description": "A logo consisting of a teal circle followed by the text 'Northwind' in teal.",
+    "alt_verdict": "missing_needed",
+    "suggested_alt": "Northwind home",
+    "confidence": 1,
+    "reason": "The image is inside a link and lacks an alt attribute, so it needs text to describe the link's destination."
+   }
+  },
+  {
+   "file": "logo.svg",
+   "alt": "\"Northwind Traders logo\"",
+   "answer": {
+    "role": "informative",
+    "visible_text": "Northwind",
+    "description": "A logo consisting of a teal circle followed by the word Northwind in teal text.",
+    "alt_verdict": "inadequate",
+    "suggested_alt": "Northwind Traders",
+    "confidence": 0.9,
+    "reason": "The alt text omits the word 'Traders' which is part of the company name and the current alt attribute."
+   }
+  },
+  {
+   "file": "hero.svg",
+   "alt": "MISSING",
+   "answer": {
+    "role": "decorative",
+    "visible_text": "",
+    "description": "A simple vector illustration of mountains and a sun.",
+    "alt_verdict": "missing_needed",
+    "suggested_alt": "",
+    "confidence": 0.9,
+    "reason": "The image is purely decorative and should have an empty alt attribute to be ignored by screen readers."
+   }
+  },
+  {
+   "file": "hero.svg",
+   "alt": "EMPTY",
+   "answer": {
+    "role": "decorative",
+    "visible_text": "",
+    "description": "A simple vector illustration of stylized blue mountains and a yellow sun against a light background.",
+    "alt_verdict": "good",
+    "suggested_alt": "",
+    "confidence": 1,
+    "reason": "The image is a generic decorative graphic that does not provide essential information about the 2026 results."
+   }
+  },
+  {
+   "file": "chart.svg",
+   "alt": "\"image\"",
+   "answer": {
+    "role": "complex",
+    "visible_text": "Quarterly sales 2026 (units) 400 550 700 500 Q1 Q2 Q3 Q4",
+    "description": "A bar chart showing quarterly sales units for 2026, with 400 in Q1, 550 in Q2, 700 in Q3, and 500 in Q4.",
+    "alt_verdict": "inadequate",
+    "suggested_alt": "Bar chart of 2026 quarterly sales: Q1 400 units, Q2 550 units, Q3 700 units, and Q4 500 units.",
+    "confidence": 1,
+    "reason": "The current alt text 'image' is too vague and fails to provide the essential data contained in the chart."
+   }
+  },
+  {
+   "file": "chart.svg",
+   "alt": "OTHER",
+   "answer": {
+    "role": "complex",
+    "visible_text": "Quarterly sales 2026 (units) 400 550 700 500 Q1 Q2 Q3 Q4",
+    "description": "A bar chart showing quarterly sales for 2026 with values of 400, 550, 700, and 500 units respectively.",
+    "alt_verdict": "good",
+    "suggested_alt": "Bar chart of 2026 quarterly sales: Q1 400 units, Q2 550, Q3 700, Q4 500.",
+    "confidence": 1,
+    "reason": "The alt text accurately summarizes the key data points presented in the chart."
+   }
+  },
+  {
+   "file": "sale-banner.png",
+   "alt": "\"banner\"",
+   "answer": {
+    "role": "text",
+    "visible_text": "SPRING SALE 30% OFF",
+    "description": "A yellow banner with the text 'SPRING SALE 30% OFF' in brown.",
+    "alt_verdict": "inadequate",
+    "suggested_alt": "SPRING SALE 30% OFF",
+    "confidence": 1,
+    "reason": "The current alt text 'banner' is too vague and fails to convey the important information written in the image."
+   }
+  },
+  {
+   "file": "sale-banner.png",
+   "alt": "OTHER",
+   "answer": {
+    "role": "text",
+    "visible_text": "SPRING SALE 30% OFF",
+    "description": "A yellow banner with the text 'SPRING SALE 30% OFF' in brown.",
+    "alt_verdict": "good",
+    "suggested_alt": "SPRING SALE 30% OFF",
+    "confidence": 1,
+    "reason": "The alt text accurately reflects the text content displayed within the image."
+   }
+  },
+  {
+   "file": "promo-text.png",
+   "alt": "EMPTY",
+   "answer": {
+    "role": "text",
+    "visible_text": "FREE SHIPPING on orders over $50",
+    "description": "An image containing promotional text about free shipping.",
+    "alt_verdict": "missing_needed",
+    "suggested_alt": "FREE SHIPPING on orders over $50",
+    "confidence": 1,
+    "reason": "The image contains important promotional information that is not present in the surrounding text."
+   }
+  },
+  {
+   "file": "promo-text.png",
+   "alt": "OTHER",
+   "answer": {
+    "role": "text",
+    "visible_text": "FREE SHIPPING on orders over $50",
+    "description": "A promotional banner with dark blue text on a light blue background stating the free shipping offer.",
+    "alt_verdict": "good",
+    "suggested_alt": "FREE SHIPPING on orders over $50",
+    "confidence": 1,
+    "reason": "The alt text accurately reflects the text contained within the image."
+   }
+  },
+  {
+   "file": "divider.png",
+   "alt": "EMPTY",
+   "answer": {
+    "role": "decorative",
+    "visible_text": "",
+    "description": "A simple horizontal line with a repeating scalloped or wave pattern.",
+    "alt_verdict": "good",
+    "suggested_alt": "",
+    "confidence": 1,
+    "reason": "The image is a purely visual divider that adds no information to the page content."
+   }
+  },
+  {
+   "file": "visitors-line.png",
+   "alt": "\"chart_final_v2.png\"",
+   "answer": {
+    "role": "complex",
+    "visible_text": "Monthly website visitors, Jan-Jun 2026 1,200 1,500 1,400 2,100 2,600 3,100 Jan Feb Mar Apr May Jun",
+    "description": "A line chart showing monthly website visitors from January to June 2026, with values increasing from 1,200 in January to 3,100 in June.",
+    "alt_verdict": "inadequate",
+    "suggested_alt": "Line chart showing monthly website visitors from January to June 2026: Jan 1,200; Feb 1,500; Mar 1,400; Apr 2,100; May 2,600; Jun 3,100.",
+    "confidence": 1,
+    "reason": "The current alt text is a filename and does not describe the data presented in the chart."
+   }
+  },
+  {
+   "file": "visitors-line.png",
+   "alt": "OTHER",
+   "answer": {
+    "role": "complex",
+    "visible_text": "Monthly website visitors, Jan-Jun 2026 1,200 1,500 1,400 2,100 2,600 3,100 Jan Feb Mar Apr May Jun",
+    "description": "A line chart showing monthly website visitors from January to June 2026, with values increasing from 1,200 to 3,100.",
+    "alt_verdict": "inadequate",
+    "suggested_alt": "Line chart of monthly website visitors from January to June 2026: Jan 1,200; Feb 1,500; Mar 1,400; Apr 2,100; May 2,600; Jun 3,100.",
+    "confidence": 0.95,
+    "reason": "The current alt text omits the specific monthly data points shown in the chart."
+   }
+  },
+  {
+   "file": "sales-bars.png",
+   "alt": "\"Photo of our team at the office\"",
+   "answer": {
+    "role": "complex",
+    "visible_text": "Sales by region, 2026 (units) 120 80 150 95 North South East West",
+    "description": "A bar chart showing 2026 sales units by region: North (120), South (80), East (150), and West (95).",
+    "alt_verdict": "wrong",
+    "suggested_alt": "Bar chart showing 2026 sales units by region: North 120, South 80, East 150, and West 95.",
+    "confidence": 1,
+    "reason": "The current alt text describes a photo of a team, which is completely unrelated to the actual chart content."
+   }
+  },
+  {
+   "file": "sales-bars.png",
+   "alt": "OTHER",
+   "answer": {
+    "role": "complex",
+    "visible_text": "Sales by region, 2026 (units) 120 80 150 95 North South East West",
+    "description": "A bar chart showing 2026 sales units by region: North 120, South 80, East 150, and West 95.",
+    "alt_verdict": "good",
+    "suggested_alt": "Bar chart of 2026 sales by region in units: North 120, South 80, East 150, West 95.",
+    "confidence": 1,
+    "reason": "The alt text accurately conveys all the data points presented in the chart."
+   }
+  },
+  {
+   "file": "pie.png",
+   "alt": "OTHER",
+   "answer": {
+    "role": "complex",
+    "visible_text": "Traffic sources Search 50% Social 30% Direct 20%",
+    "description": "A pie chart showing traffic sources with Search at 50%, Social at 30%, and Direct at 20%.",
+    "alt_verdict": "good",
+    "suggested_alt": "Pie chart of traffic sources: Search 50%, Social 30%, Direct 20%.",
+    "confidence": 1,
+    "reason": "The alt text accurately summarizes the data presented in the chart."
+   }
+  }
+ ]
+}

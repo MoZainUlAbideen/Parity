@@ -4,6 +4,8 @@
 
 About 1 in 6 people live with a disability, and 95.9% of the top million homepages fail automated WCAG checks (WebAIM Million 2026). Parity opens a page in a real browser, audits it the way a screen-reader user, a keyboard-only user, and a low-vision user would experience it, and reports each problem with the exact WCAG rule it breaks.
 
+**Live demo:** the website (Vercel) and API (Render) are in `web/` and `src/parity/api/`; see [Deploy](#deploy).
+
 Every finding is labeled honestly:
 
 | Label | Meaning |
@@ -12,7 +14,7 @@ Every finding is labeled honestly:
 | `ai-high-confidence` | An AI agent found it and is at least 80% sure |
 | `needs-review` | Parity isn't sure; a human should check |
 
-## Status: Milestone 3 (vision + measurement agents)
+## Status: live product (milestones 1-4 and 7 done)
 
 ### Milestone 1: foundation
 - Real-browser crawler (Playwright + Chromium) scanning desktop and mobile viewports
@@ -35,14 +37,32 @@ Every finding is labeled honestly:
 - **Contrast meter (no AI).** axe can't compute contrast for text over a background image, so it marks it "needs review". Parity renders the background without the text, screenshots exactly the text area and measures the text color against every pixel, judging the hardest-to-read 5% against WCAG's 4.5:1 (3:1 for large text). Passing text is settled as passing, failing text becomes a finding with the measured ratio. Text with shadows or outlines stays with a human, with the number attached
 - **Alt-text rules (no AI).** Alt text that is a placeholder ("banner", "image") or a file name ("chart_final_v2.png") is always a failure (W3C failure F30), and axe doesn't check for it
 - **Vision agent (Gemini).** Looks at each image with its context (link, caption, heading, nearby text) and judges whether the alt text conveys the same information, whether an image marked decorative actually carries information, and proposes alt text for every image, including the ones axe flags as missing alt. Built for a crowded free tier: retries with backoff, model fallbacks, a disk cache (the same image is never paid for twice), and a per-page image cap
+- **Judges the image, not what covers it.** The model gets each image's own pixels (found on the Mars demo, where carousel slides clipped out of view were photographed as the badge on top of them), and repeated carousel slides are judged once
 - **Robust on real sites.** Measured through element screenshots, so zoomed-out mobile layouts work (found on the Deque Mars demo, which has no viewport meta tag); an element that can't be measured stays with a human and never breaks the scan
 - **Evidence on every finding.** Each agent finding carries how it was decided (a measured ratio, the rule, or the model's reason and confidence) and a suggested fix
 
 | Configuration | Precision | Recall (all 24) | Recall (AI-only 11) | False alarms on fixed pages | Left for human review |
 |---|---|---|---|---|---|
 | Rules only (axe) | 100% | 54% | 0% | 0 | 5 |
-| Rules + agents, no AI | 100% | 75% | 45% | 0 | 0 |
-| Rules + agents + Gemini vision | | *run locally* | | | |
+| Rules + agents, no AI (incl. keyboard agent) | 100% | 92% | 82% | 0 | 0 |
+| + Gemini vision, before consistency checks | 80% | | | | |
+| **Everything, with consistency checks** | **100%** | **100%** | **100%** | **0** | 1 |
+
+The vision rows replay real `gemini-3.1-flash-lite` answers recorded on 26 Sep 2026 (`tests/data/`), so the test suite checks them without calling the API. The benchmark was built alongside Parity, so 100% means "does what it was designed to do", not "perfect on the open web".
+
+- **Consistency checks on the model.** If Gemini calls alt text "inadequate" but its own suggested alt adds nothing new (word coverage >= 0.9), the verdict is dropped; if only chart data points are missing, or coverage is >= 0.6, it goes to a human instead. On the recorded answers this removed every false alarm without losing a real problem
+
+### Milestone 4: interaction agent
+- **Keyboard walk.** Presses Tab through the page like a keyboard user and records every focus stop; anything that looks clickable (`onclick`, `cursor: pointer`) but is never reached is a failure of 2.1.1 Keyboard
+- **Ambiguous links.** Links with the same generic text ("Read more", "Learn more") going to different pages fail 2.4.4 Link Purpose
+- **Placeholder-only labels.** Form fields whose only label is placeholder text that disappears when you type
+
+### Milestone 7: live product
+- **API** (`src/parity/api/app.py`, FastAPI): `POST /api/scans` queues a scan (202), `GET /api/scans/{id}` polls it, `GET /api/scans/{id}/screenshot/{viewport}`, `POST /api/ask` for grounded answers. One worker and a shared browser; per-IP rate limits (3 scans, 20 questions per hour); queue cap (503 when busy); jobs expire after an hour; SSRF guard on every URL
+- **Website** (`web/`, static, no build step): a home page that lets visitors *experience* the problem (hear what a screen reader says about an image, see text that fails contrast, try a keyboard that skips a button), a report page that explains every finding in plain words (who it hurts, how sure Parity is, the WCAG rule, where it is on the screenshot), a "How it works" page with the honest numbers, and a WCAG assistant in the bottom-left corner
+- **The site passes its own audit.** `tests/test_site_self_audit.py` scans every page with Parity. Its first run caught real problems on our own report page (15 identical-sounding "What W3C says" links, tables a keyboard couldn't scroll); they're fixed and the test keeps them fixed
+- **SSRF protection for everything the page loads**, not just the address typed in: every request the audit browser makes (iframes, images, redirects) is checked against internal addresses
+- **Docker on Render**, static site on Vercel; 200+ tests
 
 The benchmark now includes deliberately correct cases (a good chart description, a correctly hidden decorative divider, white text that really is readable over a dark photo), so false alarms are measured, not assumed.
 
@@ -110,6 +130,14 @@ uv run parity agent-eval
 # Evals
 uv run parity baseline-eval
 uv run parity retrieval-eval
+
+# API + website locally
+uv run uvicorn parity.api.app:app --reload        # http://127.0.0.1:8000/api/health
+python -m http.server 5500 -d web                  # set window.PARITY_API in web/config.js
+
+# Refresh the example report shown on the website
+uv run parity scan https://dequeuniversity.com/demo/mars/ --out reports
+uv run parity export-example reports/report.json --name mars
 ```
 
 Reports and screenshots go to `reports/`.
@@ -124,6 +152,14 @@ PARITY_VISION_MODELS=gemini-3.1-flash-lite  # optional; comma-separated fallback
 PARITY_VISION_MIN_INTERVAL=2                # optional; seconds between vision calls
 ```
 
+## Deploy
+
+**Backend (Render).** New > Blueprint > pick this repo (`render.yaml`, Docker). Set the secrets `GROQ_API_KEY`, `GEMINI_API_KEY` and `ALLOWED_ORIGINS` (your Vercel URL, e.g. `https://parity.vercel.app`). Check `https://<service>.onrender.com/api/health`. The free plan sleeps when idle; the website shows "Waking up the server…" while it starts.
+
+**Frontend (Vercel).** New Project > this repo > Root Directory `web`, framework "Other", no build command. Put the Render URL in `web/config.js` (`window.PARITY_API`).
+
+API settings (all optional): `PARITY_SCANS_PER_HOUR` (3), `PARITY_ASKS_PER_HOUR` (20), `PARITY_MAX_QUEUE` (5), `PARITY_MAX_IMAGES` (8), `PARITY_SCAN_TIMEOUT` (150 s), `PARITY_JOB_TTL` (3600 s), `PARITY_VISION` (on when a Gemini key is set).
+
 ## Project layout
 
 ```
@@ -132,6 +168,8 @@ src/parity/
   scanner.py           Real-browser crawl + axe + agents per viewport, cited report
   agents/contrast.py   Pixel-measured contrast of text over images
   agents/images.py     Alt-text rules + vision judgment + suggested alt text
+  agents/interaction.py  Keyboard walk, ambiguous links, placeholder-only labels
+  api/app.py           FastAPI: scan queue, rate limits, grounded answers
   gemini.py            Gemini vision client (retries, fallbacks, cache)
   bot_detection.py     Recognize bot-protection challenge pages
   url_safety.py        SSRF protection
@@ -157,6 +195,8 @@ eval/
   retrieval_golden.json   Golden questions for the retrieval eval
   results/             Committed eval results
 tests/
+web/                   Static website (Vercel): index, report, how, assets/, examples/
+Dockerfile, render.yaml   Backend deploy
 ```
 
 ## Roadmap
@@ -164,11 +204,11 @@ tests/
 1. Foundation: crawler, rule engine, labeled benchmark, baseline eval (done)
 2. WCAG knowledge base + RAG with citations (done)
 3. Vision + measurement agents: alt text quality, contrast over images (done)
-4. Interaction agent: keyboard and focus
-5. Orchestrator, critic, report + eval harness v1
-6. Fixer agent with re-scan verification and GitHub PRs
-7. Live product: backend on Render, frontend on Vercel
-8. LLMOps: tracing, CI eval gate, customer GitHub Action, scheduled rescans
+4. Interaction agent: keyboard and focus (done)
+5. Live product: backend on Render, frontend on Vercel (done)
+6. Fixer agent: code fixes with re-scan verification and GitHub PRs
+7. Multi-page crawls, pages behind a login, PDF checks
+8. LLMOps: tracing, customer GitHub Action, scheduled rescans
 
 ## License notes
 

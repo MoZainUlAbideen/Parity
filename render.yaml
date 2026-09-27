@@ -1,0 +1,22 @@
+# Render Blueprint: New > Blueprint, pick this repo, and Render builds the Dockerfile.
+services:
+  - type: web
+    name: parity-api
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false          # paste in the Render dashboard (never commit keys)
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false          # your Vercel URL, e.g. https://parity-xyz.vercel.app
+      - key: PARITY_VISION_MODELS
+        value: gemini-3.1-flash-lite
+      - key: PARITY_LLM_MODEL
+        value: openai/gpt-oss-120b
+      - key: PARITY_SCANS_PER_HOUR
+        value: "3"
+      - key: PARITY_MAX_IMAGES
+        value: "8"

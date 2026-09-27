@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Clipped carousel</title>
+<style>
+  /* A block sits right above the carousel window. Images scrolled out of the window are
+     positioned over it, so a screenshot of their box shows this block, not the image. */
+  .banner { height: 300px; background: #d00; color: #fff; font: 700 40px sans-serif; }
+  .window { height: 130px; overflow: hidden; width: 220px; }
+  .track { list-style: none; margin: 0; padding: 0; transform: translateY(-260px); }
+  .track li { height: 130px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Clipped carousel</h1>
+  <div class="banner">SPECIAL OFFERS</div>
+  <div class="window">
+    <ul class="track">
+      <li><a href="/pies"><img src="../assets/pie.png" width="210" height="120" alt="Pie chart"></a></li>
+      <li><a href="/sales"><img src="../assets/sales-bars.png" width="210" height="120" alt="Sales by region"></a></li>
+      <li><a href="/pies"><img src="../assets/pie.png" width="210" height="120" alt="Pie chart"></a></li>
+    </ul>
+  </div>
+</main>
+</body>
+</html>

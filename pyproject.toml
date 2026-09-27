@@ -8,14 +8,16 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
+    "fastapi>=0.141.1",
     "httpx>=0.28.1",
     "pillow>=11.0",
-    "playwright>=1.56.0",
+    "playwright==1.56.0",
     "pydantic>=2.13.5",
     "python-dotenv>=1.2.3",
     "rich>=15.0.0",
     "snowballstemmer>=3.1.1",
     "typer>=0.27.2",
+    "uvicorn[standard]>=0.54.0",
 ]
 
 [project.scripts]
@@ -33,6 +35,10 @@ build-backend = "uv_build"
 [dependency-groups]
 dev = [
     "beautifulsoup4>=4.15.0",
+    # Semantic search locally too: plain `uv sync` removes extras, so without this the
+    # "dense" model silently disappears and search falls back to keywords only.
+    # The Docker image uses --no-dev, so the server stays small.
+    "fastembed>=0.8.1",
     "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
 ]
@@ -41,3 +47,10 @@ dev = [
 testpaths = ["tests"]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+filterwarnings = [
+    # Starlette's TestClient warns about its own httpx dependency; nothing in Parity to fix.
+    "ignore:Using `httpx` with `starlette.testclient` is deprecated",
+    # Windows only: Playwright's browser pipes are garbage-collected after pytest closes the
+    # event loop. Python's asyncio complains while printing them; the browser is already closed.
+    "ignore:Exception ignored in. <function (_ProactorBasePipeTransport|BaseSubprocessTransport).__del__:pytest.PytestUnraisableExceptionWarning",
+]

@@ -49,6 +49,33 @@
 - [x] Bug found on a real site (Deque Mars, mobile): pages without a viewport meta tag are zoomed out on phones and the meter's crop landed outside the screenshot, crashing the scan. Now measures via element screenshots with proportional crops; failures stay with a human and never break the scan
 - [x] Bug caught by tests during that fix: re-reading positions while text was hidden also read text-shadow as "none"
 - [x] 163 tests passing
-- [ ] Run `parity agent-eval` with Gemini on your machine
-- [ ] Scan a real site with the vision agent (Deque Mars: 86 needs-review contrast items)
-- [ ] Push to GitHub, CI green
+- [x] `parity agent-eval` with Gemini on your machine: 80% precision (false alarms on correct alt text)
+- [x] Mars scan with vision: meter settled 66 of 86 contrast cases, 11 real failures
+- [x] Vision consistency checks + W3C chart/link guidance in the prompt; replay of the real answers: 100% precision, 100% recall
+- [x] Bug found on Mars: a wrapping link read neighbouring words as background (false 1.28:1 fail). Now hides all text incl. ::before/::after (16.94:1)
+- [x] Bug: same element "passing" on desktop and "failing" on mobile. A failure on any screen wins
+- [x] Recorded-answer replay tests (no API calls in CI)
+
+## Milestone 4: Interaction agent (done)
+- [x] Keyboard Tab walk; clickable-but-unreachable elements fail 2.1.1
+- [x] Ambiguous "Read more" links fail 2.4.4; placeholder-only labels
+- [x] Bug caught by tests: malformed/about:blank hrefs crashed the link check
+- [x] No-AI recall 75% -> 92%, still 100% precision
+- [x] Element positions recorded, so the report pins each problem on the screenshot
+
+## Milestone 5: Live product
+- [x] FastAPI backend: scan queue, polling, screenshots, /api/ask; rate limits, queue cap, TTL, SSRF guard, CORS
+- [x] Dockerfile (Playwright base + uv) and render.yaml
+- [x] Website: home (hear it / see it / try it), plain-words report with pins and filters, how-it-works with honest numbers, bottom-left WCAG assistant
+- [x] Reviewed as a visitor on desktop and phone: fixed cramped hero card, nav wrapping on phones, chat button covering content (now shrinks to an icon when you scroll), report gutters, confusing "23 left for review" label
+- [x] Parity audited its own site: found 15 identical "What W3C says" links + unscrollable tables; fixed; now a test (all 3 pages pass)
+- [x] 197 tests passing
+- [x] Mars scan with all agents on your machine: 16 confirmed kinds, 113 places, 65 contrast cases settled
+- [x] Bug found in that report: carousel clones clipped by overflow:hidden were photographed in place, so Gemini judged the badge on top of them and gave different alt text for the same image. Now judged from the image's own pixels, repeats judged once (saves quota too)
+- [x] Same bug gave hidden slides pins at negative positions: pins now only where the element can be seen
+- [x] Security gap found while fixing it: only the typed URL was SSRF-checked. Now every browser request and the final redirect target are checked
+- [x] Semantic search model now installed by plain `uv sync`; Windows test warnings fixed (197 -> 205 tests)
+- [ ] Re-run the Mars scan + export with the image fix
+- [ ] Re-run `parity agent-eval` with Gemini (new prompt, cache misses)
+- [ ] Deploy backend on Render, frontend on Vercel, update web/config.js
+- [ ] Add the retrieval-eval step to CI by hand; push; CI green

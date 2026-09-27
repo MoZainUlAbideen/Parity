@@ -394,5 +394,34 @@ def retrieval_eval(
     console.print(f"\nSaved {out}")
 
 
+@app.command("export-example")
+def export_example(
+    report: Path = typer.Argument(Path("reports/report.json"), help="A report.json from `parity scan`"),
+    name: str = typer.Option(..., help="Example name, e.g. mars"),
+    web_dir: Path = typer.Option(Path("web"), help="The website folder"),
+) -> None:
+    """Turn a saved scan into a lightweight example the website can show without the backend."""
+    import json
+
+    from PIL import Image
+
+    data = json.loads(report.read_text(encoding="utf-8"))
+    out = web_dir / "examples" / name
+    out.mkdir(parents=True, exist_ok=True)
+    for snap in data["snapshots"]:
+        snap.pop("aria_snapshot", None)
+        src = snap.pop("screenshot_path", None)
+        snap["screenshot_url"] = None
+        if src and Path(src).exists():
+            img = Image.open(src).convert("RGB")
+            target = out / f"{snap['viewport']}.jpg"
+            img.save(target, "JPEG", quality=78, optimize=True, progressive=True)
+            snap["screenshot_url"] = f"examples/{name}/{target.name}"
+            snap["screenshot_size"] = [img.width, img.height]
+    (out / "report.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    size = sum(f.stat().st_size for f in out.iterdir()) / 1024
+    console.print(f"Exported to {out} ({size:.0f} KB)")
+
+
 def main() -> None:
     app()

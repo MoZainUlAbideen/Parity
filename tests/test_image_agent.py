@@ -156,4 +156,103 @@ async def test_image_cap_protects_quota(base_url, page):
     vision = ScriptedVision({"": {"alt_verdict": "good", "confidence": 1}})
     audit = await audit_images(page, vision=vision, max_images=3)
     assert audit.judged == 3
-    assert "first 3 of 7" in audit.errors[-1]
+    assert "first 3 of 7 different images" in audit.errors[-1]
+
+
+# ---------------------------------------------------------------- consistency checks
+# Regression (2026-09-27): real gemini-3.1-flash-lite answers that produced 5 false alarms.
+
+
+def test_self_contradicting_verdict_is_dropped():
+    # Gemini: "inadequate" ... reason: "'Northwind home' is appropriate", suggestion identical.
+    f, _ = judge(img(alt="Northwind home", inControl="a"), {"role": "functional", "alt_verdict": "inadequate", "confidence": 0.9,
+                 "reason": "'Northwind home' is appropriate for a logo link", "suggested_alt": "Northwind home"})
+    assert f is None
+
+
+def test_suggestion_already_inside_current_alt_is_dropped():
+    f, _ = judge(img(alt="Northwind Traders logo"), {"role": "informative", "alt_verdict": "inadequate", "confidence": 0.9,
+                 "suggested_alt": "Northwind Traders"})
+    assert f is None
+
+
+def test_chart_missing_only_data_points_goes_to_human_review():
+    alt = "Line chart of monthly website visitors, January to June 2026, rising from 1,200 to 3,100."
+    f, _ = judge(img(alt=alt), {"role": "complex", "alt_verdict": "inadequate", "confidence": 0.95,
+                 "suggested_alt": "Line chart of monthly website visitors from January to June 2026: Jan 1,200; Feb 1,500; "
+                                  "Mar 1,400; Apr 2,100; May 2,600; Jun 3,100."})
+    assert f.confidence == Confidence.needs_review
+    assert "W3C allows a short summary" in f.nodes[0].evidence
+
+
+def test_real_problems_survive_the_checks():
+    # Real Mars answers: alt describes something else entirely.
+    f, _ = judge(img(alt="Beautiful baboon, blowing bubbles, biking backward", inControl="a"),
+                 {"role": "functional", "alt_verdict": "wrong", "confidence": 1, "suggested_alt": "Special Offers"})
+    assert f.confidence == Confidence.ai_high
+    f, _ = judge(img(alt="Photo of our team at the office"),
+                 {"role": "complex", "alt_verdict": "wrong", "confidence": 1,
+                  "suggested_alt": "Bar chart showing 2026 sales units by region: North (120), South (80), East (150), West (95)"})
+    assert f.confidence == Confidence.ai_high
+
+
+def test_coverage():
+    from parity.agents.images import coverage
+
+    assert coverage("Northwind home", "Northwind home") == 1.0
+    assert coverage("banner", "SPRING SALE 30% OFF") == 0.0
+    assert coverage("anything", "") == 1.0
+
+
+def test_prompt_states_w3c_chart_and_link_guidance():
+    p = build_prompt(img())
+    assert "Listing every data point is NOT required" in p
+    assert "identifies the destination is \"good\"" in p
+
+
+# ---------------------------------------------------------------- real-site regressions
+# Found on Deque's Mars demo (2026-09-27): a vertical carousel clones its slides and clips
+# them with overflow:hidden. Screenshots of the clipped clones showed whatever sat at their
+# position instead (a "1" badge), so the model judged the wrong picture ("It sees: a circle
+# with the number 1") and the same image got different suggested alt text on each copy.
+
+class RecordingVision:
+    name = "recording"
+
+    def __init__(self):
+        self.calls: list[tuple[str, bytes, str]] = []
+
+    def judge_json(self, prompt, image, mime):
+        self.calls.append((prompt, image, mime))
+        return {"role": "informative", "alt_verdict": "good", "confidence": 0.95, "suggested_alt": ""}, self.name
+
+
+async def test_clipped_images_are_judged_from_their_own_pixels(base_url, page):
+    from parity.eval.fixture_server import FIXTURES_DIR
+    await page.goto(f"{base_url}/special/clipped_carousel.html")
+    vision = RecordingVision()
+    await audit_images(page, vision=vision, allow_private=True)  # fixtures are served from 127.0.0.1
+    sent = {prompt.split("file name: ")[1].split()[0]: image for prompt, image, _ in vision.calls}
+    assert sent["pie.png"] == (FIXTURES_DIR / "assets" / "pie.png").read_bytes()
+    assert sent["sales-bars.png"] == (FIXTURES_DIR / "assets" / "sales-bars.png").read_bytes()
+
+
+async def test_repeated_images_are_judged_once_and_share_one_answer(base_url, page):
+    await page.goto(f"{base_url}/special/clipped_carousel.html")
+    vision = RecordingVision()
+    audit = await audit_images(page, vision=vision)
+    assert len(vision.calls) == 2  # pie.png appears twice with the same alt and link: one call
+    assert audit.judged == 2
+
+
+async def test_rendered_fallback_also_shows_the_image_not_its_cover(base_url, page):
+    # SVGs and images we may not fetch directly are drawn by the browser on top of the page.
+    import io
+    from PIL import Image
+    await page.goto(f"{base_url}/special/clipped_carousel.html")
+    vision = RecordingVision()
+    await audit_images(page, vision=vision, allow_private=False)  # 127.0.0.1 may not be fetched directly
+    for _, image, mime in vision.calls:
+        assert mime == "image/png"
+        r, g, b = Image.open(io.BytesIO(image)).convert("RGB").resize((1, 1)).getpixel((0, 0))
+        assert not (r > 180 and g < 60 and b < 60), "captured the red banner covering the image"
