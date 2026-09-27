@@ -339,36 +339,70 @@ def _same_image(img: ImageInfo) -> tuple:
     return (img.src, img.alt, img.linkHref, img.inControl)
 
 
-async def audit_images(page, vision: GeminiVision | None = None, max_images: int = 15,
-                       allow_private: bool = False, out_of_time=lambda: False) -> ImageAudit:
-    audit = ImageAudit()
+@dataclass
+class PreparedImages:
+    """Everything the vision step needs, captured while we still own the page."""
+    images: list[ImageInfo]
+    unique: list[tuple]
+    pixels: dict[tuple, tuple[bytes, str]] = field(default_factory=dict)
+    capture_errors: list[str] = field(default_factory=list)
+
+
+async def prepare_images(page, vision: GeminiVision | None = None, max_images: int = 15,
+                         allow_private: bool = False) -> PreparedImages:
+    """Phase 1 (needs the page, fast): find images and capture their pixels."""
     images = [i for i in await collect_images(page) if not i.ariaHidden and i.role not in ("presentation", "none")]
-    answers: dict[tuple, dict | None] = {}
-    unique = list(dict.fromkeys(_same_image(i) for i in images))
-    to_judge = set(unique[:max_images]) if vision is not None else set()
-    stopped = 0
+    prep = PreparedImages(images=images, unique=list(dict.fromkeys(_same_image(i) for i in images)))
+    if vision is None:
+        return prep
+    first = {}
     for img in images:
-        key = _same_image(img)
-        if key in to_judge and key not in answers and out_of_time():
-            to_judge.discard(key)
-            stopped += 1
-        if key in to_judge and key not in answers:
-            answers[key] = None
+        first.setdefault(_same_image(img), img)
+    for key in prep.unique[:max_images]:
+        img = first[key]
+        try:
+            prep.pixels[key] = await image_pixels(page, img, allow_private)
+        except Exception as exc:  # element vanished, capture failed, etc.
+            prep.capture_errors.append(f"{img.selector}: could not capture image ({exc.__class__.__name__})")
+    return prep
+
+
+async def judge_images(prep: PreparedImages, vision: GeminiVision | None = None, max_images: int = 15,
+                       out_of_time=lambda: False) -> ImageAudit:
+    """Phase 2 (network only, no page): ask the model, then apply rules and consistency checks.
+
+    Needs no browser, so the scanner runs it while the contrast meter uses the page.
+    Measured live on Render's free CPU (2026-09-27): images 50.5 s then contrast 36.4 s in a row,
+    and the time budget ran out before the contrast meter finished.
+    """
+    audit = ImageAudit(errors=list(prep.capture_errors))
+    answers: dict[tuple, dict | None] = {}
+    stopped = 0
+    if vision is not None:
+        for key, (pixels, mime) in prep.pixels.items():
+            if out_of_time():
+                stopped += 1
+                continue
+            img = next(i for i in prep.images if _same_image(i) == key)
             try:
-                pixels, mime = await image_pixels(page, img, allow_private)
                 answers[key], _ = await asyncio.to_thread(vision.judge_json, build_prompt(img), pixels, mime)
                 audit.judged += 1
             except GeminiError as exc:
                 audit.errors.append(f"{img.selector}: {exc}")
-            except Exception as exc:  # element vanished, capture failed, etc.
-                audit.errors.append(f"{img.selector}: could not capture image ({exc.__class__.__name__})")
-        finding, suggestion = judge(img, answers.get(key))
+    for img in prep.images:
+        finding, suggestion = judge(img, answers.get(_same_image(img)))
         if finding:
             audit.findings.append(finding)
         if suggestion:
             audit.suggestions[img.selector] = suggestion
     if stopped:
         audit.errors.append(f"Ran out of time: {stopped} image(s) were checked by the rules only, not by the vision model.")
-    if vision is not None and len(unique) > max_images:
-        audit.errors.append(f"Checked the first {max_images} of {len(unique)} different images to protect your API quota.")
+    if vision is not None and len(prep.unique) > max_images:
+        audit.errors.append(f"Checked the first {max_images} of {len(prep.unique)} different images to protect your API quota.")
     return audit
+
+
+async def audit_images(page, vision: GeminiVision | None = None, max_images: int = 15,
+                       allow_private: bool = False, out_of_time=lambda: False) -> ImageAudit:
+    prep = await prepare_images(page, vision, max_images, allow_private)
+    return await judge_images(prep, vision, max_images, out_of_time)

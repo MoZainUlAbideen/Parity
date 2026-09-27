@@ -208,10 +208,10 @@ def create_app(settings: Settings | None = None, vision_factory=None, llm_factor
         out_dir = settings.data_dir / job.id
         try:
             browser = await get_browser()
-            # Optional checks stop at 55% of the limit, leaving time for the second screen size
+            # Optional checks stop at 70% of the limit, leaving time for the second screen size
             # and the report, so a slow server returns a labelled partial report, not an error.
             options = AgentOptions(vision=vision_factory(), max_images=settings.max_images,
-                                   deadline=time.monotonic() + settings.scan_timeout * 0.55,
+                                   deadline=time.monotonic() + settings.scan_timeout * 0.7,
                                    on_stage=lambda name: setattr(job, "stage", name))
             report = await asyncio.wait_for(
                 scan_url(job.url, out_dir=out_dir, allow_private=settings.allow_local, browser=browser, agents=options),

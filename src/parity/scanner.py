@@ -9,6 +9,7 @@ Then findings from all viewports are merged into one report.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import re
 import time
@@ -19,7 +20,7 @@ from playwright.async_api import Browser, TimeoutError as PWTimeout, async_playw
 
 from parity.bot_detection import Challenge, detect_bot_challenge
 from parity.agents.contrast import measure_text_over_image
-from parity.agents.images import audit_images
+from parity.agents.images import judge_images, prepare_images
 from parity.agents.interaction import audit_interaction
 from parity.gemini import GeminiVision
 from parity.kb.cite import cite_findings
@@ -304,20 +305,17 @@ async def _scan_viewport(
             except Exception as exc:
                 result.notes.append(f"Interaction agent failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
             timings["keyboard"] = time.perf_counter() - t
+        # Images: capture pixels now (needs the page), then ask the model in the background
+        # while the contrast meter uses the page. The two used to run back to back.
+        image_job = None
         if agents.images and run_image_agent and not agents.out_of_time():
-            t = time.perf_counter()
+            t_img = time.perf_counter()
             agents.stage("images")
             try:
-                audit = await audit_images(page, agents.vision, agents.max_images, allow_private=allow_private,
-                                           out_of_time=agents.out_of_time)
-                for f in audit.findings:
-                    f.viewports = [viewport.name]
-                result.findings += audit.findings
-                result.suggestions = audit.suggestions
-                result.notes += audit.errors
+                prep = await prepare_images(page, agents.vision, agents.max_images, allow_private=allow_private)
+                image_job = asyncio.create_task(judge_images(prep, agents.vision, agents.max_images, agents.out_of_time))
             except Exception as exc:
                 result.notes.append(f"Image agent failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
-            timings["images"] = time.perf_counter() - t
         if agents.contrast:
             t = time.perf_counter()
             if run_image_agent:
@@ -329,6 +327,17 @@ async def _scan_viewport(
             except Exception as exc:
                 result.notes.append(f"Contrast meter failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
             timings["contrast"] = time.perf_counter() - t
+        if image_job is not None:
+            try:
+                audit = await image_job
+                for f in audit.findings:
+                    f.viewports = [viewport.name]
+                result.findings += audit.findings
+                result.suggestions = audit.suggestions
+                result.notes += audit.errors
+            except Exception as exc:
+                result.notes.append(f"Image agent failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
+            timings["images(parallel)"] = time.perf_counter() - t_img
         log.info("scan %s [%s] %s", url, viewport.name, " ".join(f"{k}={v:.1f}s" for k, v in timings.items()))
         if run_image_agent:  # first viewport: locate every problem on its full-page screenshot
             try:

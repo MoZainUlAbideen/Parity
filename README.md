@@ -1,5 +1,5 @@
 # Parity
-### Live Frontend : https://parity-iota-puce.vercel.app/
+
 **Parity finds what's locking disabled users out of your website, explains it in plain words, and fixes it, with proof.**
 
 About 1 in 6 people live with a disability, and 95.9% of the top million homepages fail automated WCAG checks (WebAIM Million 2026). Parity opens a page in a real browser, audits it the way a screen-reader user, a keyboard-only user, and a low-vision user would experience it, and reports each problem with the exact WCAG rule it breaks.
@@ -158,7 +158,7 @@ PARITY_VISION_MIN_INTERVAL=2                # optional; seconds between vision c
 
 **Frontend (Vercel).** New Project > this repo > Root Directory `web`, framework "Other", no build command. Put the Render URL in `web/config.js` (`window.PARITY_API`).
 
-API settings (all optional): `PARITY_SCANS_PER_HOUR` (3), `PARITY_ASKS_PER_HOUR` (20), `PARITY_MAX_QUEUE` (5), `PARITY_MAX_IMAGES` (8), `PARITY_SCAN_TIMEOUT` (240 s; optional checks stop at 55% of it so a slow server returns a labelled partial report), `PARITY_JOB_TTL` (3600 s), `PARITY_VISION` (on when a Gemini key is set).
+API settings (all optional): `PARITY_SCANS_PER_HOUR` (3), `PARITY_ASKS_PER_HOUR` (20), `PARITY_MAX_QUEUE` (5), `PARITY_MAX_IMAGES` (8), `PARITY_SCAN_TIMEOUT` (240 s; optional checks stop at 70% of it so a slow server returns a labelled partial report), `PARITY_JOB_TTL` (3600 s), `PARITY_VISION` (on when a Gemini key is set).
 
 ## Project layout
 

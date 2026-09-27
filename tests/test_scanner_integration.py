@@ -165,3 +165,33 @@ async def test_stages_are_reported_in_order(base_url, browser):
     await scan_url(f"{base_url}/broken/contrast_images.html", allow_private=True, browser=browser,
                    agents=AgentOptions(on_stage=stages.append))
     assert stages == ["rules", "keyboard", "images", "contrast", "mobile"]
+
+
+async def test_vision_calls_run_while_the_contrast_meter_works(base_url, browser, monkeypatch):
+    # Measured live on Render's free CPU (2026-09-27): images=50.5s then contrast=36.4s, back
+    # to back, and the time budget ran out. The model calls need no browser, so they overlap.
+    import time as _t
+    import parity.scanner as scanner_mod
+    from parity.scanner import AgentOptions
+    events = []
+
+    class SlowVision:
+        name = "slow"
+
+        def judge_json(self, prompt, image, mime):
+            _t.sleep(0.3)
+            events.append(("vision_done", _t.monotonic()))
+            return {"alt_verdict": "good", "confidence": 1, "suggested_alt": ""}, self.name
+
+    real = scanner_mod._run_contrast_meter
+
+    async def spy(page, findings, viewport, out_of_time=lambda: False):
+        events.append(("contrast_start", _t.monotonic()))
+        return await real(page, findings, viewport, out_of_time)
+
+    monkeypatch.setattr(scanner_mod, "_run_contrast_meter", spy)
+    await scan_url(f"{base_url}/broken/images_quality.html", viewports=["desktop"], allow_private=True,
+                   browser=browser, agents=AgentOptions(vision=SlowVision()))
+    contrast_start = next(t for e, t in events if e == "contrast_start")
+    last_vision = max(t for e, t in events if e == "vision_done")
+    assert contrast_start < last_vision, "contrast meter waited for every vision call"

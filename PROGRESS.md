@@ -81,5 +81,7 @@
 - [x] Bug found live: `ALLOWED_ORIGINS` with a trailing slash blocked every browser request. Origins are now normalised (+2 tests)
 - [x] Bug found live: on Render's free CPU a full scan passed the 150 s limit and the visitor got only an error. Now optional checks stop at 55% of a 240 s limit and the report says what was skipped; rules results are never lost (+2 tests)
 - [x] Progress page shows the scanner's real stage instead of a timed guess; stage timings in the server logs
-- [ ] Live scan of Mars finishes on Render
+- [x] Live scan of Mars finishes on Render: 17 kinds, 114 places (28 contrast cases settled vs 65 locally: time budget)
+- [x] Timings from the live server: rules 9.5 s, keyboard 8.7 s, images 50.5 s, contrast 36.4 s (then out of time), mobile contrast skipped
+- [x] Vision calls now run while the contrast meter works (they need no browser) (+1 test); budget raised to 70% of the limit
 - [ ] Add the retrieval-eval step to CI by hand; push; CI green
