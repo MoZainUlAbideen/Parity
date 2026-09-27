@@ -340,14 +340,18 @@ def _same_image(img: ImageInfo) -> tuple:
 
 
 async def audit_images(page, vision: GeminiVision | None = None, max_images: int = 15,
-                       allow_private: bool = False) -> ImageAudit:
+                       allow_private: bool = False, out_of_time=lambda: False) -> ImageAudit:
     audit = ImageAudit()
     images = [i for i in await collect_images(page) if not i.ariaHidden and i.role not in ("presentation", "none")]
     answers: dict[tuple, dict | None] = {}
     unique = list(dict.fromkeys(_same_image(i) for i in images))
     to_judge = set(unique[:max_images]) if vision is not None else set()
+    stopped = 0
     for img in images:
         key = _same_image(img)
+        if key in to_judge and key not in answers and out_of_time():
+            to_judge.discard(key)
+            stopped += 1
         if key in to_judge and key not in answers:
             answers[key] = None
             try:
@@ -363,6 +367,8 @@ async def audit_images(page, vision: GeminiVision | None = None, max_images: int
             audit.findings.append(finding)
         if suggestion:
             audit.suggestions[img.selector] = suggestion
+    if stopped:
+        audit.errors.append(f"Ran out of time: {stopped} image(s) were checked by the rules only, not by the vision model.")
     if vision is not None and len(unique) > max_images:
         audit.errors.append(f"Checked the first {max_images} of {len(unique)} different images to protect your API quota.")
     return audit

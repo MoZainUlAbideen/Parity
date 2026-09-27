@@ -21,12 +21,14 @@ async function loadExample(name) {
   return res.json();
 }
 
+// Real stages reported by the server, in the order it runs them.
 const STEPS = [
-  [0, "Opening the page in a real browser (desktop and mobile)"],
-  [8, "Running the accessibility rules"],
-  [18, "Measuring text contrast over images"],
-  [30, "Pressing Tab through the page like a keyboard user"],
-  [40, "Looking at every image with the vision model"],
+  ["", "Opening the page in a real browser"],
+  ["rules", "Running the accessibility rules"],
+  ["keyboard", "Pressing Tab through the page like a keyboard user"],
+  ["images", "Looking at every image with the vision model"],
+  ["contrast", "Measuring text contrast over images"],
+  ["mobile", "Checking the phone-sized layout"],
 ];
 
 async function pollScan(id) {
@@ -56,12 +58,13 @@ async function pollScan(id) {
     setStatus([
       el("h1", {}, heading),
       el("p", { class: "report-url" }, job.url),
-      el("p", { class: "muted" }, `Usually 30–90 seconds. ${secs}s so far. You can keep this tab open; results stay available for an hour.`),
-      el("ol", { class: "progress-list", "aria-label": "Typical scan steps" },
-        STEPS.map(([t, label], i) => {
-          const next = STEPS[i + 1] ? STEPS[i + 1][0] : Infinity;
-          const cls = job.status === "queued" ? "" : secs >= next ? "done" : secs >= t ? "now" : "";
-          return el("li", { class: cls }, el("span", { class: "dot", "aria-hidden": "true" }), label);
+      el("p", { class: "muted" }, `Usually one to three minutes on the free server. ${secs}s so far. You can keep this tab open; results stay available for an hour.`),
+      el("ol", { class: "progress-list", "aria-label": "Scan steps" },
+        STEPS.map(([key, label], i) => {
+          const at = Math.max(0, STEPS.findIndex(([k]) => k === (job.stage || "")));
+          const cls = job.status === "queued" ? "" : i < at ? "done" : i === at ? "now" : "";
+          return el("li", { class: cls, "aria-current": cls === "now" ? "step" : null },
+            el("span", { class: "dot", "aria-hidden": "true" }), label);
         })),
     ]);
     await new Promise((r) => setTimeout(r, 2500));

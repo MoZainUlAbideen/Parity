@@ -19,6 +19,7 @@ Run locally:  uv run uvicorn parity.api.app:app --reload
 from __future__ import annotations
 
 import asyncio
+import logging
 import os
 import shutil
 import time
@@ -55,6 +56,10 @@ def parse_origins(raw: str) -> list[str]:
     return out or ["*"]
 
 
+# Stage timings ("scan <url> [desktop] rules=4.1s images=22.0s ...") appear in the server logs.
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(name)s %(message)s")
+
+
 class Settings:
     def __init__(self):
         self.allowed_origins = parse_origins(os.environ.get("ALLOWED_ORIGINS", "*"))
@@ -62,7 +67,7 @@ class Settings:
         self.asks_per_hour = _env_int("PARITY_ASKS_PER_HOUR", 20)
         self.max_queue = _env_int("PARITY_MAX_QUEUE", 5)
         self.max_images = _env_int("PARITY_MAX_IMAGES", 8)
-        self.scan_timeout = _env_int("PARITY_SCAN_TIMEOUT", 150)
+        self.scan_timeout = _env_int("PARITY_SCAN_TIMEOUT", 240)
         self.job_ttl = _env_int("PARITY_JOB_TTL", 3600)
         self.allow_local = os.environ.get("PARITY_ALLOW_LOCAL") == "1"  # tests / local dev only
         self.data_dir = Path(os.environ.get("PARITY_DATA_DIR", "/tmp/parity-scans"))
@@ -109,6 +114,7 @@ class Job:
     finished: float | None = None
     report: dict | None = None
     error: str | None = None
+    stage: str = ""  # what the scanner is actually doing now (shown on the progress page)
 
 
 class ScanRequest(BaseModel):
@@ -184,7 +190,11 @@ def create_app(settings: Settings | None = None, vision_factory=None, llm_factor
         out_dir = settings.data_dir / job.id
         try:
             browser = await get_browser()
-            options = AgentOptions(vision=vision_factory(), max_images=settings.max_images)
+            # Optional checks stop at 55% of the limit, leaving time for the second screen size
+            # and the report, so a slow server returns a labelled partial report, not an error.
+            options = AgentOptions(vision=vision_factory(), max_images=settings.max_images,
+                                   deadline=time.monotonic() + settings.scan_timeout * 0.55,
+                                   on_stage=lambda name: setattr(job, "stage", name))
             report = await asyncio.wait_for(
                 scan_url(job.url, out_dir=out_dir, allow_private=settings.allow_local, browser=browser, agents=options),
                 timeout=settings.scan_timeout,
@@ -240,7 +250,7 @@ def create_app(settings: Settings | None = None, vision_factory=None, llm_factor
 
     def job_view(job: Job) -> dict:
         return {"id": job.id, "url": job.url, "status": job.status, "position": position(job.id),
-                "report": job.report, "error": job.error}
+                "stage": job.stage, "report": job.report, "error": job.error}
 
     @app.get("/api/health")
     async def health():

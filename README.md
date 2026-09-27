@@ -158,7 +158,7 @@ PARITY_VISION_MIN_INTERVAL=2                # optional; seconds between vision c
 
 **Frontend (Vercel).** New Project > this repo > Root Directory `web`, framework "Other", no build command. Put the Render URL in `web/config.js` (`window.PARITY_API`).
 
-API settings (all optional): `PARITY_SCANS_PER_HOUR` (3), `PARITY_ASKS_PER_HOUR` (20), `PARITY_MAX_QUEUE` (5), `PARITY_MAX_IMAGES` (8), `PARITY_SCAN_TIMEOUT` (150 s), `PARITY_JOB_TTL` (3600 s), `PARITY_VISION` (on when a Gemini key is set).
+API settings (all optional): `PARITY_SCANS_PER_HOUR` (3), `PARITY_ASKS_PER_HOUR` (20), `PARITY_MAX_QUEUE` (5), `PARITY_MAX_IMAGES` (8), `PARITY_SCAN_TIMEOUT` (240 s; optional checks stop at 55% of it so a slow server returns a labelled partial report), `PARITY_JOB_TTL` (3600 s), `PARITY_VISION` (on when a Gemini key is set).
 
 ## Project layout
 

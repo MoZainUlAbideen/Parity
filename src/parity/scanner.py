@@ -9,6 +9,7 @@ Then findings from all viewports are merged into one report.
 
 from __future__ import annotations
 
+import logging
 import re
 import time
 from dataclasses import dataclass, field
@@ -90,6 +91,21 @@ class AgentOptions:
     interaction: bool = True
     vision: GeminiVision | None = None
     max_images: int = 15
+    # time.monotonic() after which optional work stops and the scan finishes with what it has.
+    # Found live (2026-09-27): on Render's free CPU a full Mars scan ran past the 150 s limit
+    # and the visitor got nothing, although the rule engine had finished long before.
+    deadline: float | None = None
+    on_stage: object = None  # callable(name) -> None: reports real progress to the website
+
+    def stage(self, name: str) -> None:
+        if callable(self.on_stage):
+            try:
+                self.on_stage(name)
+            except Exception:
+                pass
+
+    def out_of_time(self) -> bool:
+        return self.deadline is not None and time.monotonic() >= self.deadline
 
     @classmethod
     def rules_only(cls) -> "AgentOptions":
@@ -106,6 +122,12 @@ class AgentOptions:
         if self.images and self.vision:
             out.append(f"{Source.vision_agent.value}:{self.vision.name}")
         return out
+
+
+log = logging.getLogger("parity.scan")
+
+TIME_NOTE = ("Parity stopped some optional checks early to finish in time on this server; "
+             "items it didn't get to are listed for human review.")
 
 
 @dataclass
@@ -125,21 +147,24 @@ def _is_background_contrast_node(finding: Finding, node) -> bool:
 MAX_CONTRAST_MEASUREMENTS = 120  # per viewport; bounds scan time on huge pages
 
 
-async def _run_contrast_meter(page, findings: list[Finding], viewport: str) -> tuple[list[Finding], list[Resolved], list[str]]:
+async def _run_contrast_meter(page, findings: list[Finding], viewport: str,
+                              out_of_time=lambda: False) -> tuple[list[Finding], list[Resolved], list[str]]:
     """Settle axe's 'needs review' contrast-over-image nodes by measuring pixels.
 
     One element that can't be measured never breaks the scan: it stays
     'needs review' with a note saying why.
     """
     new, resolved, notes = [], [], []
-    measured = failed = 0
+    measured = failed = skipped = 0
     for f in findings:
         if f.confidence != Confidence.needs_review:
             continue
         keep = []
         for node in f.nodes:
             m = None
-            if _is_background_contrast_node(f, node) and measured < MAX_CONTRAST_MEASUREMENTS:
+            if _is_background_contrast_node(f, node) and measured < MAX_CONTRAST_MEASUREMENTS and out_of_time():
+                skipped += 1
+            elif _is_background_contrast_node(f, node) and measured < MAX_CONTRAST_MEASUREMENTS:
                 measured += 1
                 try:
                     m = await measure_text_over_image(page, node.target)
@@ -166,6 +191,8 @@ async def _run_contrast_meter(page, findings: list[Finding], viewport: str) -> t
         f.nodes = keep
     if failed:
         notes.append(f"Contrast meter ({viewport}): {failed} element(s) could not be measured and remain for human review.")
+    if skipped:
+        notes.append(f"Contrast meter ({viewport}): ran out of time after {measured} items; {skipped} remain for human review.")
     if measured >= MAX_CONTRAST_MEASUREMENTS:
         notes.append(f"Contrast meter ({viewport}): measured the first {MAX_CONTRAST_MEASUREMENTS} items; the rest remain for human review.")
     return [f for f in findings if f.nodes] + new, resolved, notes
@@ -256,17 +283,18 @@ async def _scan_viewport(
             aria_snapshot=await page.locator("body").aria_snapshot(),
             dom_size=await page.evaluate("document.getElementsByTagName('*').length"),
         )
+        agents.stage("rules" if run_image_agent else "mobile")
+        t0 = time.perf_counter()
         raw = await run_axe(page)
         result = ViewportResult(snapshot=snapshot, findings=normalize_axe_results(raw, viewport.name))
 
         # Agents add value but must never cost the customer the rule-engine report.
-        if agents.contrast:
-            try:
-                result.findings, result.resolved, notes = await _run_contrast_meter(page, result.findings, viewport.name)
-                result.notes += notes
-            except Exception as exc:
-                result.notes.append(f"Contrast meter failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
-        if agents.interaction and run_image_agent:  # keyboard behaviour: once, on the first viewport
+        # Order = value per second on a slow server: keyboard walk (fast), images (the AI
+        # headline, capped), then the contrast meter (one screenshot per element).
+        timings = {"rules": time.perf_counter() - t0}
+        if agents.interaction and run_image_agent and not agents.out_of_time():  # keyboard: first viewport only
+            t = time.perf_counter()
+            agents.stage("keyboard")
             try:
                 ia = await audit_interaction(page)
                 for f in ia.findings:
@@ -275,9 +303,13 @@ async def _scan_viewport(
                 result.notes += ia.notes
             except Exception as exc:
                 result.notes.append(f"Interaction agent failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
-        if agents.images and run_image_agent:
+            timings["keyboard"] = time.perf_counter() - t
+        if agents.images and run_image_agent and not agents.out_of_time():
+            t = time.perf_counter()
+            agents.stage("images")
             try:
-                audit = await audit_images(page, agents.vision, agents.max_images, allow_private=allow_private)
+                audit = await audit_images(page, agents.vision, agents.max_images, allow_private=allow_private,
+                                           out_of_time=agents.out_of_time)
                 for f in audit.findings:
                     f.viewports = [viewport.name]
                 result.findings += audit.findings
@@ -285,6 +317,19 @@ async def _scan_viewport(
                 result.notes += audit.errors
             except Exception as exc:
                 result.notes.append(f"Image agent failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
+            timings["images"] = time.perf_counter() - t
+        if agents.contrast:
+            t = time.perf_counter()
+            if run_image_agent:
+                agents.stage("contrast")
+            try:
+                result.findings, result.resolved, notes = await _run_contrast_meter(
+                    page, result.findings, viewport.name, agents.out_of_time)
+                result.notes += notes
+            except Exception as exc:
+                result.notes.append(f"Contrast meter failed on {viewport.name}: {str(exc).splitlines()[0][:160]}")
+            timings["contrast"] = time.perf_counter() - t
+        log.info("scan %s [%s] %s", url, viewport.name, " ".join(f"{k}={v:.1f}s" for k, v in timings.items()))
         if run_image_agent:  # first viewport: locate every problem on its full-page screenshot
             try:
                 await _attach_boxes(page, result.findings)
@@ -339,6 +384,8 @@ async def scan_url(
             resolved += [x for x in r.resolved if (x.rule_id, x.target) not in {(y.rule_id, y.target) for y in resolved}]
             suggestions.update(r.suggestions)
             notes += r.notes
+        if agents.out_of_time() and TIME_NOTE not in notes:
+            notes.append(TIME_NOTE)
         findings = cite_findings(merge_findings(per_vp))
         # A failure on ANY screen size wins: an element can't be "settled as passing" on
         # desktop while failing on mobile. Regression (2026-09-27, Deque Mars footer).

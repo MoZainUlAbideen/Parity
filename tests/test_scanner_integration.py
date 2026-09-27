@@ -142,3 +142,26 @@ async def test_hidden_carousel_slides_get_no_pin(base_url, browser):
     boxes = await page.evaluate(_BOXES_JS, sel)
     assert boxes[0] is None and boxes[1] is None
     assert boxes[2] and boxes[2]["y"] > 0 and boxes[2]["height"] > 100
+
+
+async def test_out_of_time_returns_the_rules_report_with_a_note(base_url, browser):
+    # Regression (live on Render's free CPU, 2026-09-27): a slow scan hit the time limit and
+    # the visitor got an error instead of the rule-engine results that were already done.
+    import time as _t
+    from parity.scanner import TIME_NOTE, AgentOptions
+    stages = []
+    opts = AgentOptions(deadline=_t.monotonic() - 1, on_stage=stages.append)
+    report = await scan_url(f"{base_url}/broken/contrast_images.html", allow_private=True, browser=browser, agents=opts)
+    assert report.findings, "rule findings must survive"
+    assert TIME_NOTE in report.notes
+    assert not any(f.source.value == "contrast-meter" for f in report.findings)
+    assert any("ran out of time" in n for n in report.notes)
+    assert stages[0] == "rules" and "mobile" in stages
+
+
+async def test_stages_are_reported_in_order(base_url, browser):
+    from parity.scanner import AgentOptions
+    stages = []
+    await scan_url(f"{base_url}/broken/contrast_images.html", allow_private=True, browser=browser,
+                   agents=AgentOptions(on_stage=stages.append))
+    assert stages == ["rules", "keyboard", "images", "contrast", "mobile"]

@@ -77,5 +77,9 @@
 - [x] Semantic search model now installed by plain `uv sync`; Windows test warnings fixed (197 -> 205 tests)
 - [x] Mars scan + export with the image fix: "It sees" now matches each photo, one answer per repeated image, no quota cut-off
 - [x] Live `agent-eval` with Gemini: precision 100%, recall 100% (24/24), 0 false alarms, 1 left for review
-- [ ] Deploy backend on Render, frontend on Vercel, update web/config.js
+- [x] Render + Vercel live; chat answers on the live site
+- [x] Bug found live: `ALLOWED_ORIGINS` with a trailing slash blocked every browser request. Origins are now normalised (+2 tests)
+- [x] Bug found live: on Render's free CPU a full scan passed the 150 s limit and the visitor got only an error. Now optional checks stop at 55% of a 240 s limit and the report says what was skipped; rules results are never lost (+2 tests)
+- [x] Progress page shows the scanner's real stage instead of a timed guess; stage timings in the server logs
+- [ ] Live scan of Mars finishes on Render
 - [ ] Add the retrieval-eval step to CI by hand; push; CI green
