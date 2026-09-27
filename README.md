@@ -1,5 +1,5 @@
 # Parity
-
+### Live Frontend : (https://parity-otsj9l5r3-myne9.vercel.app/)
 **Parity finds what's locking disabled users out of your website, explains it in plain words, and fixes it, with proof.**
 
 About 1 in 6 people live with a disability, and 95.9% of the top million homepages fail automated WCAG checks (WebAIM Million 2026). Parity opens a page in a real browser, audits it the way a screen-reader user, a keyboard-only user, and a low-vision user would experience it, and reports each problem with the exact WCAG rule it breaks.
