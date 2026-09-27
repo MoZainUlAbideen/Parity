@@ -60,6 +60,24 @@ def parse_origins(raw: str) -> list[str]:
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(name)s %(message)s")
 
 
+log = logging.getLogger("parity.api")
+
+
+def cors_rules(origins: list[str]) -> tuple[list[str], str | None]:
+    """Exact origins, plus one regex for wildcard entries like https://parity-*.vercel.app
+    (Vercel gives every preview deployment its own address)."""
+    import re
+    exact = [o for o in origins if "*" not in o or o == "*"]
+    wild = [o for o in origins if "*" in o and o != "*"]
+    pattern = "|".join(re.escape(o).replace(r"\*", "[a-z0-9-]+") for o in wild) or None
+    return exact, (f"^(?:{pattern})$" if pattern else None)
+
+
+def origin_allowed(origin: str, exact: list[str], pattern: str | None) -> bool:
+    import re
+    return "*" in exact or origin in exact or bool(pattern and re.match(pattern, origin))
+
+
 class Settings:
     def __init__(self):
         self.allowed_origins = parse_origins(os.environ.get("ALLOWED_ORIGINS", "*"))
@@ -242,7 +260,18 @@ def create_app(settings: Settings | None = None, vision_factory=None, llm_factor
             await state["pw"].stop()
 
     app = FastAPI(title="Parity API", version="1.0", lifespan=lifespan)
-    app.add_middleware(CORSMiddleware, allow_origins=settings.allowed_origins, allow_methods=["GET", "POST"], allow_headers=["*"])
+    exact, pattern = cors_rules(settings.allowed_origins)
+    app.add_middleware(CORSMiddleware, allow_origins=exact, allow_origin_regex=pattern,
+                       allow_methods=["GET", "POST"], allow_headers=["*"])
+
+    @app.middleware("http")
+    async def explain_rejected_origins(request: Request, call_next):
+        # Found live (2026-09-27): the browser only says "failed to fetch" and the server log
+        # only "OPTIONS /api/scans 400". Say which address was refused and what is allowed.
+        origin = request.headers.get("origin")
+        if origin and not origin_allowed(origin, exact, pattern):
+            log.warning("CORS: refused requests from %s; ALLOWED_ORIGINS allows %s", origin, settings.allowed_origins)
+        return await call_next(request)
 
     def position(job_id: str) -> int:
         waiting = [j.id for j in sorted(jobs.values(), key=lambda j: j.created) if j.status == "queued"]

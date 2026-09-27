@@ -141,3 +141,25 @@ def test_browser_preflight_from_the_website_is_allowed(monkeypatch):
                                             "Access-Control-Request-Headers": "content-type"})
     assert r.status_code == 200
     assert r.headers["access-control-allow-origin"] == "https://parity.vercel.app"
+
+
+def test_wildcard_origins_cover_vercel_preview_addresses():
+    from parity.api.app import cors_rules, origin_allowed
+    exact, pattern = cors_rules(["https://parity-iota-puce.vercel.app", "https://parity-*.vercel.app"])
+    assert origin_allowed("https://parity-iota-puce.vercel.app", exact, pattern)
+    assert origin_allowed("https://parity-git-main-zain.vercel.app", exact, pattern)
+    assert not origin_allowed("https://evil.example", exact, pattern)
+    assert not origin_allowed("https://parity-x.vercel.app.evil.example", exact, pattern)
+
+
+def test_refused_origin_is_named_in_the_logs(monkeypatch, caplog):
+    import logging
+    monkeypatch.setenv("ALLOWED_ORIGINS", "https://parity.vercel.app")
+    from fastapi.testclient import TestClient
+    from parity.api.app import Settings, create_app
+    client = TestClient(create_app(Settings()))
+    with caplog.at_level(logging.WARNING, logger="parity.api"):
+        r = client.options("/api/scans", headers={"Origin": "https://other.vercel.app",
+                                                  "Access-Control-Request-Method": "POST"})
+    assert r.status_code == 400
+    assert "https://other.vercel.app" in caplog.text
