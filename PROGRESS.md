@@ -75,7 +75,7 @@
 - [x] Same bug gave hidden slides pins at negative positions: pins now only where the element can be seen
 - [x] Security gap found while fixing it: only the typed URL was SSRF-checked. Now every browser request and the final redirect target are checked
 - [x] Semantic search model now installed by plain `uv sync`; Windows test warnings fixed (197 -> 205 tests)
-- [ ] Re-run the Mars scan + export with the image fix
-- [ ] Re-run `parity agent-eval` with Gemini (new prompt, cache misses)
+- [x] Mars scan + export with the image fix: "It sees" now matches each photo, one answer per repeated image, no quota cut-off
+- [x] Live `agent-eval` with Gemini: precision 100%, recall 100% (24/24), 0 false alarms, 1 left for review
 - [ ] Deploy backend on Render, frontend on Vercel, update web/config.js
 - [ ] Add the retrieval-eval step to CI by hand; push; CI green

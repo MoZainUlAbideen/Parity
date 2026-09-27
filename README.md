@@ -48,7 +48,7 @@ Every finding is labeled honestly:
 | + Gemini vision, before consistency checks | 80% | | | | |
 | **Everything, with consistency checks** | **100%** | **100%** | **100%** | **0** | 1 |
 
-The vision rows replay real `gemini-3.1-flash-lite` answers recorded on 26 Sep 2026 (`tests/data/`), so the test suite checks them without calling the API. The benchmark was built alongside Parity, so 100% means "does what it was designed to do", not "perfect on the open web".
+The last row was confirmed live with `gemini-3.1-flash-lite` on 27 Sep 2026; the test suite replays real answers recorded the day before (`tests/data/`), so it checks the vision logic without calling the API. The benchmark was built alongside Parity, so 100% means "does what it was designed to do", not "perfect on the open web".
 
 - **Consistency checks on the model.** If Gemini calls alt text "inadequate" but its own suggested alt adds nothing new (word coverage >= 0.9), the verdict is dropped; if only chart data points are missing, or coverage is >= 0.6, it goes to a human instead. On the recorded answers this removed every false alarm without losing a real problem
 
